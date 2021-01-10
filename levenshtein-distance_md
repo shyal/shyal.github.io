@@ -1,0 +1,489 @@
+<html>
+  <head>
+  <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+  <meta name="keywords" content="shyal beardsley, shyal.com, shyal, oliver, beardsley">
+  <meta name="description" content="levenshtein distance">
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    config: ["MMLorHTML.js"],
+    jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+    extensions: ["MathMenu.js", "MathZoom.js"]
+  });
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.5.2/mermaid.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.js"></script>
+    
+    <link rel="stylesheet" href="/static/styles.css">
+    <!-- <script src="/static/mermaid.min.js"></script> -->
+    <link href="/static/lightbox.css" rel="stylesheet" />
+    
+    <title>levenshtein distance - Shyal Beardsley</title>
+    <style>
+      pre { line-height: 125%; }
+td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #ffffcc }
+.highlight { background: #ffffff; }
+.highlight .c { color: #888888 } /* Comment */
+.highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.highlight .k { color: #008800; font-weight: bold } /* Keyword */
+.highlight .ch { color: #888888 } /* Comment.Hashbang */
+.highlight .cm { color: #888888 } /* Comment.Multiline */
+.highlight .cp { color: #cc0000; font-weight: bold } /* Comment.Preproc */
+.highlight .cpf { color: #888888 } /* Comment.PreprocFile */
+.highlight .c1 { color: #888888 } /* Comment.Single */
+.highlight .cs { color: #cc0000; font-weight: bold; background-color: #fff0f0 } /* Comment.Special */
+.highlight .gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #aa0000 } /* Generic.Error */
+.highlight .gh { color: #333333 } /* Generic.Heading */
+.highlight .gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #555555 } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #666666 } /* Generic.Subheading */
+.highlight .gt { color: #aa0000 } /* Generic.Traceback */
+.highlight .kc { color: #008800; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008800; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008800; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008800 } /* Keyword.Pseudo */
+.highlight .kr { color: #008800; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #888888; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #0000DD; font-weight: bold } /* Literal.Number */
+.highlight .s { color: #dd2200; background-color: #fff0f0 } /* Literal.String */
+.highlight .na { color: #336699 } /* Name.Attribute */
+.highlight .nb { color: #003388 } /* Name.Builtin */
+.highlight .nc { color: #bb0066; font-weight: bold } /* Name.Class */
+.highlight .no { color: #003366; font-weight: bold } /* Name.Constant */
+.highlight .nd { color: #555555 } /* Name.Decorator */
+.highlight .ne { color: #bb0066; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0066bb; font-weight: bold } /* Name.Function */
+.highlight .nl { color: #336699; font-style: italic } /* Name.Label */
+.highlight .nn { color: #bb0066; font-weight: bold } /* Name.Namespace */
+.highlight .py { color: #336699; font-weight: bold } /* Name.Property */
+.highlight .nt { color: #bb0066; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #336699 } /* Name.Variable */
+.highlight .ow { color: #008800 } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #0000DD; font-weight: bold } /* Literal.Number.Bin */
+.highlight .mf { color: #0000DD; font-weight: bold } /* Literal.Number.Float */
+.highlight .mh { color: #0000DD; font-weight: bold } /* Literal.Number.Hex */
+.highlight .mi { color: #0000DD; font-weight: bold } /* Literal.Number.Integer */
+.highlight .mo { color: #0000DD; font-weight: bold } /* Literal.Number.Oct */
+.highlight .sa { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Affix */
+.highlight .sb { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Backtick */
+.highlight .sc { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Char */
+.highlight .dl { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Delimiter */
+.highlight .sd { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Doc */
+.highlight .s2 { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Double */
+.highlight .se { color: #0044dd; background-color: #fff0f0 } /* Literal.String.Escape */
+.highlight .sh { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Heredoc */
+.highlight .si { color: #3333bb; background-color: #fff0f0 } /* Literal.String.Interpol */
+.highlight .sx { color: #22bb22; background-color: #f0fff0 } /* Literal.String.Other */
+.highlight .sr { color: #008800; background-color: #fff0ff } /* Literal.String.Regex */
+.highlight .s1 { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Single */
+.highlight .ss { color: #aa6600; background-color: #fff0f0 } /* Literal.String.Symbol */
+.highlight .bp { color: #003388 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0066bb; font-weight: bold } /* Name.Function.Magic */
+.highlight .vc { color: #336699 } /* Name.Variable.Class */
+.highlight .vg { color: #dd7700 } /* Name.Variable.Global */
+.highlight .vi { color: #3333bb } /* Name.Variable.Instance */
+.highlight .vm { color: #336699 } /* Name.Variable.Magic */
+.highlight .il { color: #0000DD; font-weight: bold } /* Literal.Number.Integer.Long */
+      
+
+      .MathJax_Display{
+        /*text-align: left !important;*/
+        margin: 0 !important;
+      }
+
+      pre {
+      /*line-height: 1em;*/
+      white-space: pre-wrap;       /* css-3 */
+      white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+      white-space: -pre-wrap;      /* Opera 4-6 */
+      white-space: -o-pre-wrap;    /* Opera 7 */
+      word-wrap: break-word;       /* Internet Explorer 5.5+ */
+      }
+
+      div.mermaid {
+        max-width: 500px;
+      }
+  
+      body {
+        text-align: left !important;
+        margin: 0px;
+        padding: 0px;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      .lineno {
+        margin-right: 10px;
+        color: #a5b4a3;
+      }
+
+      .linenodiv {
+        border-left: 2px solid #69c;
+        color: #89ac9a;
+        background-color: #f5f7f9 !important;
+      }
+
+      .codehilitetable td {
+        background-color: #f5f7f9;
+      }
+
+      th, td {
+        text-align: left;
+      }
+
+      tr:nth-child(even) {background-color: #f2f2f2;}
+
+      img {
+        max-width: 50em;
+        max-height: 30em;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 2em 1em;
+      }
+
+      .text-center{
+        text-align: center;
+      }
+
+      main,
+      footer,
+      .narrow {
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        margin: 0 auto;
+        max-width: 50em;
+        line-height: 1.5;
+        padding: 2em 1em;
+        color: #566b78;
+      }
+
+      .lb-image {
+        background: white;
+      }
+
+      div {
+        padding: 0px;
+        margin: 0px;
+      }
+
+      code,
+      pre {
+        background: #f7f9fb;
+      }
+
+      .linenodiv {
+        width: 10px;
+        padding-right: 0px;
+      }
+
+      h2 {
+        margin-top: 0.5em;
+        padding-top: 0.5em;
+      }
+
+      h1,
+      h2,
+      strong {
+        color: #333;
+      }
+
+      a {
+        color: #e81c4f;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <main>
+
+    <!-- <img src='/Attachments/me.png' height='150px'> -->
+
+    
+    <div><h1 class='main-title'>levenshtein distance</h1></div>
+     
+
+    
+    <a href="javascript:history.back()">←</a>
+    <a href='/'>🏠</a>
+     
+    <!-- if has_fences -->
+    <!-- <div><a href='/black'><img src='/Attachments/black.svg'/></a></div> -->
+    <!--  end  -->
+    <p>The <strong>levenshtein distance</strong> is how many edits need to be made on word <strong>A</strong> to transform it into word <strong>B</strong>. Characters can be:</p>
+<ul>
+<li>deleted</li>
+<li>added</li>
+<li>modified</li>
+</ul>
+<p>The <strong>levenstein distance</strong> is symmetrical, meaning transforming word <strong>A</strong> into word <strong>B</strong> takes as many operations as transforming word <strong>B</strong> into word <strong>A</strong>.</p>
+<p>When computing the levenshtein distance using <a href="https://en.wikipedia.org/wiki/Dynamic_programming">dynamic programming</a>, the first step should be to focus on the transformations, and decisions taking place at each step.</p>
+<p>Let's take <code>saturday</code> and <code>sunday</code> as examples.</p>
+<video src="https://static.ioloop.io/LevenshteinDistance.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>By simply removing the letters in common, we can already get a hint that the distance is <code>3</code>. </p>
+<p>Let's now think about this in terms of transformations of <strong>saturday</strong>. Starting with:</p>
+<video src="https://static.ioloop.io/LevenshteinDistanceEdits.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>Looking at the animation above should make it clear as day that 3 edits are required, thus the levenshtein distance is <code>3</code>.</p>
+<h2 id="defining-the-strategy">Defining the strategy</h2>
+<h3 id="clipping-suffixes">Clipping suffixes</h3>
+<p>As you can see, when the ends of the words match, we can simply clip them off one letter at a time.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">b</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+<span class="linenos">2</span>  <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="n">a</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+<p>This performs the:</p>
+<ul>
+<li>satur<strong>day</strong> -&gt; satur</li>
+<li>sun<strong>day</strong> -&gt; sun</li>
+</ul>
+<p>transformations.</p>
+<p>Next we'll try 3 different transformations, and see which one resulted in the shortest levenshtein distance (yes this is recursive, we'll come to that later).</p>
+<p>1/ adding a character to a<br />
+2/ substituting the last character in a<br />
+3/ deleting the last character from a</p>
+<h3 id="adding-bs-last-character-to-a">adding b's last character to a</h3>
+<p>This would for example tranform:</p>
+<ul>
+<li><strong>satur</strong> into <strong>saturn</strong></li>
+</ul>
+<p>because we are copying the last character from b, and appending it to a. At which point, we would, once again ask, "what's the levenshstein distance between: <strong>saturn</strong> and <strong>sun</strong>?".</p>
+<h3 id="substituting-as-last-character-with-bs-last-character">substituting a's last character with b's last character</h3>
+<p>This would for example tranform:</p>
+<ul>
+<li><strong>satur</strong> into <strong>satun</strong></li>
+</ul>
+<p>At which point, we would, once again ask, "what's the levenshstein distance between: <strong>satun</strong> and <strong>sun</strong>?".</p>
+<h3 id="deleting-as-last-character">deleting a's last character</h3>
+<p>This would for example tranform:</p>
+<ul>
+<li><strong>satur</strong> into <strong>satu</strong></li>
+</ul>
+<p>At which point, we would, once again ask, "what's the levenshstein distance between: <strong>satu</strong> and <strong>sun</strong>?".</p>
+<h2 id="taking-the-minimum">Taking the minimum</h2>
+<p>Remember we are interested in the minimum transformations. This is hard to reason about, as the definition is recursive. What transformations can i make that will result in the shortest levenshtein distance?</p>
+<p>This does not apply to clipping characters off the end of <strong>both</strong> words, since we perform the same operation on both a and b, the levenshtein distance ends up being the same.</p>
+<p>However, we tried a bunch of transformations on a, i.e adding substituting and deleting the last character. This is no smarter than trial and error.. we're just trying things out and asking the question again on these substrings.</p>
+<p>The important point however, is we need to ask what resulted in the minimum distance for these transformations, ie.</p>
+<p>
+<script type="math/tex; mode=display">min \{ add, subst, del\}</script>
+</p>
+<p>Asking this question gives us the answer of how many transformations are required to transform substring a into substring b. However, If you observe carefully, you'll notice we performed an operation ourselves before asking the question: we added, substituted, or deleted in a first! So we need the: +1 to register that fact.</p>
+<p>
+<script type="math/tex; mode=display">min \{ add, subst, del\} + 1</script>
+</p>
+<h2 id="base-cases">Base cases</h2>
+<p>But what happens when one string is empty? What's the levenshtein distance between:</p>
+<ul>
+<li>''</li>
+<li>'sun'</li>
+</ul>
+<p>The distance is 3! The length of <strong>sun</strong>. You'd need to add 3 characters to a for it to become b. Likewise, what's the distance between:</p>
+<ul>
+<li>'satu'</li>
+<li>''</li>
+</ul>
+<p>The distance is 4! You'd need to delete 4 characters from a to make it b. So our base cases are:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">2</span>  <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+
+<p>And that's it! You have it. This is called a <em>top down</em> approach, because we start with the full words, and break it down step by step, recursively, while caching the solutions.</p>
+<p>You could also compute the bottom up approach, by asking the question: "what's the levelshtein distance between <strong>s</strong> and <strong>s</strong>?" then progressively make the string bigger.</p>
+<p>Here's our first implementation:</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">functools</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">def</span> <span class="nf">lev</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+<span class="linenos"> 5</span>    <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="linenos"> 6</span>    <span class="k">def</span> <span class="nf">dp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="linenos"> 7</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 8</span>            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>        <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">b</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+<span class="linenos">11</span>            <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="n">a</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>        <span class="n">add_last</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">)</span>
+<span class="linenos">14</span>        <span class="n">sub_last</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">a</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">)</span>
+<span class="linenos">15</span>        <span class="n">del_last</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">a</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">)</span>
+<span class="linenos">16</span>        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">min</span><span class="p">(</span><span class="n">sub_last</span><span class="p">,</span> <span class="n">add_last</span><span class="p">,</span> <span class="n">del_last</span><span class="p">)</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>    <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="n">d</span> <span class="o">=</span> <span class="n">lev</span><span class="p">(</span><span class="s2">&quot;saturday&quot;</span><span class="p">,</span> <span class="s2">&quot;sunday&quot;</span><span class="p">)</span>
+<span class="linenos">22</span><span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+
+<h2 id="reducing-the-number-of-calls">Reducing the number of calls</h2>
+<p>Next, we can actually make some optimisations. There's no point <strong>adding</strong> b's last character to a's. See:</p>
+<ul>
+<li>satur -&gt; saturn</li>
+<li>sun</li>
+</ul>
+<p>Once we compare <strong>saturn</strong> and <strong>sun</strong> the first thing we'll need to do is chop off the matching 'n' at the end of each strings. So instead of adding b's last character onto a, we can simply chop the last character off of b.</p>
+<ul>
+<li>satur -&gt; saturn</li>
+<li>
+<p>sun</p>
+</li>
+<li>
+<p>saturn -&gt; satur</p>
+</li>
+<li>su</li>
+</ul>
+<p>Yes adding b's last character to a ends up deleting the last character off of b, and leaving a intact. This optimisation saves on the number of calls.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">add_last</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+<p>Likewise, if we substitute the last character off of a with the last character off of b, well both last characters end up getting chopped off, we can can simply cut to the chase.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">sub_last</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">a</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+<p>Our optimised implementation:</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">functools</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">def</span> <span class="nf">lev</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+<span class="linenos"> 5</span>    <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="linenos"> 6</span>    <span class="k">def</span> <span class="nf">dp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="linenos"> 7</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 8</span>            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>        <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">b</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+<span class="linenos">11</span>            <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="n">a</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>        <span class="n">add_last</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">14</span>        <span class="n">del_last</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">a</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">)</span>
+<span class="linenos">15</span>        <span class="n">sub_last</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">a</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">16</span>        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">min</span><span class="p">(</span><span class="n">sub_last</span><span class="p">,</span> <span class="n">add_last</span><span class="p">,</span> <span class="n">del_last</span><span class="p">)</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>    <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="n">d</span> <span class="o">=</span> <span class="n">lev</span><span class="p">(</span><span class="s2">&quot;saturday&quot;</span><span class="p">,</span> <span class="s2">&quot;sunday&quot;</span><span class="p">)</span>
+<span class="linenos">22</span><span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+
+<video width="640" height="480" controls>
+  <source src="https://static.ioloop.io/algorithms/paste-c6eac6e192c8e3d1e4f438a3ba4f6c6f650cf3c6.mp4" type="video/mp4">
+</video>
+
+<h2 id="passing-around-indices-instead-of-substrings">passing around indices instead of substrings</h2>
+<p>Yet another optimisation we can make is noticing we don't need to pass a substring, but instead we can simply pass the indices of the character being worked on:</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">functools</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">def</span> <span class="nf">lev</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+<span class="linenos"> 5</span>    <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="linenos"> 6</span>    <span class="k">def</span> <span class="nf">dp</span><span class="p">(</span><span class="n">ai</span><span class="p">,</span> <span class="n">bi</span><span class="p">):</span>
+<span class="linenos"> 7</span>        <span class="k">if</span> <span class="n">ai</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 8</span>            <span class="k">return</span> <span class="n">bi</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos"> 9</span>        <span class="k">elif</span> <span class="n">bi</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">10</span>            <span class="k">return</span> <span class="n">ai</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>        <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">ai</span><span class="p">]</span> <span class="o">==</span> <span class="n">B</span><span class="p">[</span><span class="n">bi</span><span class="p">]:</span>
+<span class="linenos">13</span>            <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="n">ai</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bi</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>        <span class="n">sub_last</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">ai</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bi</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">16</span>        <span class="n">add_last</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">ai</span><span class="p">,</span> <span class="n">bi</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">17</span>        <span class="n">del_last</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">ai</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bi</span><span class="p">)</span>
+<span class="linenos">18</span>        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">min</span><span class="p">(</span><span class="n">sub_last</span><span class="p">,</span> <span class="n">add_last</span><span class="p">,</span> <span class="n">del_last</span><span class="p">)</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span>    <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="n">d</span> <span class="o">=</span> <span class="n">lev</span><span class="p">(</span><span class="s2">&quot;saturday&quot;</span><span class="p">,</span> <span class="s2">&quot;sunday&quot;</span><span class="p">)</span>
+<span class="linenos">24</span><span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+
+<p>This optimisation does, however, come at a great cost in terms of complexity (of understanding). You can make it easier to debug by creating substring variables at the top of it:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">[:</span><span class="n">ai</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">2</span><span class="n">b</span> <span class="o">=</span> <span class="n">B</span><span class="p">[:</span><span class="n">bi</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+<p>This is probably the form you want to remember, and be able to code up. The following version is less legible, but would still be acceptable.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">lru_cache</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">def</span> <span class="nf">lev</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+<span class="linenos"> 4</span>    <span class="nd">@lru_cache</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="nf">dp</span><span class="p">(</span><span class="n">ai</span><span class="p">,</span> <span class="n">bi</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="k">if</span> <span class="n">ai</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">bi</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 7</span>            <span class="k">return</span> <span class="p">(</span><span class="n">ai</span><span class="p">,</span> <span class="n">bi</span><span class="p">)[</span><span class="n">ai</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos"> 8</span>        <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">ai</span><span class="p">]</span> <span class="o">==</span> <span class="n">B</span><span class="p">[</span><span class="n">bi</span><span class="p">]:</span>
+<span class="linenos"> 9</span>            <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="n">ai</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bi</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">10</span>        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">min</span><span class="p">(</span><span class="n">dp</span><span class="p">(</span><span class="n">ai</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bi</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dp</span><span class="p">(</span><span class="n">ai</span><span class="p">,</span> <span class="n">bi</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dp</span><span class="p">(</span><span class="n">ai</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bi</span><span class="p">))</span>
+<span class="linenos">11</span>    <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="n">d</span> <span class="o">=</span> <span class="n">lev</span><span class="p">(</span><span class="s2">&quot;saturday&quot;</span><span class="p">,</span> <span class="s2">&quot;sunday&quot;</span><span class="p">)</span>
+<span class="linenos">14</span><span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+
+<p>See also:</p>
+<p><a href="/./minimum-deletion">minimum deletion</a></p>
+    </main>
+    
+    <footer>
+        All content rights reserved Shyal Beardsley 2020.
+    </footer>
+    
+  </body>
+
+
+<script>
+ var i = 0;
+ $("img").each(function() {  
+   imgsrc = this.src;
+
+  if (imgsrc.includes('.mp4')){
+    $(this).replaceWith($("<video width='640' height='480' controls> <source src='"+imgsrc+"' type='video/mp4'></video>"))
+   }
+   else{
+     $(this).wrap('<a href="'+this.src+'" data-lightbox="image-'+i+'" data-title=""></a>');
+   }
+   i += 1;
+  });  
+</script>
+
+<script src="/static/lightbox.js"></script>
+<script>
+lightbox.option({
+  'resizeDuration': 200,
+  'wrapAround': true,
+  'fitImagesInViewport': true
+})
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78427660-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-78427660-1');
+</script>
+
+</html>

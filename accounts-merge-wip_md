@@ -1,0 +1,404 @@
+<html>
+  <head>
+  <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+  <meta name="keywords" content="shyal beardsley, shyal.com, shyal, oliver, beardsley">
+  <meta name="description" content="accounts merge wip">
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    config: ["MMLorHTML.js"],
+    jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+    extensions: ["MathMenu.js", "MathZoom.js"]
+  });
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.5.2/mermaid.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.js"></script>
+    
+    <link rel="stylesheet" href="/static/styles.css">
+    <!-- <script src="/static/mermaid.min.js"></script> -->
+    <link href="/static/lightbox.css" rel="stylesheet" />
+    
+    <title>accounts merge wip - Shyal Beardsley</title>
+    <style>
+      pre { line-height: 125%; }
+td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #ffffcc }
+.highlight { background: #ffffff; }
+.highlight .c { color: #888888 } /* Comment */
+.highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.highlight .k { color: #008800; font-weight: bold } /* Keyword */
+.highlight .ch { color: #888888 } /* Comment.Hashbang */
+.highlight .cm { color: #888888 } /* Comment.Multiline */
+.highlight .cp { color: #cc0000; font-weight: bold } /* Comment.Preproc */
+.highlight .cpf { color: #888888 } /* Comment.PreprocFile */
+.highlight .c1 { color: #888888 } /* Comment.Single */
+.highlight .cs { color: #cc0000; font-weight: bold; background-color: #fff0f0 } /* Comment.Special */
+.highlight .gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #aa0000 } /* Generic.Error */
+.highlight .gh { color: #333333 } /* Generic.Heading */
+.highlight .gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #555555 } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #666666 } /* Generic.Subheading */
+.highlight .gt { color: #aa0000 } /* Generic.Traceback */
+.highlight .kc { color: #008800; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008800; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008800; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008800 } /* Keyword.Pseudo */
+.highlight .kr { color: #008800; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #888888; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #0000DD; font-weight: bold } /* Literal.Number */
+.highlight .s { color: #dd2200; background-color: #fff0f0 } /* Literal.String */
+.highlight .na { color: #336699 } /* Name.Attribute */
+.highlight .nb { color: #003388 } /* Name.Builtin */
+.highlight .nc { color: #bb0066; font-weight: bold } /* Name.Class */
+.highlight .no { color: #003366; font-weight: bold } /* Name.Constant */
+.highlight .nd { color: #555555 } /* Name.Decorator */
+.highlight .ne { color: #bb0066; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0066bb; font-weight: bold } /* Name.Function */
+.highlight .nl { color: #336699; font-style: italic } /* Name.Label */
+.highlight .nn { color: #bb0066; font-weight: bold } /* Name.Namespace */
+.highlight .py { color: #336699; font-weight: bold } /* Name.Property */
+.highlight .nt { color: #bb0066; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #336699 } /* Name.Variable */
+.highlight .ow { color: #008800 } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #0000DD; font-weight: bold } /* Literal.Number.Bin */
+.highlight .mf { color: #0000DD; font-weight: bold } /* Literal.Number.Float */
+.highlight .mh { color: #0000DD; font-weight: bold } /* Literal.Number.Hex */
+.highlight .mi { color: #0000DD; font-weight: bold } /* Literal.Number.Integer */
+.highlight .mo { color: #0000DD; font-weight: bold } /* Literal.Number.Oct */
+.highlight .sa { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Affix */
+.highlight .sb { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Backtick */
+.highlight .sc { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Char */
+.highlight .dl { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Delimiter */
+.highlight .sd { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Doc */
+.highlight .s2 { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Double */
+.highlight .se { color: #0044dd; background-color: #fff0f0 } /* Literal.String.Escape */
+.highlight .sh { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Heredoc */
+.highlight .si { color: #3333bb; background-color: #fff0f0 } /* Literal.String.Interpol */
+.highlight .sx { color: #22bb22; background-color: #f0fff0 } /* Literal.String.Other */
+.highlight .sr { color: #008800; background-color: #fff0ff } /* Literal.String.Regex */
+.highlight .s1 { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Single */
+.highlight .ss { color: #aa6600; background-color: #fff0f0 } /* Literal.String.Symbol */
+.highlight .bp { color: #003388 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0066bb; font-weight: bold } /* Name.Function.Magic */
+.highlight .vc { color: #336699 } /* Name.Variable.Class */
+.highlight .vg { color: #dd7700 } /* Name.Variable.Global */
+.highlight .vi { color: #3333bb } /* Name.Variable.Instance */
+.highlight .vm { color: #336699 } /* Name.Variable.Magic */
+.highlight .il { color: #0000DD; font-weight: bold } /* Literal.Number.Integer.Long */
+      
+
+      .MathJax_Display{
+        /*text-align: left !important;*/
+        margin: 0 !important;
+      }
+
+      pre {
+      /*line-height: 1em;*/
+      white-space: pre-wrap;       /* css-3 */
+      white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+      white-space: -pre-wrap;      /* Opera 4-6 */
+      white-space: -o-pre-wrap;    /* Opera 7 */
+      word-wrap: break-word;       /* Internet Explorer 5.5+ */
+      }
+
+      div.mermaid {
+        max-width: 500px;
+      }
+  
+      body {
+        text-align: left !important;
+        margin: 0px;
+        padding: 0px;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      .lineno {
+        margin-right: 10px;
+        color: #a5b4a3;
+      }
+
+      .linenodiv {
+        border-left: 2px solid #69c;
+        color: #89ac9a;
+        background-color: #f5f7f9 !important;
+      }
+
+      .codehilitetable td {
+        background-color: #f5f7f9;
+      }
+
+      th, td {
+        text-align: left;
+      }
+
+      tr:nth-child(even) {background-color: #f2f2f2;}
+
+      img {
+        max-width: 50em;
+        max-height: 30em;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 2em 1em;
+      }
+
+      .text-center{
+        text-align: center;
+      }
+
+      main,
+      footer,
+      .narrow {
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        margin: 0 auto;
+        max-width: 50em;
+        line-height: 1.5;
+        padding: 2em 1em;
+        color: #566b78;
+      }
+
+      .lb-image {
+        background: white;
+      }
+
+      div {
+        padding: 0px;
+        margin: 0px;
+      }
+
+      code,
+      pre {
+        background: #f7f9fb;
+      }
+
+      .linenodiv {
+        width: 10px;
+        padding-right: 0px;
+      }
+
+      h2 {
+        margin-top: 0.5em;
+        padding-top: 0.5em;
+      }
+
+      h1,
+      h2,
+      strong {
+        color: #333;
+      }
+
+      a {
+        color: #e81c4f;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <main>
+
+    <!-- <img src='/Attachments/me.png' height='150px'> -->
+
+    
+    <div><h1 class='main-title'>accounts merge wip</h1></div>
+     
+
+    
+    <a href="javascript:history.back()">←</a>
+    <a href='/'>🏠</a>
+     
+    <!-- if has_fences -->
+    <!-- <div><a href='/black'><img src='/Attachments/black.svg'/></a></div> -->
+    <!--  end  -->
+    <video src="https://static.ioloop.io/MergeAccounts.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<blockquote>
+<blockquote>
+<p>Given a list accounts, each element accounts[i] is a list of strings, where the first element accounts[i][0] is a name, and the rest of the elements are emails representing emails of the account.</p>
+<p>Now, we would like to merge these accounts. Two accounts definitely belong to the same person if there is some email that is common to both accounts. Note that even if two accounts have the same name, they may belong to different people as people could have the same name. A person can have any number of accounts initially, but all of their accounts definitely have the same name.</p>
+<p>After merging the accounts, return the accounts in the following format: the first element of each account is the name, and the rest of the elements are emails in sorted order. The accounts themselves can be returned in any order.</p>
+</blockquote>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">Example</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="n">Input</span><span class="p">:</span> 
+<span class="linenos"> 3</span><span class="n">accounts</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos"> 4</span> <span class="p">[</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;johnsmith@mail.com&quot;</span><span class="p">,</span> <span class="s2">&quot;john00@mail.com&quot;</span><span class="p">],</span>
+<span class="linenos"> 5</span> <span class="p">[</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;johnnybravo@mail.com&quot;</span><span class="p">],</span>
+<span class="linenos"> 6</span> <span class="p">[</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;johnsmith@mail.com&quot;</span><span class="p">,</span> <span class="s2">&quot;john_newyork@mail.com&quot;</span><span class="p">],</span>
+<span class="linenos"> 7</span> <span class="p">[</span><span class="s2">&quot;Mary&quot;</span><span class="p">,</span> <span class="s2">&quot;mary@mail.com&quot;</span><span class="p">]</span>
+<span class="linenos"> 8</span> <span class="p">]</span>
+<span class="linenos"> 9</span> 
+<span class="linenos">10</span><span class="n">Output</span><span class="p">:</span> <span class="p">[</span>
+<span class="linenos">11</span> <span class="p">[</span><span class="s2">&quot;John&quot;</span><span class="p">,</span>
+<span class="linenos">12</span>     <span class="s1">&#39;john00@mail.com&#39;</span><span class="p">,</span>
+<span class="linenos">13</span>     <span class="s1">&#39;john_newyork@mail.com&#39;</span><span class="p">,</span>
+<span class="linenos">14</span>     <span class="s1">&#39;johnsmith@mail.com&#39;</span>
+<span class="linenos">15</span> <span class="p">],</span>
+<span class="linenos">16</span> <span class="p">[</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;johnnybravo@mail.com&quot;</span><span class="p">],</span>
+<span class="linenos">17</span> <span class="p">[</span><span class="s2">&quot;Mary&quot;</span><span class="p">,</span> <span class="s2">&quot;mary@mail.com&quot;</span><span class="p">]]</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="n">Explanation</span><span class="p">:</span> 
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="n">The</span> <span class="n">first</span> <span class="ow">and</span> <span class="n">third</span> <span class="n">John</span><span class="s1">&#39;s are the same person as they have the common email &quot;johnsmith@mail.com&quot;.</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="n">The</span> <span class="n">second</span> <span class="n">John</span> <span class="ow">and</span> <span class="n">Mary</span> <span class="n">are</span> <span class="n">different</span> <span class="n">people</span> <span class="k">as</span> <span class="n">none</span> <span class="n">of</span> <span class="n">their</span> <span class="n">email</span> <span class="n">addresses</span> <span class="n">are</span> <span class="n">used</span> <span class="n">by</span> <span class="n">other</span> <span class="n">accounts</span><span class="o">.</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="n">We</span> <span class="n">could</span> <span class="k">return</span> <span class="n">these</span> <span class="n">lists</span> <span class="ow">in</span> <span class="nb">any</span> <span class="n">order</span><span class="p">,</span> <span class="k">for</span> <span class="n">example</span> <span class="n">the</span> <span class="n">answer</span> <span class="p">[</span>
+<span class="linenos">26</span><span class="p">[</span><span class="s1">&#39;Mary&#39;</span><span class="p">,</span> <span class="s1">&#39;mary@mail.com&#39;</span><span class="p">],</span>
+<span class="linenos">27</span><span class="p">[</span><span class="s1">&#39;John&#39;</span><span class="p">,</span> <span class="s1">&#39;johnnybravo@mail.com&#39;</span><span class="p">],</span> 
+<span class="linenos">28</span><span class="p">[</span><span class="s1">&#39;John&#39;</span><span class="p">,</span> 
+<span class="linenos">29</span> <span class="s1">&#39;john00@mail.com&#39;</span><span class="p">,</span>
+<span class="linenos">30</span> <span class="s1">&#39;john_newyork@mail.com&#39;</span><span class="p">,</span>
+<span class="linenos">31</span> <span class="s1">&#39;johnsmith@mail.com&#39;</span><span class="p">]</span>
+<span class="linenos">32</span><span class="p">]</span> <span class="n">would</span> <span class="n">still</span> <span class="n">be</span> <span class="n">accepted</span><span class="o">.</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span><span class="n">Note</span><span class="p">:</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span><span class="n">The</span> <span class="n">length</span> <span class="n">of</span> <span class="n">accounts</span> <span class="n">will</span> <span class="n">be</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">range</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]</span><span class="o">.</span>
+<span class="linenos">37</span><span class="n">The</span> <span class="n">length</span> <span class="n">of</span> <span class="n">accounts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="n">will</span> <span class="n">be</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">range</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span><span class="o">.</span>
+<span class="linenos">38</span><span class="n">The</span> <span class="n">length</span> <span class="n">of</span> <span class="n">accounts</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="n">will</span> <span class="n">be</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">range</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span><span class="o">.</span>
+</pre></div>
+
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">collections</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">def</span> <span class="nf">accountsMerge</span><span class="p">(</span> <span class="n">accounts</span><span class="p">):</span>
+<span class="linenos"> 4</span>    <span class="n">em_to_name</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos"> 5</span>    <span class="n">graph</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
+<span class="linenos"> 6</span>    <span class="k">for</span> <span class="n">acc</span> <span class="ow">in</span> <span class="n">accounts</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="n">em_to_name</span><span class="p">[</span><span class="n">acc</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">acc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos"> 8</span>        <span class="k">for</span> <span class="n">email</span> <span class="ow">in</span> <span class="n">acc</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+<span class="linenos"> 9</span>            <span class="n">graph</span><span class="p">[</span><span class="n">acc</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+<span class="linenos">10</span>            <span class="n">graph</span><span class="p">[</span><span class="n">email</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">acc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>    <span class="k">def</span> <span class="nf">visit</span><span class="p">(</span><span class="n">email</span><span class="p">):</span>
+<span class="linenos">13</span>        <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+<span class="linenos">14</span>        <span class="k">for</span> <span class="n">next_node</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">email</span><span class="p">]:</span>
+<span class="linenos">15</span>            <span class="k">if</span> <span class="n">next_node</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+<span class="linenos">16</span>                <span class="n">visit</span><span class="p">(</span><span class="n">next_node</span><span class="p">)</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>    <span class="n">seen</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">ans</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(),</span> <span class="nb">set</span><span class="p">(),</span> <span class="p">[]</span>
+<span class="linenos">19</span>    <span class="k">for</span> <span class="n">email</span> <span class="ow">in</span> <span class="n">em_to_name</span><span class="p">:</span>
+<span class="linenos">20</span>        <span class="k">if</span> <span class="n">email</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">done</span><span class="p">:</span>
+<span class="linenos">21</span>            <span class="n">visit</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+<span class="linenos">22</span>            <span class="n">ans</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">em_to_name</span><span class="p">[</span><span class="n">email</span><span class="p">]]</span> <span class="o">+</span> <span class="p">[</span><span class="o">*</span><span class="nb">sorted</span><span class="p">([</span><span class="o">*</span><span class="n">seen</span><span class="p">])])</span>
+<span class="linenos">23</span>            <span class="n">done</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">seen</span><span class="p">)</span>
+<span class="linenos">24</span>            <span class="n">seen</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="linenos">25</span>    <span class="k">return</span> <span class="n">ans</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="n">r</span> <span class="o">=</span> <span class="n">accountsMerge</span><span class="p">([</span>
+<span class="linenos">28</span>                <span class="p">[</span><span class="s2">&quot;David&quot;</span><span class="p">,</span> <span class="s2">&quot;d0&quot;</span><span class="p">,</span> <span class="s2">&quot;d1&quot;</span><span class="p">,</span> <span class="s2">&quot;d3&quot;</span><span class="p">],</span>
+<span class="linenos">29</span>                <span class="p">[</span><span class="s2">&quot;David&quot;</span><span class="p">,</span> <span class="s2">&quot;d1&quot;</span><span class="p">,</span> <span class="s2">&quot;d2&quot;</span><span class="p">],</span>
+<span class="linenos">30</span>                <span class="p">[</span><span class="s2">&quot;Mary&quot;</span><span class="p">,</span> <span class="s2">&quot;m1&quot;</span><span class="p">,</span> <span class="s2">&quot;m2&quot;</span><span class="p">],</span>
+<span class="linenos">31</span>                <span class="p">[</span><span class="s2">&quot;Mary&quot;</span><span class="p">,</span> <span class="s2">&quot;m2&quot;</span><span class="p">]])</span>
+<span class="linenos">32</span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+
+<p><img src='https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggVERcbmQwIC0tPiBkMFxuZDAgLS0-IGQwXG5kMCAtLT4gZDFcbmQxIC0tPiBkMFxuZDAgLS0-IGQzXG5kMyAtLT4gZDBcbmQxIC0tPiBkMVxuZDEgLS0-IGQxXG5kMSAtLT4gZDJcbmQyIC0tPiBkMVxubTEgLS0-IG0xXG5tMSAtLT4gbTFcbm0xIC0tPiBtMlxubTIgLS0-IG0xXG5tMiAtLT4gbTJcbm0yIC0tPiBtMiIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In0sInVwZGF0ZUVkaXRvciI6ZmFsc2V9' /></p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">r</span> <span class="o">=</span> <span class="n">accountsMerge</span><span class="p">([</span>
+<span class="linenos">2</span>                <span class="p">[</span><span class="s2">&quot;David&quot;</span><span class="p">,</span> <span class="s2">&quot;d0&quot;</span><span class="p">,</span> <span class="s2">&quot;d1&quot;</span><span class="p">,</span> <span class="s2">&quot;d3&quot;</span><span class="p">],</span>
+<span class="linenos">3</span>                <span class="p">[</span><span class="s2">&quot;David&quot;</span><span class="p">,</span> <span class="s2">&quot;d1&quot;</span><span class="p">,</span> <span class="s2">&quot;d2&quot;</span><span class="p">],</span>
+<span class="linenos">4</span>                <span class="p">[</span><span class="s2">&quot;David&quot;</span><span class="p">,</span> <span class="s2">&quot;d4&quot;</span><span class="p">,</span> <span class="s2">&quot;d2&quot;</span><span class="p">],</span>
+<span class="linenos">5</span>                <span class="p">[</span><span class="s2">&quot;David&quot;</span><span class="p">,</span> <span class="s2">&quot;d5&quot;</span><span class="p">,</span> <span class="s2">&quot;d2&quot;</span><span class="p">],</span>
+<span class="linenos">6</span>                <span class="p">[</span><span class="s2">&quot;David&quot;</span><span class="p">,</span> <span class="s2">&quot;d0&quot;</span><span class="p">,</span> <span class="s2">&quot;d2&quot;</span><span class="p">],</span>
+<span class="linenos">7</span>                <span class="p">[</span><span class="s2">&quot;David&quot;</span><span class="p">,</span> <span class="s2">&quot;d0&quot;</span><span class="p">,</span> <span class="s2">&quot;d2&quot;</span><span class="p">,</span> <span class="s2">&quot;d7&quot;</span><span class="p">],</span>
+<span class="linenos">8</span>                <span class="p">[</span><span class="s2">&quot;Mary&quot;</span><span class="p">,</span> <span class="s2">&quot;m1&quot;</span><span class="p">,</span> <span class="s2">&quot;m2&quot;</span><span class="p">],</span>
+<span class="linenos">9</span>                <span class="p">[</span><span class="s2">&quot;Mary&quot;</span><span class="p">,</span> <span class="s2">&quot;m2&quot;</span><span class="p">]])</span>
+</pre></div>
+
+<div class="mermaid">
+graph TD
+d0 --> d1
+d7 --> d0
+d0 --> d2
+d0 --> d0
+d5 --> d2
+d2 --> d4
+d1 --> d0
+d4 --> d4
+d2 --> d1
+d0 --> d7
+d2 --> d5
+d0 --> d3
+d1 --> d1
+d2 --> d0
+d3 --> d0
+d1 --> d2
+d4 --> d2
+d5 --> d5
+</div>
+
+<div class="mermaid">
+graph TD
+m2 --> m1
+m1 --> m1
+m2 --> m2
+m1 --> m2
+</div>
+
+<p>See also:</p>
+<p><a href="/./alien-dictionary">alien dictionary</a></p>
+<script>mermaid.initialize({startOnLoad:true});</script>
+    </main>
+    
+    <footer>
+        All content rights reserved Shyal Beardsley 2020.
+    </footer>
+    
+  </body>
+
+
+<script>
+ var i = 0;
+ $("img").each(function() {  
+   imgsrc = this.src;
+
+  if (imgsrc.includes('.mp4')){
+    $(this).replaceWith($("<video width='640' height='480' controls> <source src='"+imgsrc+"' type='video/mp4'></video>"))
+   }
+   else{
+     $(this).wrap('<a href="'+this.src+'" data-lightbox="image-'+i+'" data-title=""></a>');
+   }
+   i += 1;
+  });  
+</script>
+
+<script src="/static/lightbox.js"></script>
+<script>
+lightbox.option({
+  'resizeDuration': 200,
+  'wrapAround': true,
+  'fitImagesInViewport': true
+})
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78427660-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-78427660-1');
+</script>
+
+</html>

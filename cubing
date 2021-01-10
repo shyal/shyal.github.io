@@ -1,0 +1,1843 @@
+<html>
+  <head>
+  <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+  <meta name="keywords" content="shyal beardsley, shyal.com, shyal, oliver, beardsley">
+  <meta name="description" content="cubing">
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    config: ["MMLorHTML.js"],
+    jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+    extensions: ["MathMenu.js", "MathZoom.js"]
+  });
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.5.2/mermaid.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.js"></script>
+    
+    <link rel="stylesheet" href="/static/styles.css">
+    <!-- <script src="/static/mermaid.min.js"></script> -->
+    <link href="/static/lightbox.css" rel="stylesheet" />
+    
+    <title>cubing - Shyal Beardsley</title>
+    <style>
+      pre { line-height: 125%; }
+td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #ffffcc }
+.highlight { background: #ffffff; }
+.highlight .c { color: #888888 } /* Comment */
+.highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.highlight .k { color: #008800; font-weight: bold } /* Keyword */
+.highlight .ch { color: #888888 } /* Comment.Hashbang */
+.highlight .cm { color: #888888 } /* Comment.Multiline */
+.highlight .cp { color: #cc0000; font-weight: bold } /* Comment.Preproc */
+.highlight .cpf { color: #888888 } /* Comment.PreprocFile */
+.highlight .c1 { color: #888888 } /* Comment.Single */
+.highlight .cs { color: #cc0000; font-weight: bold; background-color: #fff0f0 } /* Comment.Special */
+.highlight .gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #aa0000 } /* Generic.Error */
+.highlight .gh { color: #333333 } /* Generic.Heading */
+.highlight .gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #555555 } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #666666 } /* Generic.Subheading */
+.highlight .gt { color: #aa0000 } /* Generic.Traceback */
+.highlight .kc { color: #008800; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008800; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008800; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008800 } /* Keyword.Pseudo */
+.highlight .kr { color: #008800; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #888888; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #0000DD; font-weight: bold } /* Literal.Number */
+.highlight .s { color: #dd2200; background-color: #fff0f0 } /* Literal.String */
+.highlight .na { color: #336699 } /* Name.Attribute */
+.highlight .nb { color: #003388 } /* Name.Builtin */
+.highlight .nc { color: #bb0066; font-weight: bold } /* Name.Class */
+.highlight .no { color: #003366; font-weight: bold } /* Name.Constant */
+.highlight .nd { color: #555555 } /* Name.Decorator */
+.highlight .ne { color: #bb0066; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0066bb; font-weight: bold } /* Name.Function */
+.highlight .nl { color: #336699; font-style: italic } /* Name.Label */
+.highlight .nn { color: #bb0066; font-weight: bold } /* Name.Namespace */
+.highlight .py { color: #336699; font-weight: bold } /* Name.Property */
+.highlight .nt { color: #bb0066; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #336699 } /* Name.Variable */
+.highlight .ow { color: #008800 } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #0000DD; font-weight: bold } /* Literal.Number.Bin */
+.highlight .mf { color: #0000DD; font-weight: bold } /* Literal.Number.Float */
+.highlight .mh { color: #0000DD; font-weight: bold } /* Literal.Number.Hex */
+.highlight .mi { color: #0000DD; font-weight: bold } /* Literal.Number.Integer */
+.highlight .mo { color: #0000DD; font-weight: bold } /* Literal.Number.Oct */
+.highlight .sa { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Affix */
+.highlight .sb { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Backtick */
+.highlight .sc { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Char */
+.highlight .dl { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Delimiter */
+.highlight .sd { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Doc */
+.highlight .s2 { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Double */
+.highlight .se { color: #0044dd; background-color: #fff0f0 } /* Literal.String.Escape */
+.highlight .sh { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Heredoc */
+.highlight .si { color: #3333bb; background-color: #fff0f0 } /* Literal.String.Interpol */
+.highlight .sx { color: #22bb22; background-color: #f0fff0 } /* Literal.String.Other */
+.highlight .sr { color: #008800; background-color: #fff0ff } /* Literal.String.Regex */
+.highlight .s1 { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Single */
+.highlight .ss { color: #aa6600; background-color: #fff0f0 } /* Literal.String.Symbol */
+.highlight .bp { color: #003388 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0066bb; font-weight: bold } /* Name.Function.Magic */
+.highlight .vc { color: #336699 } /* Name.Variable.Class */
+.highlight .vg { color: #dd7700 } /* Name.Variable.Global */
+.highlight .vi { color: #3333bb } /* Name.Variable.Instance */
+.highlight .vm { color: #336699 } /* Name.Variable.Magic */
+.highlight .il { color: #0000DD; font-weight: bold } /* Literal.Number.Integer.Long */
+      
+
+      .MathJax_Display{
+        /*text-align: left !important;*/
+        margin: 0 !important;
+      }
+
+      pre {
+      /*line-height: 1em;*/
+      white-space: pre-wrap;       /* css-3 */
+      white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+      white-space: -pre-wrap;      /* Opera 4-6 */
+      white-space: -o-pre-wrap;    /* Opera 7 */
+      word-wrap: break-word;       /* Internet Explorer 5.5+ */
+      }
+
+      div.mermaid {
+        max-width: 500px;
+      }
+  
+      body {
+        text-align: left !important;
+        margin: 0px;
+        padding: 0px;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      .lineno {
+        margin-right: 10px;
+        color: #a5b4a3;
+      }
+
+      .linenodiv {
+        border-left: 2px solid #69c;
+        color: #89ac9a;
+        background-color: #f5f7f9 !important;
+      }
+
+      .codehilitetable td {
+        background-color: #f5f7f9;
+      }
+
+      th, td {
+        text-align: left;
+      }
+
+      tr:nth-child(even) {background-color: #f2f2f2;}
+
+      img {
+        max-width: 50em;
+        max-height: 30em;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 2em 1em;
+      }
+
+      .text-center{
+        text-align: center;
+      }
+
+      main,
+      footer,
+      .narrow {
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        margin: 0 auto;
+        max-width: 50em;
+        line-height: 1.5;
+        padding: 2em 1em;
+        color: #566b78;
+      }
+
+      .lb-image {
+        background: white;
+      }
+
+      div {
+        padding: 0px;
+        margin: 0px;
+      }
+
+      code,
+      pre {
+        background: #f7f9fb;
+      }
+
+      .linenodiv {
+        width: 10px;
+        padding-right: 0px;
+      }
+
+      h2 {
+        margin-top: 0.5em;
+        padding-top: 0.5em;
+      }
+
+      h1,
+      h2,
+      strong {
+        color: #333;
+      }
+
+      a {
+        color: #e81c4f;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <main>
+
+    <!-- <img src='/Attachments/me.png' height='150px'> -->
+
+    
+    <div><h1 class='main-title'>cubing</h1></div>
+     
+
+    
+    <a href="javascript:history.back()">←</a>
+    <a href='/'>🏠</a>
+     
+    <!-- if has_fences -->
+    <!-- <div><a href='/black'><img src='/Attachments/black.svg'/></a></div> -->
+    <!--  end  -->
+    <h1 id="cubing-algorithms-to-revise">Cubing algorithms to revise</h1>
+<p><a href="https://www.salon.com/2020/09/20/ern-rubik-on-why-his-famous-cube-is-a-metaphor-for-the-human-condition/">Nice article</a>.</p>
+<p><a href="http://www.rubiksplace.com/speedcubing/F2L-algorithms/">Full F2L</a>.</p>
+<h2 id="oll">OLL</h2>
+<p><a href="http://www.rubiksplace.com/speedcubing/OLL-algorithms/">Full OLL</a></p>
+<p>Last layer is not fully facing up.</p>
+<h3 id="pi">Pi</h3>
+<p>The front looks like the H, but the back are facing outwards.</p>
+<p>R U2 (R2 U' R2 U' R2) U2 R</p>
+<h2 id="pll">PLL</h2>
+<p><a href="https://www.youtube.com/watch?v=f_Yor-ydZjs&amp;t=201s">Youtube</a><br />
+<a href="https://jperm.net/algs/2lookpll">Algorithms</a><br />
+<a href="http://www.rubiksplace.com/speedcubing/PLL-algorithms/">Full PLL</a></p>
+<h3 id="adjacent-corner-swap">Adjacent corner swap</h3>
+<p>R U R' U' R' F R2 U' R' U' R U R' F'</p>
+<h3 id="diagonal-corner-swap">Diagonal corner swap</h3>
+<p>(F R U' R' U' R U R' F') (R U R' U' R' F R F')</p>
+<h3 id="edge-cycle-1">Edge Cycle #1</h3>
+<p>Last layer is orientated correctly, but there are 3 edge pieces that need permutating anti-clockwise.</p>
+<p>R U' R U R U R U' R' U' R2</p>
+<h3 id="edge-cycle-2">Edge Cycle #2</h3>
+<p>Last layer is orientated correctly, but there are 3 edge pieces that need permutating clockwise.</p>
+<p>R2 U R U R' U' R' U' R' U R'</p>
+<h3 id="opposite-edge-swap">Opposite edge swap</h3>
+<p>M2 U' M2 U2 M2 U' M2</p>
+<h3 id="adjacent-edge-swap">Adjacent edge swap</h3>
+<p>M' U' M2 U' M2 U' M' U2 M2</p>
+<style type="text/css">
+
+img.f2l-img{width:80px;height:80px;}
+
+
+table{border-style: outset; border-width: 1px;border-spacing: 0px; width:100%;}
+td {border-style: inset;border-width: 1px;border-color: gray;}
+th {border-style: inset;border-width: 1px;border-color: gray;}
+.imgTh{text-align:center;}
+
+
+/* mobile css code (up to 420px) */
+@media screen and (max-width: 420px)
+{
+.gbutton{display:none !important;}
+.firstImg{float:none;display:block;margin-left:auto;margin-right:auto;margin-bottom:20px;}
+tr {display:block;}
+td {width:100%;}
+th {width:10%;}
+.spaceTd{width:0;height:0;border: 0;display: block;padding: 0;}
+.tdHeader{padding-top: 5px;padding-bottom: 5px;border-width:0;}
+#fcase{width:12%;}
+#cimg1{width:32%;}
+#calg1{width:52%;}
+#scase{display:none;}
+#cimg2{display:none;}
+#calg2{display:none;}
+
+}
+
+
+/* medium width css code (421px-1163px) */
+@media screen and (min-width: 421px) and (max-width: 1163px)
+{
+h1.headers{margin-right:30px;}
+.firstImg{float:right;margin-left:40px;}
+.trHeader{height:40px;}
+
+}
+
+
+
+/* desktop css code (1164px and above) */
+@media screen and (min-width: 1164px)/*extra 20px for scroll bar*/
+{
+h1.headers{margin-right:40px;}
+.firstImg{float:right;margin-left:40px;}
+.trHeader{height:40px;}
+
+}
+
+
+
+table{border-style: outset; border-width: 1px;border-spacing: 0px; width:100%; font-size:12pt;}
+td {border-style: inset;border-width: 1px;border-color: gray; padding: 3px;}
+th {border-style: inset;border-width: 1px;border-color: gray;}
+.imgTh{text-align:center;}
+
+
+/* mobile css code (up to 420px) */
+@media screen and (max-width: 420px)
+{
+.gbutton{display:none !important;}
+.firstImg{float:none;display:block;margin-left:auto;margin-right:auto;margin-bottom:20px;}
+tr {display:block;}
+td {width:100%;}
+th {width:10%;}
+.spaceTd{width:0;height:0;border: 0;display: block; padding: 0;}
+.falg{width:10%;}
+.aimg1{width:15%;}
+.aalg1{width:75%;}
+.salg{display:none;}
+.aimg2{display:none;}
+.aalg2{display:none;}
+
+}
+
+
+/* medium width css code (421px-1163px) */
+@media screen and (min-width: 421px) and (max-width: 1163px)
+{
+h1.headers{margin-right:30px;}
+.firstImg{float:right;margin-left:40px;}
+.falg{width:3%;}
+.aimg1{width:11%;}
+.aalg1{width:33%;}
+.salg{width:3%;}
+.aimg2{width:11%;}
+.aalg2{width:33%;}
+.spaceTd{width:2%;}
+
+}
+
+
+
+/* desktop css code (1164px and above) */
+@media screen and (min-width: 1164px)/*extra 20px for scroll bar*/
+{
+h1.headers{margin-right:40px;}
+.firstImg{float:right;margin-left:40px;}
+.falg{width:3%;}
+.aimg1{width:11%;}
+.aalg1{width:33%;}
+.salg{width:3%;}
+.aimg2{width:11%;}
+.aalg2{width:33%;}
+.spaceTd{width:2%;}
+
+}
+
+
+</style>
+
+<table style="font-size:12pt;">
+    <tr><td colspan="7"><b>Corner on top, FL color facing side, edge colors match</b></td></tr>
+    <tr>
+        <th style="width:6%" id="fcase">Case #</th>
+        <th style="width:16%" id="cimg1">Case Image</th>
+        <td style="width:25%" id="calg1"><b>Algorithm</b></td>
+        <td style="width:2%" class="spaceTd">&nbsp;</td>
+        <td style="width:25%;text-align:right;" id="calg2"><b>Algorithm</b></td>
+        <th style="width:16%" id="cimg2">Case Image</th>
+        <th style="width:6%" id="scase">Case #</th>
+    </tr>
+    <tr>
+        <th>1</th>
+        <th class="imgTh">                  
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var1.PNG" alt="F2l Algorithm - case #1"/>
+        </th>
+        <td>
+            <b>U (R U' R')</b><br />
+            R' F R F'<br />
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>y' U' (R' U R)</b><br />
+            F R' F' R<br />
+        </td>
+        <th class="imgTh">                  
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var2.PNG" alt="F2l Algorithm - case #2"/>
+        </th>
+        <th>2</th>
+    </tr>
+    <tr>
+        <th>3</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var3.PNG" alt="F2l Algorithm - case #3"/>
+        </th>
+        <td>
+            <b>U' R U R' U2 (R U' R')</b><br />
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>d R' U' R U2' (R' U R)</b><br />
+            y' (U R' U' R) U2
+ (R' U R)<br />
+        </td>
+        <th class="imgTh">
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var4.PNG" alt="F2l Algorithm - case #4"/>
+        </th>
+        <th>4</th>
+    </tr>
+    <tr>
+        <th>5</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var5.PNG" alt="F2l Algorithm - case #5"/>
+        </th>
+        <td>
+            <b>U' R U2' R' U2 (R U' R')</b><br />
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>d R' U2 R U2' (R' U R)</b><br />
+            R' F R F'<br />
+        </td>
+        <th class="imgTh">
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var6.PNG" alt="F2l Algorithm - case #6"/>
+        </th>
+        <th>6</th>
+    </tr>
+    <tr>
+        <th>7</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var7.PNG" alt="F2l Algorithm - case #7"/>
+        </th>
+        <td>
+            <b>y' R' U R U' d' (R U R')</b><br />
+            y L' U L U2 y (R U R')<br />
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>R U' R' U d (R' U' R)</b><br />
+            R U' R' U2 y' (R' U' R)<br />
+            (R U' R') U2 (F' U' F)<br />
+        </td>
+        <th class="imgTh">
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var8.PNG" alt="F2l Algorithm - case #8"/>
+        </th>
+        <th>8</th>
+    </tr>
+    <tr class="trHeader"><td class="tdHeader" colspan="7"><b>Corner on top, FL color facing side, edge colors opposite</b></td></tr>
+    <tr>
+        <th>9</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var9.PNG" alt="F2l Algorithm - case #9"/>
+        </th>
+        <td>
+            <b>y' (R' U' R)</b><br />
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>(R U R')</b><br />
+        </td>
+        <th class="imgTh">
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var10.PNG" alt="F2l Algorithm - case #10"/>
+        </th>
+        <th>10</th>
+    </tr>
+    <tr>
+        <th>11</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var11.PNG" alt="F2l Algorithm - case #11"/>
+        </th>
+        <td>
+            <b>d R' U' R U'(R' U' R)</b><br />
+            U' R U' R' d R' U' R<br />
+            U' R U' R' U y' R' U' R<br />
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>U' R U R' U (R U R')</b><br />
+        </td>
+        <th class="imgTh">
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var12.PNG" alt="F2l Algorithm - case #12"/>
+        </th>
+        <th>12</th>
+    </tr>
+    <tr>
+        <th>13</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var13.PNG" alt="F2l Algorithm - case #13"/>
+        </th>
+        <td>
+            <b>U' R U2' R' d (R' U' R)</b><br />
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>R' U2 R2 U R2' U R</b><br /><small>*Last R' U R can be avoided if back slot is empty.</small><br />
+            R U' R' U R U' R' U2 (R U' R')<br />
+            d R' U2 R d' (R U R')
+        </td>
+        <th class="imgTh">
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var14.PNG" alt="F2l Algorithm - case #14"/>
+        </th>
+        <th>14</th>
+    </tr>
+    <tr>
+        <th>15</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var15.PNG" alt="F2l Algorithm - case #15"/>
+        </th>
+        <td>
+            <b>d R' U R U' (R' U' R)</b><br />
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>U' R U' R' U(R U R')</b><br />
+        </td>
+        <th class="imgTh">
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var16.PNG" alt="F2l Algorithm - case #16"/>
+        </th>
+        <th>16</th>
+    </tr>
+    <tr class="trHeader"><td class="tdHeader" colspan="7"><b>Corner on top, FL color facing up</b></td></tr>
+    <tr>
+        <th>17</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var17.PNG" alt="F2l Algorithm - case #17"/>
+        </th>
+        <td>
+            <b>R U2' R' U' (R U R')</b><br />
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>y' R' U2 R U (R' U' R)</b><br />
+            y (L' U2 L) U (L' U' L)<br />
+        </td>
+        <th class="imgTh">
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var18.PNG" alt="F2l Algorithm - case #18"/>
+        </th>
+        <th>18</th>
+    </tr>
+    <tr>
+        <th>19</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var19.PNG" alt="F2l Algorithm - case #19"/>
+        </th>
+        <td>
+            <b>U R U2 R' U (R U' R')</b><br />
+            U R U2 R2 F R F'<br />
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>y' U' R' U2 R U' (R' U R)</b><br />
+        </td>
+        <th class="imgTh">
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var20.PNG" alt="F2l Algorithm - case #20"/>
+        </th>
+        <th>20</th>
+    </tr>
+    <tr>
+        <th>21</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var21.PNG" alt="F2l Algorithm - case #21"/>
+        </th>
+        <td>
+            <b>U2 R U R' U (R U' R')</b><br />
+            (R U' R') U2' (R U R')<br />
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>y' U2 R' U' R U' (R' U R) </b><br />
+            y' R' U R U2 (R' U' R)<br />
+        </td>
+        <th class="imgTh">
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var22.PNG" alt="F2l Algorithm - case #22"/>
+        </th>
+        <th>22</th>
+    </tr>
+    <tr>
+        <th>23</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var23.PNG" alt="F2l Algorithm - case #23"/>
+        </th>
+        <td>
+            <b>y' U R' U2 R y R U2 R' U R U' R'</b><br />
+            U2 R2 U2 R' U' R U' R2<br />
+            R U R' U2' R U R' U'(R U R')
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>U' R U2' R' y' R' U2 R U' R' U R</b><br />
+            R U R' d R' U R U' (R' U R)<br />
+            y' U2 R2 U2 R U R' U R2
+        </td>
+        <th class="imgTh">
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var24.PNG" alt="F2l Algorithm - case #24"/>
+        </th>
+        <th>24</th>
+    </tr>
+    <tr class="trHeader"><td class="tdHeader" colspan="7"><b>Corner down, edge on top</b></td></tr>
+    <tr>
+        <th>25</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var25.PNG" alt="F2l Algorithm - case #25"/>
+        </th>
+        <td>
+            <b>U R U' R' d' (L' U L)</b><br />
+            U R U' R' U' y (L' U L)<br />
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>y' U' R' U R r' U' R U M'</b><br />
+            d' L' U L d (R U' R')<br />
+            y U' (L' U L) y' U (R U' R')
+        </td>
+        <th class="imgTh">
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var26.PNG" alt="F2l Algorithm - case #26"/>
+        </th>
+        <th>26</th>
+    </tr>
+    <tr>
+        <th>27</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var27.PNG" alt="F2l Algorithm - case #27"/>
+        </th>
+        <td>
+            <b>y' R' U' R U (R' U' R)</b><br />
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>R U R' U' (R U R')</b><br />
+        </td>
+        <th class="imgTh">
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var28.PNG" alt="F2l Algorithm - case #28"/>
+        </th>
+        <th>28</th>
+    </tr>
+    <tr>
+        <th>29</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var29.PNG" alt="F2l Algorithm - case #29"/>
+        </th>
+        <td>
+            <b>R U' R' U (R U' R')</b><br />
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>y' R' U R U' (R' U R)</b><br />
+            R U R' d (R' U2 R)<br />
+        </td>
+        <th class="imgTh">
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var30.PNG" alt="F2l Algorithm - case #30"/>
+        </th>
+        <th>30</th>
+    </tr>
+    <tr class="trHeader"><td class="tdHeader" colspan="7"><b>Edge down, corner on top</b></td></tr>
+    <tr>
+        <th>31</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var31.PNG" alt="F2l Algorithm - case #31"/>
+        </th>
+        <td>
+            <b>U' R U' R' U2 (R U' R')</b><br />
+            d' L' U' R' U L U' R<br />
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>d R' U R U2 (R' U R)</b><br />
+            U' (R U2' R') U (R U R')<br />
+            U R U R' U2 (R U R')
+        </td>
+        <th class="imgTh">
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var32.PNG" alt="F2l Algorithm - case #32"/>
+        </th>
+        <th>32</th>
+    </tr>
+    <tr>
+        <th>33</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var33.PNG" alt="F2l Algorithm - case #33"/>
+        </th>
+        <td>
+            <b>U' R U R' d (R' U' R)</b><br />
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>d R' U' R d' (R U R')</b><br />
+            y U2 (L' U L) U y (L U L')<br />
+        </td>
+        <th class="imgTh">
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var34.PNG" alt="F2l Algorithm - case #34"/>
+        </th>
+        <th>34</th>
+    </tr>
+    <tr>
+        <th>35</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var35.PNG" alt="F2l Algorithm - case #35"/>
+        </th>
+        <td>
+            <b>R U' R' d (R' U R)</b><br />
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>[R U R' U'][R U R' U'](R U R')</b><br />
+            U [R U' R' U] [R U' R' U] (R U' R')<br />
+        </td>
+        <th class="imgTh">
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var36.PNG" alt="F2l Algorithm - case #36"/>
+        </th>
+        <th>36</th>
+    </tr>
+    <tr class="trHeader"><td class="tdHeader" colspan="7"><b>Corner down, edge down</b></td></tr>
+    <tr>
+        <th>37</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var37.PNG" alt="F2l Algorithm - case #37"/>
+        </th>
+        <td>
+            <b>R U' R' U' R U R' U2 (R U' R')</b><br />
+            y' R' U' R U2 R' U R U' (R' U' R)<br />
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>R U R' U2 R U' R' U(R U R')</b><br />
+            R U' R' U R U2' R' U (R U' R')<br />
+        </td>
+        <th class="imgTh">
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var38.PNG" alt="F2l Algorithm - case #38"/>
+        </th>
+        <th>38</th>
+    </tr>
+    <tr>
+        <th>39</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var39.PNG" alt="F2l Algorithm - case #39"/>
+        </th>
+        <td>
+            <b>R U' R' d R' U' R U' (R' U' R)</b><br />
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+            <b>R U R' U' R U' R' U2 y' (R' U' R)</b><br />
+            R U' R' U d R' U' R U' (R' U R)<br />
+        </td>
+        <th class="imgTh">
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var40.PNG" alt="F2l Algorithm - case #40"/>
+        </th>
+        <th>40</th>
+    </tr>
+    <tr>
+        <th>41</th>
+        <th class="imgTh">      
+                    <img class="f2l-img" src="http://www.rubiksplace.com/speedcubing/F2L-algorithms/images/f2l-var41.PNG" alt="F2l Algorithm - case #41"/>
+        </th>
+        <td>
+            <b>R U' R' U y' R' U2 R U2' (R' U R)</b><br />
+            R U' R' d R' U2 R U2' (R' U R)<br />
+            [R' F R F'] [R U' R' U] [R U' R' U2] (R U' R')
+        </td>
+        <td class="spaceTd"></td>
+        <td style="text-align:right;">
+
+        </td>
+        <th class="imgTh">
+
+        </th>
+        <th></th>
+    </tr>
+
+</table>
+
+<table>
+    <tr>        
+        <th class="falg">Alg. No.</th>
+        <th class="aimg1">Image</th>
+        <td class="aalg1"><b>Algorithm</b></td>
+        <td class="spaceTd">&nbsp;</td>
+        <td class="aalg2"><b>Algorithm</b></td>
+        <th class="aimg2">Image</th>
+        <th class="salg">Alg. No.</th>
+    </tr>
+    <tr>
+        <th>27</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-27.PNG" width="85" height="85" alt="Orientation Case #27 - Sune" />
+        </th>
+        <td>
+            <b>L U L' U [L U2 L']</b><br />
+            <b>(y2) R U R' U [R U2' R']</b>
+            <br /><br />
+            <u>Name:</u> Sune. The most recognized OLL algorithm. 
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>R' U' R U' R' U2 R</b><br />
+            (y) R U2 R' U' R U' R'          
+            <br /><br />
+            <u>Name:</u> AntiSune. <br />
+            Mirror of the Sune algorithm. Distinguished from the Sune by the side the non-oriented corners are facing. Easy to recognize after placing the oriented corner at the back.         
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-26.PNG" width="85" height="85" alt="Orientation Case #26 Antisune" />
+        </th>
+        <th>26</th>
+    </tr>
+    <tr>
+        <th>21</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-21.PNG" width="85" height="85" alt="Orientation Case #21" />
+        </th>
+        <td>
+            <b>R U2 R' U' R U R' U' R U' R'</b><br />
+            (y) R U R' U [R U' R' U] [R U2 R']<br />
+            F [R U R' U'] [R U R' U'] [R U R' U'] F'
+            <br /><br />
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>R U2' [R2 U'] [R2 U'] R2 U2' R</b><br /> 
+            <br />
+            Algorithm can be easily recognized by the 1 pair of headlights, to be faced to the left. Tip: the right hand leaves the cube completely after R2 and regrip toward the next R2 turn.        
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-22.PNG" width="85" height="85" alt="Orientation Case #22" />
+        </th>
+        <th>22</th>
+    </tr>
+    <tr>
+        <th>23</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-23.PNG" width="85" height="85" alt="Orientation Case #23 - Superman" />
+        </th>
+        <td>
+            <b>R2 D [R' U2 R] D' [R' U2 R']</b><br />
+            <br />
+            <u>Name:</u> Superman.<br />
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>l' U' L U R U' [r' F]</b><br />  
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-24.PNG" width="85" height="85" alt="Orientation Case #24" />
+        </th>
+        <th>24</th>
+    </tr>
+    <tr>
+        <th>25</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-25.PNG" width="85" height="85" alt="Orientation Case #25" />
+        </th>
+        <td>
+            <b>[R' F R B'] [R' F' R B]</b><br />
+        </td>
+        <td class="spaceTd"></td>
+        <td> </td>
+        <th></th>
+        <th></th>
+    </tr>
+</table>
+<h3>No Edges Correctly Oriented</h3>
+<table>
+    <tr>
+        <th class="falg">Alg. No.</th>
+        <th class="aimg1">Image</th>
+        <td class="aalg1"><b>Algorithm</b></td>
+        <td class="spaceTd">&nbsp;</td>
+        <td class="aalg2"><b>Algorithm</b></td>
+        <th class="aimg2">Image</th>
+        <th class="salg">Alg. No.</th>
+    </tr>
+    <tr>
+        <th>1</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-1.PNG" width="85" height="85" alt="Orientation Case #1" />
+        </th>
+        <td>
+            <b>R U2 [R2' F R F'] U2' [R' F R F']</b><br />
+            <br />
+            Recognized by 2 bars (3 stickers in a row), to be faced to the sides.
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>[F R U R' U' F'] [f R U R' U' f']</b><br />  
+            <br />
+            Recognized by a single bar, to be faced to the left. This algorithm is a combination of T orientation + P orientation.      
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-2.PNG" width="85" height="85" alt="Orientation Case #2" />
+        </th>
+        <th>2</th>
+    </tr>
+    <tr>
+        <th>3</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-3.PNG" width="85" height="85" alt="Orientation Case #3" />
+        </th>
+        <td>
+            <b>(f R U R' U' f') U' (F R U R' U' F')</b><br />
+            <br />
+            Made of P orientation + U' + T orientation. Recognition: when is in the correct angle, the 2 stickers in the L face are lined up with the center piece and the corner piece.
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>(f R U R' U' f') U (F R U R' U' F')</b><br />    
+            <br />
+            Made of P orientation + U + T orientation. Recognition: when is in the correct angle, the 2 stickers in the L face are lined up with the center piece and the corner piece.
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-4.PNG" width="85" height="85" alt="Orientation Case #4" />
+        </th>
+        <th>4</th>
+    </tr>
+    <tr>
+        <th>17</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-17.PNG" width="85" height="85" alt="Orientation Case #17" />
+        </th>
+        <td>
+            <b>[R U R' U] [R' F R F'] U2 [R' F R F']</b><br />
+            <br />
+            The correct angle is when the 2 sticker blocks on the sides are on the B &amp; L faces, and form together with the corners an arrow shape facing toward the L &amp; B faces.
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>M U R U R' U' M2 [U R U' r']</b><br />
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-20.PNG" width="85" height="85" alt="Orientation Case #20" />
+        </th>
+        <th>20</th>
+    </tr>
+    <tr>
+        <th>18</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-18.PNG" width="85" height="85" alt="Orientation Case #18" />
+        </th>
+        <td>
+            <b>[F R U R' U] y' R' U2 [R' F R F']</b><br />
+            <br />
+            Recognized by the stickers bar, to be faced at the back of the cube (B face).
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>[r' R] U [R U R' U'] r [R2' F R F']</b><br />
+            M U [R U R' U'] M' [R' F R F'] &nbsp;   <small>(same; M instead r' R)</small>
+            <br />
+            Recognized by the lack of stickers bar (unlike case #18)
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-19.PNG" width="85" height="85" alt="Orientation Case #19" />
+        </th>
+        <th>19</th>
+    </tr>
+</table>
+<h3>C shapes</h3>
+<table>
+    <tr>
+        <th class="falg">Alg. No.</th>
+        <th class="aimg1">Image</th>
+        <td class="aalg1"><b>Algorithm</b></td>
+        <td class="spaceTd">&nbsp;</td>
+        <td class="aalg2"><b>Algorithm</b></td>
+        <th class="aimg2">Image</th>
+        <th class="salg">Alg. No.</th>
+    </tr>
+    <tr>
+        <th>46</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-46.PNG" width="85" height="85" alt="Orientation Case #46 - C shape orientation" />
+        </th>
+        <td>
+            <b>R' U' [R' F R F'] U R</b><br />
+            <br />
+            Recognized by the stickers bar, to be faced to the right.
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>R U R2 U' R' F R U R U' F'</b><br /> 
+            <br />
+            Recognized by the lack of a stickers bar. I do the last F' using my right hand ring finger.
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-34.PNG" width="85" height="85" alt="Orientation Case #34 - C shape orientation" />
+        </th>
+        <th>34</th>
+    </tr>
+</table>
+<h3>I shapes</h3>
+<table>
+    <tr>
+        <th class="falg">Alg. No.</th>
+        <th class="aimg1">Image</th>
+        <td class="aalg1"><b>Algorithm</b></td>
+        <td class="spaceTd">&nbsp;</td>
+        <td class="aalg2"><b>Algorithm</b></td>
+        <th class="aimg2">Image</th>
+        <th class="salg">Alg. No.</th>
+    </tr>
+    <tr>
+        <th>55</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-55.PNG" width="85" height="85" alt="Orientation Case #55 - I shape orientation" />
+        </th>
+        <td>
+            <b>R U2 R2 U' R U' R' U2 F R F'</b><br />
+            (y) R' F R U R U' R2 F' [R2 U' R' U] R U R'
+            <br />
+            Recognized by the 2 sets of sticker bars, to be faced to the sides.
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>R U R' U R d' R U' R' F'</b><br />
+            R' U' R U' R' d R' U R B    
+            <br />
+            Recognized by having a single bar. To be faced to the right.
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-52.PNG" width="85" height="85" alt="Orientation Case #52 - I shape orientation" />
+        </th>
+        <th>52</th>
+    </tr>
+    <tr>
+        <th>51</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-51.PNG" width="85" height="85" alt="Orientation Case #51 - I shape orientation" />
+        </th>
+        <td>
+            <b>f [R U R' U'] [R U R' U'] f'</b><br />
+            <br />
+            Recognition: No bars, having 2 blocks of stickers &amp; headlights. Headlights to be faced to the left. (Similar in shape and positioning to case # 2)
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>[F R U R' U' R] F' [r U R' U'] r'</b><br />
+            (y) [f R U R' U' f'] [F (R U R' U') (R U R' U') F']
+            <br />
+            No bars or blocks. Recognized by 2 pairs of headlights, to be faced to the sides.
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-56.PNG" width="85" height="85" alt="Orientation Case #56 - I shape orientation" />
+        </th>
+        <th>56</th>
+    </tr>
+</table>
+<h3>L shapes</h3>
+<table>
+    <tr>
+        <th class="falg">Alg. No.</th>
+        <th class="aimg1">Image</th>
+        <td class="aalg1"><b>Algorithm</b></td>
+        <td class="spaceTd">&nbsp;</td>
+        <td class="aalg2"><b>Algorithm</b></td>
+        <th class="aimg2">Image</th>
+        <th class="salg">Alg. No.</th>
+    </tr>
+    <tr>
+        <th>48</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-48.PNG" width="85" height="85" alt="Orientation Case #48 - L shape orientation" />
+        </th>
+        <td>
+            <b>F [R U R' U'] [R U R' U'] F'</b><br />
+            <br />
+            Recognition: No bar, headlights. headlights facing to the left when L shape is correctly positioned.
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>R' U' [R' F R F'] [R' F R F'] U R</b><br />
+            [F' L' U' L U] [L' U' L U] F<br />
+
+            <br />
+            Mirror of #48. Headlights facing to the right when L shape is correctly positioned.
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-47.PNG" width="85" height="85" alt="Orientation Case #47 - L shape orientation" />
+        </th>
+        <th>47</th>
+    </tr>
+    <tr>
+        <th>54</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-54.PNG" width="85" height="85" alt="Orientation Case #54 - L shape orientation" />
+        </th>
+        <td>
+            <b>[r U R' U] [R U' R' U] [R U2' r']</b><br />
+            <br />
+            Recognized by having bar &amp; headlights. headlights facing to the right.
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>[l' U' L U'] [L' U L U'] [L' U2 l]</b><br />
+            (y2) r' U' R U' R' U R U' [R' U2 r]
+            <br /><br />
+            Mirror of case #54. Headlights facing to the left.
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-53.PNG" width="85" height="85" alt="Orientation Case #53 - L shape orientation" />
+        </th>
+        <th>53</th>
+    </tr>
+    <tr>
+        <th>49</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-49.PNG" width="85" height="85" alt="Orientation Case #49 - L shape orientation" />
+        </th>
+        <td>
+            <b>[R' F R' F'] R2 U2' y [R' F R F']</b><br />
+            <br />
+            Recognized by having bar &amp; a block (also no headlights). Bar is facing to the left.
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>R' F R2 B' R2' F' R2 B R'</b><br />
+            (y2) R B' R B R2' U2 [F R' F' R]
+            <br /><br />
+            Mirror of case #49. Headlights facing to the right (on main algorithm).
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-50.PNG" width="85" height="85" alt="Orientation Case #50 - L shape orientation" />
+        </th>
+        <th>50</th>
+    </tr>
+</table>
+<h3>P shapes</h3>
+<table>
+    <tr>
+        <th class="falg">Alg. No.</th>
+        <th class="aimg1">Image</th>
+        <td class="aalg1"><b>Algorithm</b></td>
+        <td class="spaceTd">&nbsp;</td>
+        <td class="aalg2"><b>Algorithm</b></td>
+        <th class="aimg2">Image</th>
+        <th class="salg">Alg. No.</th>
+    </tr>
+    <tr>
+        <th>44</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-44.PNG" width="85" height="85" alt="Orientation Case #44 - P shape orientation" />
+        </th>
+        <td>
+            <b>f [R U R' U'] f'</b><br />
+            <br />
+            Recognized by having a bar. The bar is facing left (when P is upside-down as it should).
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>f ' (L' U' L U) f</b><br />
+            (y2) R' U' F R' F' R U R<br />
+
+            <br />
+            Mirror of #44. The bar is facing right (when P is upside-down).
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-43.PNG" width="85" height="85" alt="Orientation Case #43 - P shape orientation" />
+        </th>
+        <th>43</th>
+    </tr>
+    <tr>
+        <th>32</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-32.PNG" width="85" height="85" alt="Orientation Case #32 - P shape orientation" />
+        </th>
+        <td>
+            <b>R U B' U' R' U R B R'</b><br />
+            R d L' d' R' U R B R'<br />
+            <br />
+            Recognized by not having a bar. P shape is upside-down on the right. 
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>[R' U'] F [U R U' R'] F' R</b><br />
+            <br />
+            Mirror of #31.
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-31.PNG" width="85" height="85" alt="Orientation Case #31 - P shape orientation" />
+        </th>
+        <th>31</th>
+    </tr>
+</table>
+<h3>T shapes</h3>
+<table>
+    <tr>
+        <th class="falg">Alg. No.</th>
+        <th class="aimg1">Image</th>
+        <td class="aalg1"><b>Algorithm</b></td>
+        <td class="spaceTd">&nbsp;</td>
+        <td class="aalg2"><b>Algorithm</b></td>
+        <th class="aimg2">Image</th>
+        <th class="salg">Alg. No.</th>
+    </tr>
+    <tr>
+        <th>45</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-45.PNG" width="85" height="85" alt="Orientation Case #45 - T shape orientation" />
+        </th>
+        <td>
+            <b>F [R U R' U'] F'</b><br />
+            <br />
+            Recognized my the lack of sticker blocks. Very fast algorithm.
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>[R U R' U'] [R' F R F']</b><br />
+            <br />
+            Recognized by having 2 parallel sticker blocks.
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-33.PNG" width="85" height="85" alt="Orientation Case #33 - T shape orientation" />
+        </th>
+        <th>33</th>
+    </tr>
+</table>
+<h3>W shapes</h3>
+<table>
+    <tr>
+        <th class="falg">Alg. No.</th>
+        <th class="aimg1">Image</th>
+        <td class="aalg1"><b>Algorithm</b></td>
+        <td class="spaceTd">&nbsp;</td>
+        <td class="aalg2"><b>Algorithm</b></td>
+        <th class="aimg2">Image</th>
+        <th class="salg">Alg. No.</th>
+    </tr>
+    <tr>
+        <th>38</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-38.PNG" width="85" height="85" alt="Orientation Case #38 - W shape orientation" />
+        </th>
+        <td>
+            <b>[R U R' U] [R U' R' U'] [R' F R F']</b><br />
+            <br />
+            Recognition: when the W shape is correctly positioned- the sticker block will be at the side, and not on the front.
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>[L' U' L U'] [L' U L U] [L F' L' F]</b><br />
+            (y2) [R' U' R U'] R' U R U R y [R' F' R]<br />
+            <br />
+            Recognition: when the W shape is correctly positioned- the sticker block will be at the side, and not on the front.
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-36.PNG" width="85" height="85" alt="Orientation Case #36 - W shape orientation" />
+        </th>
+        <th>36</th>
+    </tr>
+</table>
+<h3>Awkward shapes</h3>
+<table>
+    <tr>
+        <th class="falg">Alg. No.</th>
+        <th class="aimg1">Image</th>
+        <td class="aalg1"><b>Algorithm</b></td>
+        <td class="spaceTd">&nbsp;</td>
+        <td class="aalg2"><b>Algorithm</b></td>
+        <th class="aimg2">Image</th>
+        <th class="salg">Alg. No.</th>
+    </tr>
+    <tr>
+        <th>30</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-30.PNG" width="85" height="85" alt="Orientation Case #30 - Awkward shape orientation" />
+        </th>
+        <td>
+            <b>R2 U R' B' R U' R2 U R B R'</b><br />
+            <br />
+            Recognized by having a stickers block. The last B turn is done by the right hand index finger.
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>M U [R U R' U'] [R' F R F'] M'</b><br />
+            (y) [R U R' U'] R U' R' F' U' [F R U R']<br />
+            L2 U' L B L' U L2 U' [r' U' r]
+            <br /><br />
+            Mirror of case #30. Recognized by having a stickers block. 
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-29.PNG" width="85" height="85" alt="Orientation Case #29 - Awkward shape orientation" />
+        </th>
+        <th>29</th>
+    </tr>
+    <tr>
+        <th>41</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-41.PNG" width="85" height="85" alt="Orientation Case #41 - Awkward shape orientation" />
+        </th>
+        <td>
+            <b>[R U' R' U2] R U y R U' R' U' F'</b><br />
+            (y2) [R U R' U] [R U2 R'] [F R U R' U' F']
+            <br /><br />
+            Recognized by having headlights.
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>R' U2 [R U R' U] R y [F R U R' U' F']</b><br />
+            (y') [L' U L U2] L' U' y' L' U L U F<br />
+            [R' F R F'] [R' F R F'] [R U R' U'] [R U R']
+            <br /><br />
+            Mirror of case #41. Recognized by having headlights.
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-42.PNG" width="85" height="85" alt="Orientation Case #42 - Awkward shape orientation" />
+        </th>
+        <th>42</th>
+    </tr>
+</table>
+<h3>Fish shapes</h3>
+<table>
+    <tr>
+        <th class="falg">Alg. No.</th>
+        <th class="aimg1">Image</th>
+        <td class="aalg1"><b>Algorithm</b></td>
+        <td class="spaceTd">&nbsp;</td>
+        <td class="aalg2"><b>Algorithm</b></td>
+        <th class="aimg2">Image</th>
+        <th class="salg">Alg. No.</th>
+    </tr>
+    <tr>
+        <th>37</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-37.PNG" width="85" height="85" alt="Orientation Case #37 - Fish shape orientation" />
+        </th>
+        <td>
+            <b>F R U' R' U' R U R' F'</b><br />
+            <br />
+            Recognition: 2 sticker blocks. Very fast and flowing algorithm.
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>R U2' [R2 F R F'] [R U2 R']</b><br />
+            <br />
+            Recognition: No sticker blocks (unlike #37)
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-35.PNG" width="85" height="85" alt="Orientation Case #35 - Fish shape orientation" />
+        </th>
+        <th>35</th>
+    </tr>
+    <tr>
+        <th>10</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-10.PNG" width="85" height="85" alt="Orientation Case #10 - Fish shape orientation" />
+        </th>
+        <td>
+            <b>[R U R' U] [R' F R F'] [R U2 R']</b><br />
+            [R U R'] y R' F R U' R' F' R<br />
+            <br />
+            Recognition: when positioned correctly stickers block is on the back face.
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>[R U R' U' R' F] R2 U R' U' F'</b><br />
+            [R' U' R] y' x' R U' R' F R U R'<br />
+            <br />
+            Mirror of #10. When positioned correctly stickers block is on the front face.
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-9.PNG" width="85" height="85" alt="Orientation Case #9 - Fish shape orientation" />
+        </th>
+        <th>9</th>
+    </tr>
+</table>
+<h3>Knight Move shapes</h3>
+<table>
+    <tr>        
+        <th class="falg">Alg. No.</th>
+        <th class="aimg1">Image</th>
+        <td class="aalg1"><b>Algorithm</b></td>
+        <td class="spaceTd">&nbsp;</td>
+        <td class="aalg2"><b>Algorithm</b></td>
+        <th class="aimg2">Image</th>
+        <th class="salg">Alg. No.</th>
+    </tr>
+    <tr>
+        <th>13</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-13.PNG" width="85" height="85" alt="Orientation Case #13 - Knight Move shape orientation" />
+        </th>
+        <td>
+            <b>r U' r' U' r U r' y' [R' U R]</b><br />
+            <br />
+            Recognition: 2 sticker blocks.
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>R' F R U R' F' R y' [R U' R']</b><br />
+            <br />
+            Mirror of #13. Recognition: 2 sticker blocks.
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-14.PNG" width="85" height="85" alt="Orientation Case #14 - Knight Move shape orientation" />
+        </th>
+        <th>14</th>
+    </tr>
+    <tr>
+        <th>16</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-16.PNG" width="85" height="85" alt="Orientation Case #16 - Knight Move shape orientation" />
+        </th>
+        <td>
+            <b>[r U r'] [R U R' U'] [r U' r']</b><br />
+            <br />
+            Recognition: 1 stickers block.
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>[l' U' l] [L' U' L U] [l' U l]</b><br />
+            <br />
+            Mirror of #16. Recognition: 1 stickers block.
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-15.PNG" width="85" height="85" alt="Orientation Case #15 - Knight Move shape orientation" />
+        </th>
+        <th>15</th>
+    </tr>
+</table>
+<h3>Big Lightning Bolts shapes</h3>
+<table>
+    <tr>        
+        <th class="falg">Alg. No.</th>
+        <th class="aimg1">Image</th>
+        <td class="aalg1"><b>Algorithm</b></td>
+        <td class="spaceTd">&nbsp;</td>
+        <td class="aalg2"><b>Algorithm</b></td>
+        <th class="aimg2">Image</th>
+        <th class="salg">Alg. No.</th>
+    </tr>
+    <tr>
+        <th>40</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-40.PNG" width="85" height="85" alt="Orientation Case #40 - Big Lightning Bolts shape orientation" />
+        </th>
+        <td>
+            <b>[R' F R U R' U' F'] U R</b><br />
+            <br />          
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>[L F' L' U' L U F] U' L'</b><br />
+            <br />
+            Mirror of #40. 
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-39.PNG" width="85" height="85" alt="Orientation Case #39 - Big Lightning Bolts shape orientation" />
+        </th>
+        <th>39</th>
+    </tr>
+</table>
+<h3>Small Lightning Bolts shapes</h3>
+<table>
+    <tr>        
+        <th class="falg">Alg. No.</th>
+        <th class="aimg1">Image</th>
+        <td class="aalg1"><b>Algorithm</b></td>
+        <td class="spaceTd">&nbsp;</td>
+        <td class="aalg2"><b>Algorithm</b></td>
+        <th class="aimg2">Image</th>
+        <th class="salg">Alg. No.</th>
+    </tr>
+    <tr>
+        <th>8</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-8.PNG" width="85" height="85" alt="Orientation Case #8 - Small Lightning Bolts shape orientation" />
+        </th>
+        <td>
+            <b>R U2' R' U2 R' F R F'</b><br />
+            (y2) r' U' R U' R' U2 r<br />
+            <br />      
+            Recognition: The stickers block is lined up with the head of the lightning bolt (the edge+center).
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>[r U R' U] [R U2' r']</b><br />
+            <br />
+            Mirror of #8.  
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-7.PNG" width="85" height="85" alt="Orientation Case #7 - Small Lightning Bolts shape orientation" />
+        </th>
+        <th>7</th>
+    </tr>
+    <tr>
+        <th>12</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-12.PNG" width="85" height="85" alt="Orientation Case #12 - Small Lightning Bolts shape orientation" />
+        </th>
+        <td>
+            <b>[F R U R' U' F'] U [F R U R' U' F']</b><br />
+            (y) M U2 [R' U' R U' R' U2 R] U M'<br />
+            <br />      
+            Recognition: The stickers block is not lined up with the head of the lightning bolt (the edge+center).
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>[F' L' U' L U F] y [F R U R' U' F']</b><br />
+            y [r U R' U] [R' F R F'] [R U2 r']<br />
+            (y') r' R2 U R' U [R U2 R' U] M'
+            <br /><br />
+            Mirror of #12.
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-11.PNG" width="85" height="85" alt="Orientation Case #11 - Small Lightning Bolts shape orientation" />
+        </th>
+        <th>11</th>
+    </tr>
+</table>
+<h3>Square shapes</h3>
+<table>
+    <tr>        
+        <th class="falg">Alg. No.</th>
+        <th class="aimg1">Image</th>
+        <td class="aalg1"><b>Algorithm</b></td>
+        <td class="spaceTd">&nbsp;</td>
+        <td class="aalg2"><b>Algorithm</b></td>
+        <th class="aimg2">Image</th>
+        <th class="salg">Alg. No.</th>
+    </tr>
+    <tr>
+        <th>6</th>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-6.PNG" width="85" height="85" alt="Orientation Case #6 - Square shape orientation" />
+        </th>
+        <td>
+            <b>r U2' R' U' R U' r'</b><br />
+            <br />
+        </td>
+        <td class="spaceTd"></td>
+        <td>
+            <b>l' U2 L U L' U l</b><br />
+            (y2) r' U2 R U R' U r
+            <br /><br />
+            Mirror of #6.  
+        </td>
+        <th class="imgTh">      
+                    <img src="http://www.rubiksplace.com/speedcubing/OLL-algorithms/images/OLL-5.PNG" width="85" height="85" alt="Orientation Case #5 - Square shape orientation" />
+        </th>
+        <th>5</th>
+    </tr>
+</table>
+<h3>Edge Permutations Only</h3>
+<table>
+    <tr>
+        <th class="algn">Algorithm<br />Name</th>
+        <th class="aimg">Image</th>
+        <td class="aalg"><b>Algorithm</b></td>
+    </tr>
+    <tr>
+        <th>Ua perm</th>
+        <th class="imgTh">
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-Ua-perm.PNG" alt="Ua Permutation" />
+        </th>
+        <td>
+            <b>[R U' R] U R U R U' R' U' R2</b><br />
+            (y2) R2 U' R' U' R U R U R U' R<br />
+        </td>
+    </tr>
+    <tr>
+        <th>Ub perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-Ub-perm.PNG" alt="Ub Permutation" />
+        </th>
+        <td>
+            <b>R2 U R U R' U' R' U' R' U R'</b><br />
+            (y2) R' U R' U' R' U' R' U R U R2
+        </td>
+    </tr>
+    <tr>
+        <th>Z perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-Z-perm.PNG" alt="Z Permutation" />
+        </th>
+        <td>
+            <b>M' U M2 U M2 U M' U2 M2</b><br />
+            <b>[U R' U'] R U' R U R U' R' U R U [R2 U' R' U]</b><br />
+            <b>M2 U M2 U M' U2 M2 U2 M' U2</b>
+        </td>
+    </tr>
+    <tr>
+        <th>H perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-H-perm.PNG" alt="H Permutation" />
+        </th>
+        <td>
+            <b>M2 U M2 U2 M2 U M2</b><br />
+        </td>
+    </tr>
+</table>
+<h3>Corner Permutations Only</h3>
+<table>
+    <tr>
+        <th class="algn">Algorithm<br />Name</th>
+        <th class="aimg">Image</th>
+        <td class="aalg"><b>Algorithm</b></td>
+    </tr>
+    <tr>
+        <th>Aa perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-Aa-perm.PNG" alt="Aa Permutation" />
+        </th>
+        <td>
+            <b>l' U R' D2 R U' R' D2 R2</b><br />
+        </td>
+    </tr>
+    <tr>
+        <th>Ab perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-Ab-perm.PNG" alt="Ab Permutation" />
+        </th>
+        <td>
+            <b>l U' R D2 R' U R D2 R2</b><br />
+        </td>
+    </tr>
+    <tr>
+        <th>E perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-E-perm.PNG" alt="E Permutation" />
+        </th>
+        <td>
+            <b>x' [R U' R' D] [R U R' D'] [R U R' D] [R U' R' D']</b><br />
+            (y) x' [R U' R' D] [R U R' D'] [R U R' D] [R U' R' D']
+        </td>
+    </tr>
+</table>
+<h3>Corner &amp; Edge Swap Permutations</h3>
+<table>
+    <tr>
+        <th class="algn">Algorithm<br />Name</th>
+        <th class="aimg">Image</th>
+        <td class="aalg"><b>Algorithm</b></td>
+    </tr>
+    <tr>
+        <th>T perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-T-perm.PNG" alt="T Permutation" />
+        </th>
+        <td>
+            <b>[R U R' U'] R' F R2 U' R' U' [R U R' F']</b><br />
+        </td>
+    </tr>
+    <tr>
+        <th>F perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-F-perm.PNG" alt="F Permutation" />
+        </th>
+        <td>
+            <b>[R' U R U'] R2 y' [R' U' R U] y x [R U R' U'] [R2 x U']</b><br />
+            R' U2 R' d' R' F' R2 U' R' U R' F R U' F
+        </td>
+    </tr>
+    <tr>
+        <th>Ja perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-Ja-perm.PNG" alt="Ja Permutation" />
+        </th>
+        <td>
+            <b>[R' U L'] U2 [R U' R' U2] [L R U']</b><br />
+            (y) L' U' L F L' U' L U L F' L2 U L U
+        </td>
+    </tr>
+    <tr>
+        <th>Jb perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-Jb-perm.PNG" alt="Jb Permutation" />
+        </th>
+        <td>
+            <b>[R U R' F'] [R U R' U' R' F] [R2 U' R' U']</b><br />
+        </td>
+    </tr>
+    <tr>
+        <th>Ra perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-Ra-perm.PNG" alt="Ra Permutation" />
+        </th>
+        <td>
+            <b>[L U2' L' U2'] L F' L' U' L U L F L2' U</b><br />
+            (y) [R U R' F'] R U2 R' U2 R' F R U R U2 R' U'
+        </td>
+    </tr>
+    <tr>
+        <th>Rb perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-Rb-perm.PNG" alt="Rb Permutation" />
+        </th>
+        <td>
+            <b>[R' U2 R U2] R' F R U R' U' R' F' R2 U'</b><br />
+        </td>
+    </tr>
+    <tr>
+        <th>V perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-V-perm.PNG" alt="V Permutation" />
+        </th>
+        <td>
+            <b>[R' U R' U'] [x2 y'] [R' U R' U'] [l R U'] [R' U R] U</b><br />
+            [R' U R' d'] R' F' R2 U' R' U R' F R F
+        </td>
+    </tr>
+    <tr>
+        <th>Y perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-Y-perm.PNG" alt="Y Permutation" />
+        </th>
+        <td>
+            <b>[F R U' R' U' R U R' F'] [R U R' U'] [R' F R F']</b><br />
+        </td>
+    </tr>
+    <tr>
+        <th>Na perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-Na-perm.PNG" alt="Na Permutation" />
+        </th>
+        <td>
+            <b>{L U' R U2 L' U R'} {L U' R U2 L' U R'} U</b><br />
+            (y) {L U' R U2 L' U R'} {L U' R U2 L' U R'} U'<br />
+            (y) [R U' R' U] l U F U' R' F' R U' R U l' U R'<br />
+            (z) D R' U R2 D' R D U' R' U R2 D' R U' R
+        </td>
+    </tr>
+    <tr>
+        <th>Nb perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-Nb-perm.PNG" alt="Nb Permutation" />
+        </th>
+        <td>
+            <b>{R' U L' U2 R U' L} {R' U L' U2 R U' L} U'</b><br />
+            (y) {R' U L' U2 R U' L} {R' U L' U2 R U' L} U<br />
+            (z) U' R D' R2' U R' D U' R D' R2' U R' D R'<br />
+            (y) R' U R' F R F' R U' R' F' U F R U R' U' R
+        </td>
+    </tr>
+</table>
+<h3>Corner &amp; Edge Cycle Permutations (G perms)</h3>
+<table>
+    <tr>
+        <th class="algn">Algorithm<br />Name</th>
+        <th class="aimg">Image</th>
+        <td class="aalg"><b>Algorithm</b></td>
+    </tr>
+    <tr>
+        <th>Ga perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-Ga-perm.PNG" alt="Ga Permutation" />
+        </th>
+        <td>
+            <b>[R2 u] R' U R' U' R u' R2 y' [R' U R]</b><br />
+        </td>
+    </tr>
+    <tr>
+        <th>Gb perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-Gb-perm.PNG" alt="Gb Permutation" />
+        </th>
+        <td>
+            <b>[L' U' L] y' {R2 u R' U R U' R u' R2}</b><br />
+            <b>(y2) [R' U' R] y {R2 u R' U R U' R u' R2}</b>
+        </td>
+    </tr>
+    <tr>
+        <th>Gc perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-Gc-perm.PNG" alt="Gc Permutation" />
+        </th>
+        <td>
+            <b>[R2 u'] R U' R U R' u R2 y [R U' R']</b><br />
+        </td>
+    </tr>
+    <tr>
+        <th>Gd perm</th>
+        <th class="imgTh">      
+                    <img class="pll-img" src="http://www.rubiksplace.com/speedcubing/PLL-algorithms/images/PLL-Gd-perm.PNG" alt="Gd Permutation" />
+        </th>
+        <td>
+            <b>[R U R'] y' R2 u' R U' R' U R' u R2</b><br />
+        </td>
+    </tr>
+</table>
+<div id="middleGad">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- cubeResponsiveMidAd -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-5793890360129460"
+         data-ad-slot="9780208535"
+         data-ad-format="horizontal, rectangle"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+    </main>
+    
+    <footer>
+        All content rights reserved Shyal Beardsley 2020.
+    </footer>
+    
+  </body>
+
+
+<script>
+ var i = 0;
+ $("img").each(function() {  
+   imgsrc = this.src;
+
+  if (imgsrc.includes('.mp4')){
+    $(this).replaceWith($("<video width='640' height='480' controls> <source src='"+imgsrc+"' type='video/mp4'></video>"))
+   }
+   else{
+     $(this).wrap('<a href="'+this.src+'" data-lightbox="image-'+i+'" data-title=""></a>');
+   }
+   i += 1;
+  });  
+</script>
+
+<script src="/static/lightbox.js"></script>
+<script>
+lightbox.option({
+  'resizeDuration': 200,
+  'wrapAround': true,
+  'fitImagesInViewport': true
+})
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78427660-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-78427660-1');
+</script>
+
+</html>

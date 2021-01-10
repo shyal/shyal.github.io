@@ -1,0 +1,422 @@
+<html>
+  <head>
+  <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+  <meta name="keywords" content="shyal beardsley, shyal.com, shyal, oliver, beardsley">
+  <meta name="description" content="optimal merge pattern">
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    config: ["MMLorHTML.js"],
+    jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+    extensions: ["MathMenu.js", "MathZoom.js"]
+  });
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.5.2/mermaid.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.js"></script>
+    
+    <link rel="stylesheet" href="/static/styles.css">
+    <!-- <script src="/static/mermaid.min.js"></script> -->
+    <link href="/static/lightbox.css" rel="stylesheet" />
+    
+    <title>optimal merge pattern - Shyal Beardsley</title>
+    <style>
+      pre { line-height: 125%; }
+td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #ffffcc }
+.highlight { background: #ffffff; }
+.highlight .c { color: #888888 } /* Comment */
+.highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.highlight .k { color: #008800; font-weight: bold } /* Keyword */
+.highlight .ch { color: #888888 } /* Comment.Hashbang */
+.highlight .cm { color: #888888 } /* Comment.Multiline */
+.highlight .cp { color: #cc0000; font-weight: bold } /* Comment.Preproc */
+.highlight .cpf { color: #888888 } /* Comment.PreprocFile */
+.highlight .c1 { color: #888888 } /* Comment.Single */
+.highlight .cs { color: #cc0000; font-weight: bold; background-color: #fff0f0 } /* Comment.Special */
+.highlight .gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #aa0000 } /* Generic.Error */
+.highlight .gh { color: #333333 } /* Generic.Heading */
+.highlight .gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #555555 } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #666666 } /* Generic.Subheading */
+.highlight .gt { color: #aa0000 } /* Generic.Traceback */
+.highlight .kc { color: #008800; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008800; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008800; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008800 } /* Keyword.Pseudo */
+.highlight .kr { color: #008800; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #888888; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #0000DD; font-weight: bold } /* Literal.Number */
+.highlight .s { color: #dd2200; background-color: #fff0f0 } /* Literal.String */
+.highlight .na { color: #336699 } /* Name.Attribute */
+.highlight .nb { color: #003388 } /* Name.Builtin */
+.highlight .nc { color: #bb0066; font-weight: bold } /* Name.Class */
+.highlight .no { color: #003366; font-weight: bold } /* Name.Constant */
+.highlight .nd { color: #555555 } /* Name.Decorator */
+.highlight .ne { color: #bb0066; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0066bb; font-weight: bold } /* Name.Function */
+.highlight .nl { color: #336699; font-style: italic } /* Name.Label */
+.highlight .nn { color: #bb0066; font-weight: bold } /* Name.Namespace */
+.highlight .py { color: #336699; font-weight: bold } /* Name.Property */
+.highlight .nt { color: #bb0066; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #336699 } /* Name.Variable */
+.highlight .ow { color: #008800 } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #0000DD; font-weight: bold } /* Literal.Number.Bin */
+.highlight .mf { color: #0000DD; font-weight: bold } /* Literal.Number.Float */
+.highlight .mh { color: #0000DD; font-weight: bold } /* Literal.Number.Hex */
+.highlight .mi { color: #0000DD; font-weight: bold } /* Literal.Number.Integer */
+.highlight .mo { color: #0000DD; font-weight: bold } /* Literal.Number.Oct */
+.highlight .sa { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Affix */
+.highlight .sb { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Backtick */
+.highlight .sc { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Char */
+.highlight .dl { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Delimiter */
+.highlight .sd { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Doc */
+.highlight .s2 { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Double */
+.highlight .se { color: #0044dd; background-color: #fff0f0 } /* Literal.String.Escape */
+.highlight .sh { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Heredoc */
+.highlight .si { color: #3333bb; background-color: #fff0f0 } /* Literal.String.Interpol */
+.highlight .sx { color: #22bb22; background-color: #f0fff0 } /* Literal.String.Other */
+.highlight .sr { color: #008800; background-color: #fff0ff } /* Literal.String.Regex */
+.highlight .s1 { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Single */
+.highlight .ss { color: #aa6600; background-color: #fff0f0 } /* Literal.String.Symbol */
+.highlight .bp { color: #003388 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0066bb; font-weight: bold } /* Name.Function.Magic */
+.highlight .vc { color: #336699 } /* Name.Variable.Class */
+.highlight .vg { color: #dd7700 } /* Name.Variable.Global */
+.highlight .vi { color: #3333bb } /* Name.Variable.Instance */
+.highlight .vm { color: #336699 } /* Name.Variable.Magic */
+.highlight .il { color: #0000DD; font-weight: bold } /* Literal.Number.Integer.Long */
+      
+
+      .MathJax_Display{
+        /*text-align: left !important;*/
+        margin: 0 !important;
+      }
+
+      pre {
+      /*line-height: 1em;*/
+      white-space: pre-wrap;       /* css-3 */
+      white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+      white-space: -pre-wrap;      /* Opera 4-6 */
+      white-space: -o-pre-wrap;    /* Opera 7 */
+      word-wrap: break-word;       /* Internet Explorer 5.5+ */
+      }
+
+      div.mermaid {
+        max-width: 500px;
+      }
+  
+      body {
+        text-align: left !important;
+        margin: 0px;
+        padding: 0px;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      .lineno {
+        margin-right: 10px;
+        color: #a5b4a3;
+      }
+
+      .linenodiv {
+        border-left: 2px solid #69c;
+        color: #89ac9a;
+        background-color: #f5f7f9 !important;
+      }
+
+      .codehilitetable td {
+        background-color: #f5f7f9;
+      }
+
+      th, td {
+        text-align: left;
+      }
+
+      tr:nth-child(even) {background-color: #f2f2f2;}
+
+      img {
+        max-width: 50em;
+        max-height: 30em;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 2em 1em;
+      }
+
+      .text-center{
+        text-align: center;
+      }
+
+      main,
+      footer,
+      .narrow {
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        margin: 0 auto;
+        max-width: 50em;
+        line-height: 1.5;
+        padding: 2em 1em;
+        color: #566b78;
+      }
+
+      .lb-image {
+        background: white;
+      }
+
+      div {
+        padding: 0px;
+        margin: 0px;
+      }
+
+      code,
+      pre {
+        background: #f7f9fb;
+      }
+
+      .linenodiv {
+        width: 10px;
+        padding-right: 0px;
+      }
+
+      h2 {
+        margin-top: 0.5em;
+        padding-top: 0.5em;
+      }
+
+      h1,
+      h2,
+      strong {
+        color: #333;
+      }
+
+      a {
+        color: #e81c4f;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <main>
+
+    <!-- <img src='/Attachments/me.png' height='150px'> -->
+
+    
+    <div><h1 class='main-title'>optimal merge pattern</h1></div>
+     
+
+    
+    <a href="javascript:history.back()">←</a>
+    <a href='/'>🏠</a>
+     
+    <!-- if has_fences -->
+    <!-- <div><a href='/black'><img src='/Attachments/black.svg'/></a></div> -->
+    <!--  end  -->
+    <p><a href=""></a>On this page we'll take a look at the optimal merge pattern discussed in <a href="https://www.youtube.com/watch?v=HHIc5JZyenI">this great lecture</a>. Please note we use the optimal merge pattern to build our <a href="/./huffman-encoding">huffman encoding</a> tree, although in this article we use a more efficient method (at the expense of being less concise).</p>
+<p>This time, rather than explicitely making a call to <code>min</code> as we did in our <a href="/./huffman-encoding">huffman encoding</a> example, we use a <code>heapq</code> .</p>
+<h2 id="using-a-heapq-for-efficiency">using a heapq for efficiency</h2>
+<p>The <code>heapq</code>, a binary tree, remains sorted, and has <code>O(logn)</code> push and pop. Using a <code>heapq</code> to generate our optimal merge pattern is therefore done in <code>O(nlogn)</code>, while using <code>min</code>, which takes <code>O(n)</code> would have been in the order of <code>O(n^2)</code> time.</p>
+<div class="mermaid">
+graph TD
+5 --> C[C:2]
+5 --> D[D:3]
+10 --> B[B:5]
+10 --> 5
+16 --> A[A:6]
+16 --> 10
+</div>
+
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">heapq</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">MergeNode</span><span class="p">:</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span> <span class="k">if</span> <span class="n">size</span> <span class="k">else</span> <span class="n">l</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="n">r</span><span class="o">.</span><span class="n">size</span>
+<span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">l</span> <span class="o">=</span> <span class="n">l</span>
+<span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="n">r</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="linenos">12</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">size</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">15</span>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">l</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="si">}</span><span class="s2">]&quot;</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>    <span class="k">def</span> <span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">18</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">l</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">:</span>
+<span class="linenos">19</span>            <span class="n">lc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">l</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">l</span> <span class="k">else</span> <span class="mi">0</span>
+<span class="linenos">20</span>            <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="k">else</span> <span class="mi">0</span>
+<span class="linenos">21</span>            <span class="k">return</span> <span class="n">lc</span> <span class="o">+</span> <span class="n">rc</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+<span class="linenos">22</span>        <span class="k">return</span> <span class="mi">0</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="k">def</span> <span class="nf">gen_optimal_merge</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">print_tree</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="linenos">25</span>    <span class="n">heapq</span><span class="o">.</span><span class="n">heapify</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span>    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">28</span>        <span class="n">l</span> <span class="o">=</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+<span class="linenos">29</span>        <span class="n">r</span> <span class="o">=</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+<span class="linenos">30</span>        <span class="k">if</span> <span class="n">print_tree</span><span class="p">:</span>
+<span class="linenos">31</span>            <span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+<span class="linenos">32</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">l</span><span class="o">.</span><span class="n">size</span><span class="o">+</span><span class="n">r</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2"> --&gt; </span><span class="si">{</span><span class="n">l</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">[</span><span class="si">{</span><span class="n">l</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">l</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+<span class="linenos">33</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">34</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">l</span><span class="o">.</span><span class="n">size</span><span class="o">+</span><span class="n">r</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2"> --&gt; </span><span class="si">{</span><span class="n">l</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">35</span>            <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+<span class="linenos">36</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">l</span><span class="o">.</span><span class="n">size</span><span class="o">+</span><span class="n">r</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2"> --&gt; </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">[</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+<span class="linenos">37</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">38</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">l</span><span class="o">.</span><span class="n">size</span><span class="o">+</span><span class="n">r</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2"> --&gt; </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">39</span>        <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">MergeNode</span><span class="p">(</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
+<span class="linenos">40</span>                                    <span class="n">size</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="linenos">41</span>                                    <span class="n">l</span><span class="o">=</span><span class="n">l</span><span class="p">,</span>
+<span class="linenos">42</span>                                    <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">))</span>
+<span class="linenos">43</span>    <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">items</span><span class="p">))</span>
+<span class="linenos">44</span>
+<span class="linenos">45</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos">46</span>    <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span> <span class="k">as</span> <span class="n">comb</span>
+<span class="linenos">47</span>    <span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">ascii_lowercase</span> <span class="k">as</span> <span class="n">asc</span>
+<span class="linenos">48</span>    <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<span class="linenos">49</span>    <span class="n">r</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">))</span>
+<span class="linenos">50</span>    <span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="n">MergeNode</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">next</span><span class="p">(</span><span class="n">r</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">comb</span><span class="p">(</span><span class="n">asc</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
+<span class="linenos">51</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;lists to merge: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">52</span>    <span class="n">print_tree</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">53</span>    <span class="k">if</span> <span class="n">print_tree</span><span class="p">:</span>
+<span class="linenos">54</span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graph TD&#39;</span><span class="p">)</span>
+<span class="linenos">55</span>
+<span class="linenos">56</span>    <span class="n">optimal_merge</span> <span class="o">=</span> <span class="n">gen_optimal_merge</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">print_tree</span><span class="p">)</span>
+<span class="linenos">57</span>
+<span class="linenos">58</span>    <span class="k">if</span> <span class="n">print_tree</span><span class="p">:</span>
+<span class="linenos">59</span>        <span class="nb">print</span><span class="p">(</span><span class="n">optimal_merge</span><span class="p">)</span>
+<span class="linenos">60</span>    <span class="nb">print</span><span class="p">(</span><span class="n">optimal_merge</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
+<span class="linenos">61</span>
+<span class="linenos">62</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos">63</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+<h2 id="larger-merge-patterns">larger merge patterns</h2>
+<p>Let's try with a slightly larger tree. Please note this is graphed using the same technique as <a href="/./generating-callgraphs-in-python-with-mermaid">generating callgraphs in python with mermaid</a>.</p>
+<div class="mermaid">
+graph TD
+3 --> a[a:1]
+3 --> b[b:2]
+6 --> c[c:3]
+6 --> 3
+9 --> d[d:4]
+9 --> e[e:5]
+12 --> f[f:6]
+12 --> 6
+15 --> g[g:7]
+15 --> h[h:8]
+18 --> 9
+18 --> i[i:9]
+21 --> j[j:10]
+21 --> k[k:11]
+24 --> l[l:12]
+24 --> 12
+27 --> m[m:13]
+27 --> n[n:14]
+30 --> o[o:15]
+30 --> 15
+33 --> p[p:16]
+33 --> q[q:17]
+36 --> 18
+36 --> r[r:18]
+39 --> s[s:19]
+39 --> t[t:20]
+42 --> u[u:21]
+42 --> 21
+45 --> v[v:22]
+45 --> w[w:23]
+48 --> 24
+48 --> x[x:24]
+51 --> y[y:25]
+51 --> z[z:26]
+57 --> 27
+57 --> 30
+69 --> 33
+69 --> 36
+81 --> 39
+81 --> 42
+93 --> 45
+93 --> 48
+108 --> 51
+108 --> 57
+150 --> 69
+150 --> 81
+201 --> 93
+201 --> 108
+351 --> 150
+351 --> 201
+</div>
+
+<h2 id="merging-huge-sequences">merging huge sequences</h2>
+<p>Here we build a optimal merge tree for a quarter of a million merge sequences, on one thread, in roughly 4 seconds.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">shyal</span><span class="p">:[</span><span class="o">~/</span><span class="n">dev</span><span class="o">/</span><span class="n">monolith</span><span class="p">]</span> <span class="n">time</span> <span class="n">python3</span> <span class="n">tmp</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos">2</span><span class="n">lists</span> <span class="n">to</span> <span class="n">merge</span><span class="p">:</span> <span class="mi">230230</span>
+<span class="linenos">3</span><span class="mi">465300318788</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span><span class="n">real</span>   <span class="mi">0</span><span class="n">m4</span><span class="o">.</span><span class="mi">144</span><span class="n">s</span>
+<span class="linenos">6</span><span class="n">user</span>   <span class="mi">0</span><span class="n">m4</span><span class="o">.</span><span class="mi">004</span><span class="n">s</span>
+<span class="linenos">7</span><span class="n">sys</span>    <span class="mi">0</span><span class="n">m0</span><span class="o">.</span><span class="mi">119</span><span class="n">s</span>
+</pre></div>
+
+<script>mermaid.initialize({startOnLoad:true});</script>
+    </main>
+    
+    <footer>
+        All content rights reserved Shyal Beardsley 2020.
+    </footer>
+    
+  </body>
+
+
+<script>
+ var i = 0;
+ $("img").each(function() {  
+   imgsrc = this.src;
+
+  if (imgsrc.includes('.mp4')){
+    $(this).replaceWith($("<video width='640' height='480' controls> <source src='"+imgsrc+"' type='video/mp4'></video>"))
+   }
+   else{
+     $(this).wrap('<a href="'+this.src+'" data-lightbox="image-'+i+'" data-title=""></a>');
+   }
+   i += 1;
+  });  
+</script>
+
+<script src="/static/lightbox.js"></script>
+<script>
+lightbox.option({
+  'resizeDuration': 200,
+  'wrapAround': true,
+  'fitImagesInViewport': true
+})
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78427660-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-78427660-1');
+</script>
+
+</html>

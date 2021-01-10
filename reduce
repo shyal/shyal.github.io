@@ -1,0 +1,368 @@
+<html>
+  <head>
+  <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+  <meta name="keywords" content="shyal beardsley, shyal.com, shyal, oliver, beardsley">
+  <meta name="description" content="reduce">
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    config: ["MMLorHTML.js"],
+    jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+    extensions: ["MathMenu.js", "MathZoom.js"]
+  });
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.5.2/mermaid.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.js"></script>
+    
+    <link rel="stylesheet" href="/static/styles.css">
+    <!-- <script src="/static/mermaid.min.js"></script> -->
+    <link href="/static/lightbox.css" rel="stylesheet" />
+    
+    <title>reduce - Shyal Beardsley</title>
+    <style>
+      pre { line-height: 125%; }
+td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #ffffcc }
+.highlight { background: #ffffff; }
+.highlight .c { color: #888888 } /* Comment */
+.highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.highlight .k { color: #008800; font-weight: bold } /* Keyword */
+.highlight .ch { color: #888888 } /* Comment.Hashbang */
+.highlight .cm { color: #888888 } /* Comment.Multiline */
+.highlight .cp { color: #cc0000; font-weight: bold } /* Comment.Preproc */
+.highlight .cpf { color: #888888 } /* Comment.PreprocFile */
+.highlight .c1 { color: #888888 } /* Comment.Single */
+.highlight .cs { color: #cc0000; font-weight: bold; background-color: #fff0f0 } /* Comment.Special */
+.highlight .gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #aa0000 } /* Generic.Error */
+.highlight .gh { color: #333333 } /* Generic.Heading */
+.highlight .gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #555555 } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #666666 } /* Generic.Subheading */
+.highlight .gt { color: #aa0000 } /* Generic.Traceback */
+.highlight .kc { color: #008800; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008800; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008800; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008800 } /* Keyword.Pseudo */
+.highlight .kr { color: #008800; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #888888; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #0000DD; font-weight: bold } /* Literal.Number */
+.highlight .s { color: #dd2200; background-color: #fff0f0 } /* Literal.String */
+.highlight .na { color: #336699 } /* Name.Attribute */
+.highlight .nb { color: #003388 } /* Name.Builtin */
+.highlight .nc { color: #bb0066; font-weight: bold } /* Name.Class */
+.highlight .no { color: #003366; font-weight: bold } /* Name.Constant */
+.highlight .nd { color: #555555 } /* Name.Decorator */
+.highlight .ne { color: #bb0066; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0066bb; font-weight: bold } /* Name.Function */
+.highlight .nl { color: #336699; font-style: italic } /* Name.Label */
+.highlight .nn { color: #bb0066; font-weight: bold } /* Name.Namespace */
+.highlight .py { color: #336699; font-weight: bold } /* Name.Property */
+.highlight .nt { color: #bb0066; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #336699 } /* Name.Variable */
+.highlight .ow { color: #008800 } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #0000DD; font-weight: bold } /* Literal.Number.Bin */
+.highlight .mf { color: #0000DD; font-weight: bold } /* Literal.Number.Float */
+.highlight .mh { color: #0000DD; font-weight: bold } /* Literal.Number.Hex */
+.highlight .mi { color: #0000DD; font-weight: bold } /* Literal.Number.Integer */
+.highlight .mo { color: #0000DD; font-weight: bold } /* Literal.Number.Oct */
+.highlight .sa { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Affix */
+.highlight .sb { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Backtick */
+.highlight .sc { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Char */
+.highlight .dl { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Delimiter */
+.highlight .sd { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Doc */
+.highlight .s2 { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Double */
+.highlight .se { color: #0044dd; background-color: #fff0f0 } /* Literal.String.Escape */
+.highlight .sh { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Heredoc */
+.highlight .si { color: #3333bb; background-color: #fff0f0 } /* Literal.String.Interpol */
+.highlight .sx { color: #22bb22; background-color: #f0fff0 } /* Literal.String.Other */
+.highlight .sr { color: #008800; background-color: #fff0ff } /* Literal.String.Regex */
+.highlight .s1 { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Single */
+.highlight .ss { color: #aa6600; background-color: #fff0f0 } /* Literal.String.Symbol */
+.highlight .bp { color: #003388 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0066bb; font-weight: bold } /* Name.Function.Magic */
+.highlight .vc { color: #336699 } /* Name.Variable.Class */
+.highlight .vg { color: #dd7700 } /* Name.Variable.Global */
+.highlight .vi { color: #3333bb } /* Name.Variable.Instance */
+.highlight .vm { color: #336699 } /* Name.Variable.Magic */
+.highlight .il { color: #0000DD; font-weight: bold } /* Literal.Number.Integer.Long */
+      
+
+      .MathJax_Display{
+        /*text-align: left !important;*/
+        margin: 0 !important;
+      }
+
+      pre {
+      /*line-height: 1em;*/
+      white-space: pre-wrap;       /* css-3 */
+      white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+      white-space: -pre-wrap;      /* Opera 4-6 */
+      white-space: -o-pre-wrap;    /* Opera 7 */
+      word-wrap: break-word;       /* Internet Explorer 5.5+ */
+      }
+
+      div.mermaid {
+        max-width: 500px;
+      }
+  
+      body {
+        text-align: left !important;
+        margin: 0px;
+        padding: 0px;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      .lineno {
+        margin-right: 10px;
+        color: #a5b4a3;
+      }
+
+      .linenodiv {
+        border-left: 2px solid #69c;
+        color: #89ac9a;
+        background-color: #f5f7f9 !important;
+      }
+
+      .codehilitetable td {
+        background-color: #f5f7f9;
+      }
+
+      th, td {
+        text-align: left;
+      }
+
+      tr:nth-child(even) {background-color: #f2f2f2;}
+
+      img {
+        max-width: 50em;
+        max-height: 30em;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 2em 1em;
+      }
+
+      .text-center{
+        text-align: center;
+      }
+
+      main,
+      footer,
+      .narrow {
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        margin: 0 auto;
+        max-width: 50em;
+        line-height: 1.5;
+        padding: 2em 1em;
+        color: #566b78;
+      }
+
+      .lb-image {
+        background: white;
+      }
+
+      div {
+        padding: 0px;
+        margin: 0px;
+      }
+
+      code,
+      pre {
+        background: #f7f9fb;
+      }
+
+      .linenodiv {
+        width: 10px;
+        padding-right: 0px;
+      }
+
+      h2 {
+        margin-top: 0.5em;
+        padding-top: 0.5em;
+      }
+
+      h1,
+      h2,
+      strong {
+        color: #333;
+      }
+
+      a {
+        color: #e81c4f;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <main>
+
+    <!-- <img src='/Attachments/me.png' height='150px'> -->
+
+    
+    <div><h1 class='main-title'>reduce</h1></div>
+     
+
+    
+    <a href="javascript:history.back()">←</a>
+    <a href='/'>🏠</a>
+     
+    <!-- if has_fences -->
+    <!-- <div><a href='/black'><img src='/Attachments/black.svg'/></a></div> -->
+    <!--  end  -->
+    <p><code>reduce</code> begins to unlock some serious power from Python's standard library. Here's a dead-simple example of summing a list using <code>reduce</code>:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="linenos">2</span><span class="n">res</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">acc</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">acc</span> <span class="o">+</span> <span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="c1"># 15</span>
+</pre></div>
+
+<p>This is what's happening:</p>
+<video src="https://static.ioloop.io/Reduce.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>In ascii, you might draw the table like this:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">res</span>   <span class="n">acc</span>   <span class="n">v</span>
+<span class="linenos">2</span>      <span class="mi">1</span>     <span class="mi">2</span>     <span class="p">[</span><span class="o">|</span><span class="mi">1</span><span class="o">|</span><span class="p">,</span><span class="o">|</span><span class="mi">2</span><span class="o">|</span><span class="p">,</span> <span class="mi">3</span> <span class="p">,</span> <span class="mi">4</span> <span class="p">,</span> <span class="mi">5</span> <span class="p">]</span>
+<span class="linenos">3</span>      <span class="mi">3</span>     <span class="mi">3</span>     <span class="p">[</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">2</span> <span class="p">,</span><span class="o">|</span><span class="mi">3</span><span class="o">|</span><span class="p">,</span> <span class="mi">4</span> <span class="p">,</span> <span class="mi">5</span> <span class="p">]</span>
+<span class="linenos">4</span>      <span class="mi">6</span>     <span class="mi">4</span>     <span class="p">[</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">2</span> <span class="p">,</span> <span class="mi">3</span> <span class="p">,</span><span class="o">|</span><span class="mi">4</span><span class="o">|</span><span class="p">,</span> <span class="mi">5</span> <span class="p">]</span>
+<span class="linenos">5</span>      <span class="mi">10</span>    <span class="mi">5</span>     <span class="p">[</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">2</span> <span class="p">,</span> <span class="mi">3</span> <span class="p">,</span> <span class="mi">4</span> <span class="p">,</span><span class="o">|</span><span class="mi">5</span><span class="o">|</span><span class="p">]</span>
+<span class="linenos">6</span><span class="mi">15</span>
+</pre></div>
+
+<p>Remember that drawing these tables in ascii is a very quick way of gaining a complete understanding of whatever number crunching you are doing, and is probably the most effective and quickest method of all.</p>
+<p>The lambda passed into <code>reduce</code> takes two arguments, i like calling the first one the <code>accumulator</code> and the second one the <code>value</code>. Initially they take the first two values of the list. After adding <code>1 + 2</code>, the resulting <code>3</code> of that addition gets passed in to the <code>acc</code>, so the next computation is <code>3 + 3</code>, then <code>6 + 4</code> and so on.</p>
+<p>Of course, we could use a second lambda to implement an actual <code>sum</code> function:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="linenos">2</span><span class="nb">sum</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">A</span><span class="p">:</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">acc</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">acc</span> <span class="o">+</span> <span class="n">v</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]))</span> <span class="c1"># 15</span>
+</pre></div>
+
+<p>Alternatively we could use <code>operator.add</code> and <code>operator.mult</code> to implement <code>sum</code> and <code>product</code> functions.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="linenos">2</span><span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">add</span><span class="p">,</span> <span class="n">mul</span>
+<span class="linenos">3</span><span class="nb">sum</span> <span class="o">=</span>  <span class="k">lambda</span> <span class="n">A</span><span class="p">:</span> <span class="n">reduce</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="linenos">4</span><span class="n">prod</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">A</span><span class="p">:</span> <span class="n">reduce</span><span class="p">(</span><span class="n">mul</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]))</span> <span class="c1"># 15</span>
+<span class="linenos">6</span><span class="nb">print</span><span class="p">(</span><span class="n">prod</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]))</span> <span class="c1"># 120</span>
+</pre></div>
+
+<h1 id="starting-value">Starting value</h1>
+<p>On the first iteration, <code>reduce</code> uses the first two numbers in <code>A</code> for the values of <code>a</code> and <code>b</code> in the lambda. In some cases, you'll want to control the initial value of <code>a</code> using reduce's third argument, while <code>b</code> receives the first value of <code>A</code>:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="linenos">2</span><span class="nb">sum</span> <span class="o">=</span>  <span class="k">lambda</span> <span class="n">A</span><span class="p">:</span> <span class="n">reduce</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]))</span> <span class="c1"># 15</span>
+</pre></div>
+
+<p>You'll soon see why this can be incredibly useful.</p>
+<h1 id="find-the-missing-number-in-array">Find the missing number in array</h1>
+<p>Q: Given a list of numbers from 0 -&gt; n missing 1 number, find the missing number in <code>O(1)</code> space and <code>O(n)</code> time. (<a href="https://leetcode.com/problems/missing-number/">leetcode link</a>).</p>
+<h2 id="solution">Solution:</h2>
+<p>Taking the <code>xor</code> of all the numbers in the array we're given, and taking the <code>xor</code> of all the numbers in <code>range(n + 1)</code> and <code>xor</code>ing these two results together gives us the missing number:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="linenos">2</span><span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">ixor</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="n">find_missing</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">A</span><span class="p">:</span> <span class="n">ixor</span><span class="p">(</span><span class="n">reduce</span><span class="p">(</span><span class="n">ixor</span><span class="p">,</span> <span class="n">A</span><span class="p">),</span> <span class="n">reduce</span><span class="p">(</span><span class="n">ixor</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span>
+<span class="linenos">5</span><span class="n">find_missing</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span> <span class="c1"># result 9</span>
+</pre></div>
+
+<h1 id="roman-numerals">Roman Numerals</h1>
+<p>Here's how to solve the <a href="https://leetcode.com/problems/roman-to-integer/submissions/">roman numeral to integer problem</a> using reduce: the key difficulty is that if the current number, e.g <code>I</code> is less than the following number <code>V</code> it has to be subtracted, not added.</p>
+<p>Let's begin by initialising our roman to int lookup dictionary, using the <code>dict</code> constructor. When keys don't start with a number, and doesn't contain inconvenient characters, using <code>dict</code> can be very hand and compact.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="linenos">2</span><span class="n">S</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">V</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+
+<p>Next, let's take a look at our reduce. Let's ignore the lambda for now. The sequence we're passing in is the <code>range(len(s)-1)</code>, so in the case of <code>XIV</code>: the sequence <code>[1,0]</code>. The third value we pass into <code>reduce</code> is that actual integer value of the last character (<code>5</code>).</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)),</span> <span class="n">S</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+</pre></div>
+
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">add</span><span class="p">,</span> <span class="n">sub</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="n">S</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">V</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="k">def</span> <span class="nf">romanToInt</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="linenos"> 7</span>    <span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="linenos"> 8</span>        <span class="k">if</span> <span class="n">S</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span> <span class="o">&gt;</span> <span class="n">S</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">b</span><span class="p">]]:</span>
+<span class="linenos"> 9</span>            <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">S</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">b</span><span class="p">]]</span>
+<span class="linenos">10</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">11</span>            <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">S</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">b</span><span class="p">]]</span>
+<span class="linenos">12</span>    <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)),</span> <span class="n">S</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="nb">print</span><span class="p">(</span><span class="n">romanToInt</span><span class="p">(</span><span class="s1">&#39;XIV&#39;</span><span class="p">))</span> <span class="c1"># 14</span>
+</pre></div>
+
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">add</span><span class="p">,</span> <span class="n">sub</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="n">S</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">V</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="k">def</span> <span class="nf">romanToInt</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="linenos"> 7</span>    <span class="n">r</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="n">sub</span><span class="p">)[</span><span class="n">S</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span> <span class="o">&gt;</span> <span class="n">S</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">b</span><span class="p">]]](</span><span class="n">a</span><span class="p">,</span> <span class="n">S</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">b</span><span class="p">]])</span>
+<span class="linenos"> 8</span>    <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)),</span> <span class="n">S</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="nb">print</span><span class="p">(</span><span class="n">romanToInt</span><span class="p">(</span><span class="s1">&#39;XIV&#39;</span><span class="p">))</span> <span class="c1"># 14</span>
+</pre></div>
+    </main>
+    
+    <footer>
+        All content rights reserved Shyal Beardsley 2020.
+    </footer>
+    
+  </body>
+
+
+<script>
+ var i = 0;
+ $("img").each(function() {  
+   imgsrc = this.src;
+
+  if (imgsrc.includes('.mp4')){
+    $(this).replaceWith($("<video width='640' height='480' controls> <source src='"+imgsrc+"' type='video/mp4'></video>"))
+   }
+   else{
+     $(this).wrap('<a href="'+this.src+'" data-lightbox="image-'+i+'" data-title=""></a>');
+   }
+   i += 1;
+  });  
+</script>
+
+<script src="/static/lightbox.js"></script>
+<script>
+lightbox.option({
+  'resizeDuration': 200,
+  'wrapAround': true,
+  'fitImagesInViewport': true
+})
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78427660-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-78427660-1');
+</script>
+
+</html>
