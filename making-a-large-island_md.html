@@ -242,18 +242,18 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 After, what is the size of the largest island? (An island is a 4-directionally connected group of 1s).</p>
 </blockquote>
 </blockquote>
-<p><img alt="Pasted image 53.png" src="/Attachments/Pasted image 53.png" /></p>
+<p><img alt="Pasted image 53.png" src="https://shyal.s3.us-east-2.amazonaws.com/Pasted image 53.png" /></p>
 <p>In this case, the answer clearly is:</p>
-<p><img alt="Pasted image 54.png" src="/Attachments/Pasted image 54.png" /></p>
+<p><img alt="Pasted image 54.png" src="https://shyal.s3.us-east-2.amazonaws.com/Pasted image 54.png" /></p>
 <p>You may want to think of a solution before reading on. Like most graph problems, the solution is pretty simple and straight-forward.</p>
 <h2 id="label-and-measure-islands">Label and measure islands</h2>
 <p>The first step is to label the islands, this can be done quite similarly to [[number of islands]], i.e by using either a [[depth first search]] or a [[bfs]].</p>
-<p><img alt="Pasted image 55.png" src="/Attachments/Pasted image 55.png" /></p>
+<p><img alt="Pasted image 55.png" src="https://shyal.s3.us-east-2.amazonaws.com/Pasted image 55.png" /></p>
 <p>While labeling them, it's also trivial to measure their sizes, <code>{2:8, 3:2, 4:1}</code>.</p>
 <h2 id="check-neighbours-of-0s">Check neighbours of 0s</h2>
 <p>Finally, we want to iterate over each 0, and for each of its neighbours and sum up their areas, plus one.</p>
 <p>We simply need to track the maximum of that number, and this is our answer.</p>
-<p><img alt="Pasted image 56.png" src="/Attachments/Pasted image 56.png" /></p>
+<p><img alt="Pasted image 56.png" src="https://shyal.s3.us-east-2.amazonaws.com/Pasted image 56.png" /></p>
 <p>Result: 11.</p>
 <h2 id="implementation">Implementation</h2>
 <h3 id="neighbours">Neighbours</h3>
