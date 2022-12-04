@@ -229,17 +229,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
   <body>
     
     <main>
-      <!-- <img src='/Attachments/me.png' height='150px'> -->
-
       
       <div><h1 class="main-title">valid palindrome</h1></div>
        
       <a href="javascript:history.back()">←</a>
       <a href="/">🏠</a>
       
-      <!-- if has_fences -->
-      <!-- <div><a href='/black'><img src='/Attachments/black.svg'/></a></div> -->
-      <!--  end  -->
       <div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">is_pal</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 <span class="linenos">2</span>    <span class="n">sl</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="nb">filter</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">isalnum</span><span class="p">,</span> <span class="n">s</span><span class="p">))]</span>
 <span class="linenos">3</span>    <span class="k">return</span> <span class="nb">all</span><span class="p">([</span><span class="n">sl</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">sl</span><span class="p">[</span><span class="o">~</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sl</span><span class="p">))])</span>

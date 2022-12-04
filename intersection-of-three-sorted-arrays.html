@@ -229,17 +229,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
   <body>
     
     <main>
-      <!-- <img src='/Attachments/me.png' height='150px'> -->
-
       
       <div><h1 class="main-title">intersection of three sorted arrays</h1></div>
        
       <a href="javascript:history.back()">←</a>
       <a href="/">🏠</a>
       
-      <!-- if has_fences -->
-      <!-- <div><a href='/black'><img src='/Attachments/black.svg'/></a></div> -->
-      <!--  end  -->
       <div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
 <span class="linenos">2</span>    <span class="k">def</span> <span class="nf">arraysIntersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arr1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">arr2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">arr3</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
 <span class="linenos">3</span>        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">arr1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">arr2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">arr3</span><span class="p">))</span>

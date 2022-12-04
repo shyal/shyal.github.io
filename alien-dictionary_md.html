@@ -229,17 +229,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
   <body>
     
     <main>
-      <!-- <img src='/Attachments/me.png' height='150px'> -->
-
       
       <div><h1 class="main-title">alien dictionary</h1></div>
        
       <a href="javascript:history.back()">←</a>
       <a href="/">🏠</a>
       
-      <!-- if has_fences -->
-      <!-- <div><a href='/black'><img src='/Attachments/black.svg'/></a></div> -->
-      <!--  end  -->
       <div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">alienOrder</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
 <span class="linenos"> 2</span>    <span class="n">ral</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">word</span><span class="p">}</span>
 <span class="linenos"> 3</span>    <span class="k">for</span> <span class="n">first_word</span><span class="p">,</span> <span class="n">second_word</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">words</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
