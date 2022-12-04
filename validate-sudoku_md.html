@@ -43,9 +43,9 @@
     <title>validate sudoku - Shyal Beardsley</title>
     <style>
       pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: #ffffcc }
 .highlight { background: #ffffff; }
@@ -266,7 +266,7 @@ Only the filled cells need to be validated according to the mentioned rules.</p>
 
 <h3 id="validating-a-row">Validating a row</h3>
 <p>Validating a row is the easiest task. We simply need to filter out the unassigned cells, and check whether the size of the <code>set</code> of entries is the same as the size of the <code>list</code> of entries.</p>
-<video src="https://static.ioloop.io/RowValidation.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/RowValidation.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">is_unique</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
@@ -279,7 +279,7 @@ Only the filled cells need to be validated according to the mentioned rules.</p>
 
 <h3 id="validating-all-rows">Validating all rows</h3>
 <p>Validating all rows is therefore only a matter of passing a generator expression to <code>all</code>.</p>
-<video src="https://static.ioloop.io/SudokuValidateRows.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/SudokuValidateRows.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nb">all</span><span class="p">(</span><span class="n">is_unique</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span> <span class="c1"># True</span>
@@ -296,7 +296,7 @@ Only the filled cells need to be validated according to the mentioned rules.</p>
 
 <h3 id="validating-all-columns">Validating all columns</h3>
 <p>Validating every column is simply a matter of nesting this statement in another generator expression, and passing it to <code>all</code>:</p>
-<video src="https://static.ioloop.io/SudokuValidateColumns.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/SudokuValidateColumns.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nb">all</span><span class="p">(</span><span class="n">is_unique</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span> <span class="c1"># True</span>
@@ -318,7 +318,7 @@ Only the filled cells need to be validated according to the mentioned rules.</p>
 </pre></div>
 
 <p>We can finally validate our sub-matrices, with a call to <code>all</code>:</p>
-<video src="https://static.ioloop.io/SudokuValidateSections.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/SudokuValidateSections.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nb">all</span><span class="p">(</span><span class="n">is_unique</span><span class="p">(</span><span class="n">section_as_list</span><span class="p">(</span><span class="o">*</span><span class="n">section</span><span class="p">))</span> <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">section_indices</span><span class="p">())</span>
@@ -326,7 +326,7 @@ Only the filled cells need to be validated according to the mentioned rules.</p>
 
 <h2 id="bringing-it-all-together">Bringing it all together</h2>
 <p>Please note this is not the most efficient solution to this problem, however it's a good exercise at turning the rules of Sudoku into actionable steps that can be built up progressively.</p>
-<video src="https://static.ioloop.io/SudokuValidateAll.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/SudokuValidateAll.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">is_valid</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>

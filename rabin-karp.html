@@ -43,9 +43,9 @@
     <title>rabin karp - Shyal Beardsley</title>
     <style>
       pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: #ffffcc }
 .highlight { background: #ffffff; }
@@ -241,13 +241,13 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
       <!-- <div><a href='/black'><img src='/Attachments/black.svg'/></a></div> -->
       <!--  end  -->
       <p>Write a function that finds instances of a substring in a string in linear time.</p>
-<video src="https://static.ioloop.io/RabinSlidingSimple.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/RabinSlidingSimple.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <h2 id="solution">Solution</h2>
 <h3 id="hashing-the-substring">Hashing the substring</h3>
-<p>Creating a hash works a bit like fingerprinting: it enables  condensing a long and complex piece of data, like a string, into a simpler one, like an <code>integer</code>.</p>
-<video src="https://static.ioloop.io/SentenceHash.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<p>Creating a hash works a bit like fingerprinting: it enables condensing a long and complex piece of data, like a string, into a simpler one, like an <code>integer</code>.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/SentenceHash.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>The hash for <code>pyth</code> is <code>2053428</code>. </p>
@@ -260,20 +260,20 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <p>This does not ensure that the hash <code>2053428</code> can only represent <code>pyth</code> since hashes can collide. But the probability that it represents <code>pyth</code> is very high.</p>
 <p>We create a hash, because comparing substrings is now only a matter of comparing two integers. It also enables us to <em>roll</em> the hash down the string in constant time.</p>
 <p>Likewise, we'll pre-compute the hash for <em>algo</em>.</p>
-<video src="https://static.ioloop.io/StringHash.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/StringHash.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <h3 id="rolling-the-hash">Rolling the hash</h3>
 <p>Let's replace our letters with variables <code>a</code>, <code>b</code>, <code>c</code> and <code>d</code>. </p>
-<video src="https://static.ioloop.io/RabinHashBasicEquation.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/RabinHashBasicEquation.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>We can also replace our base with <script type="math/tex">\beta</script>, and re-organise our equation a little.</p>
-<video src="https://static.ioloop.io/RabinHashReorgEquation.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/RabinHashReorgEquation.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>We can use this rearranged formula, <script type="math/tex">a \beta^{3} + b \beta^{2} + c \beta + d</script>, to remove the left-most letter, and add a new letter to the right.</p>
-<video src="https://static.ioloop.io/RabinRollingHash.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/RabinRollingHash.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>Here's an implementation, with pre-computed hashes:</p>

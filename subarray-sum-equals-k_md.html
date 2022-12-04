@@ -43,9 +43,9 @@
     <title>subarray sum equals k - Shyal Beardsley</title>
     <style>
       pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: #ffffcc }
 .highlight { background: #ffffff; }
@@ -248,7 +248,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </blockquote>
 <p>In this problem, you are being asked to count the number of subarrays who's <strong>sum</strong> equals <code>k</code>. The emphasis is on the <strong>sum</strong>, so we should first focus on computing the sum as we go.</p>
 <p>Think about it this way: you are standing in the snow, and you're given a list of 'hops' (in meters) that you need to make: <code>1, 2, 2, 0, 3, 2, 5</code>. Initially you hop <code>1</code> meter, then <code>2</code>, and <code>2</code> again, then <code>0</code> meters, then <code>3</code> etc.</p>
-<video src="https://static.ioloop.io/HoppingDownTheRoad.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/HoppingDownTheRoad.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>The <strong>sum</strong> of these hops is the distance you've traveled at each hop.</p>
@@ -274,14 +274,14 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <p>The first distance is <code>0</code>, because before you've taken the first step in a journey, you've traveled 0 meters.</p>
 <h2 id="could-i-hop-back-k">Could i hop back 'k'?</h2>
 <p>This 'total distance travelled' data is invaluable, because we can ask it questions, namely: <em>"if i hop back by k, do i land on a previous hop (myt own footprints in the snow)?"</em></p>
-<video src="https://static.ioloop.io/HoppingBackK.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/HoppingBackK.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>If we do land on a previous hop, then we have a sub-array who's sum equals k. If you're standing in the snow, hop back <strong>k</strong> and land on your footprints, that means the <strong>sum</strong> of your footprints between these two points is equals to <strong>k</strong>.</p>
 <p>Please note, that if you hop twice on the same spot (you hopped <code>0</code> meters) that still counts as a hop, hence the repeated hops from and to <code>5</code>.</p>
 <h3 id="acc-k">acc - k</h3>
 <p>In other words, the question we are asking is: is there an accumulation value equal to <code>acc - k</code>. </p>
-<video src="https://static.ioloop.io/HoppingBackKSubs.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/HoppingBackKSubs.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>Let's count the 'hits':</p>

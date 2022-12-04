@@ -43,9 +43,9 @@
     <title>tracing the recursion tree - Shyal Beardsley</title>
     <style>
       pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: #ffffcc }
 .highlight { background: #ffffff; }
@@ -256,11 +256,11 @@ video {
 <span class="linenos">7</span><span class="n">func</span><span class="p">()</span>
 </pre></div>
 
-<video src="https://static.ioloop.io/tracing1.mov" style="margin: 0 auto; width: 320px;" class='center' width="320" height="240" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/tracing1.mov" style="margin: 0 auto; width: 320px;" class='center' width="320" height="240" autoplay loop playsinline muted>
 </video>
 
 <p>The number on the branch is the number that gets printed, while the <code>func(n)</code> is the actual function call. Let's execute this code by hand, and add some 'syntax highlighting' to the call graph.</p>
-<video src="https://static.ioloop.io/tracing2.mov" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/tracing2.mov" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>Executing a recursive function by hand, and drawing the call-graph with the values of the variables dramatically improves your ability to think and code recursively. By doing so, you're tracking the values of all the variables at each step of the call stack.</p>
@@ -268,7 +268,7 @@ video {
 <h2 id="tower-of-hanoi">Tower of Hanoi</h2>
 <p>The tower of Hanoi is a classic problem, and has the tendency to create huge classic recursion headaches, as it's very difficult to visualise and intuitively grasp what it's doing.</p>
 <p>The aim is to move the disks from one (<code>src</code>) peg to another (<code>dest</code>) peg, while only having <strong>smaller</strong> disks sitting on top of <strong>larger</strong> ones.</p>
-<video src="https://static.ioloop.io/hanoi1.mov" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/hanoi1.mov" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>This recursive algorithm only uses 1 extra <code>tmp</code> peg, as a buffer.</p>
@@ -306,7 +306,7 @@ video {
 </pre></div>
 
 <p>It's now a lot easier to control the recursion depth from the caller. It's also very useful, since the <code>depth</code> or <code>n</code>is the number of disks we'll be working with.</p>
-<p><img src='https://static.ioloop.io/depth_decrease.gif'/></p>
+<p><img src='https://manim.s3.us-east-2.amazonaws.com/depth_decrease.gif'/></p>
 <h3 id="switching-two-variables">Switching two variables</h3>
 <p>Now observe what happens in the following code snippet:</p>
 <div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
@@ -326,7 +326,7 @@ video {
 <span class="linenos">6</span><span class="mi">1</span> <span class="mi">0</span>
 </pre></div>
 
-<p><img src='https://static.ioloop.io/switching_var.gif'/></p>
+<p><img src='https://manim.s3.us-east-2.amazonaws.com/switching_var.gif'/></p>
 <p>With each call, we swap the variables <code>a</code> and <code>b</code>. This is pretty similar to what we'll be doing with the Tower of Hanoi problem: with each recursion, we'll swap which disks we refer to as the <em>source</em>, the <em>temp</em> and the <em>dest</em> peg.</p>
 <h3 id="switching-three-variables">Switching three variables</h3>
 <p>Now observe what happens in the following code snippet:</p>
@@ -347,7 +347,7 @@ video {
 <span class="linenos">6</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">0</span>
 </pre></div>
 
-<p><img src='https://static.ioloop.io/switching_three_var.gif'/></p>
+<p><img src='https://manim.s3.us-east-2.amazonaws.com/switching_three_var.gif'/></p>
 <p>We are now sliding the values to the right. Again, pretty easy. </p>
 <h3 id="branching">Branching</h3>
 <p>So far, tracing the calls has been easy: there's only one call meaning our recursion "graph" is pretty much a straight line. But what happens when we make two calls instead of one?</p>
@@ -363,11 +363,11 @@ video {
 <span class="linenos">10</span><span class="n">func</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
-<p><img src='https://static.ioloop.io/branching.gif'/></p>
+<p><img src='https://manim.s3.us-east-2.amazonaws.com/branching.gif'/></p>
 <p>Well our call-graph now looks like a binary tree, and the values we are printing can, in a way, be thought of as being printed <strong>in-order</strong> since the <code>print</code> statement is between the two calls.</p>
 <h3 id="1-disk">1 disk</h3>
 <p>The best way to approach any complex algorithm is to simplify the data on which its working to a bare minimum. So let's begin with a single disk.</p>
-<video src="https://static.ioloop.io/hanoi3.mov" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/hanoi3.mov" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>With a single disk, things could not be easier: no recursion actually takes place, since we hit the base case. The work we did was equivalent to this:</p>
@@ -399,7 +399,7 @@ video {
 <h2 id="2-disks">2 disks</h2>
 <p>With two disks, things get more interesting. The first call to <code>move</code> invokes <code>move</code> recursively, switching <code>tmp</code> and <code>dest</code>; this performs the preparation work of moving the top disk to the <code>tmp</code> peg. The call then returns, next the actual intended action of moving the large disk from peg 0 to 2 can take place.</p>
 <p>Next <code>move</code> gets invoked again, on line <code>6</code>, thereby switching the <code>src</code> and <code>tmp</code> pegs; this moves the initial smaller disk onto the peg <code>2</code>, and the puzzle is complete.</p>
-<video src="https://static.ioloop.io/hanoi5.mov" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/hanoi5.mov" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>Finally we can trace our function with <code>3</code> disks.</p>
@@ -427,7 +427,7 @@ function goFullscreen(id) {
 }
 </script>
 
-<video id='fs_player' src="https://static.ioloop.io/hanoi2.mov" style="margin: 0 auto; width: 100%;" class='center' autoplay loop playsinline muted>
+<video id='fs_player' src="https://manim.s3.us-east-2.amazonaws.com/hanoi2.mov" style="margin: 0 auto; width: 100%;" class='center' autoplay loop playsinline muted>
 </video>
 <p><button onclick="goFullscreen('fs_player'); return false">fullscreen</button></p>
 <p>Recursion is difficult, and in many cases, there are no shortcuts to tracing the calls by hand, and tracking the variables carefully. The more often you do so, the better you'll become at thinking recursively, but it does take time and practice to improve in this particular skill.</p>

@@ -43,9 +43,9 @@
     <title>roman to numeral - Shyal Beardsley</title>
     <style>
       pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: #ffffcc }
 .highlight { background: #ffffff; }
@@ -241,17 +241,21 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
       <!-- <div><a href='/black'><img src='/Attachments/black.svg'/></a></div> -->
       <!--  end  -->
       <p><a href="https://leetcode.com/problems/roman-to-integer/submissions/">Leetcode link</a>. Beats 100% in memory, and 91% in speed.</p>
-<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
-<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">add</span><span class="p">,</span> <span class="n">sub</span>
-<span class="linenos"> 3</span>
-<span class="linenos"> 4</span><span class="n">S</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">V</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-<span class="linenos"> 5</span>
-<span class="linenos"> 6</span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-<span class="linenos"> 7</span>    <span class="k">def</span> <span class="nf">romanToInt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="linenos"> 8</span>        <span class="k">def</span> <span class="nf">r</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<span class="linenos"> 9</span>            <span class="k">return</span> <span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="n">sub</span><span class="p">)[</span><span class="n">S</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span> <span class="o">&gt;</span> <span class="n">S</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">b</span><span class="p">]]](</span><span class="n">a</span><span class="p">,</span> <span class="n">S</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">b</span><span class="p">]])</span>
-<span class="linenos">10</span>        <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)),</span> <span class="n">S</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<ul>
+<li>[ ] #task provide better explanation.</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="linenos">2</span><span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">add</span><span class="p">,</span> <span class="n">sub</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="n">S</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">V</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="linenos">5</span>
+<span class="linenos">6</span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<span class="linenos">7</span>    <span class="k">def</span> <span class="nf">romanToInt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos">8</span>        <span class="n">r</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="n">sub</span><span class="p">)[</span><span class="n">S</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span> <span class="o">&gt;</span> <span class="n">S</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">b</span><span class="p">]]](</span><span class="n">a</span><span class="p">,</span> <span class="n">S</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">b</span><span class="p">]])</span>
+<span class="linenos">9</span>        <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)),</span> <span class="n">S</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
 </pre></div>
+
+<p><a href="https://leetcode.com/problems/roman-to-integer/discuss/2874655/Python-beats-100-2-lines">Discuss.</a></p>
     </main>
     
     <footer>

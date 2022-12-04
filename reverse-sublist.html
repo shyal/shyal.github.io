@@ -43,9 +43,9 @@
     <title>reverse sublist - Shyal Beardsley</title>
     <style>
       pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: #ffffcc }
 .highlight { background: #ffffff; }
@@ -252,19 +252,19 @@ Output: 1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;NULL</p>
 <p>Reversing a sublist in one pass is a notoriously hard problem. It requires meticulous and painstaking pointer work.</p>
 <h2 id="solution">Solution</h2>
 <p>The first step is to create a dummy head, and a pointer <code>P</code> to the node before the head of the sublist.</p>
-<video src="https://static.ioloop.io/ReverseSublistCreation.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/ReverseSublistCreation.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>Next, a tail pointer is created, pointing to the node after the head 'P'.</p>
-<video src="https://static.ioloop.io/ReverseSublistTail.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/ReverseSublistTail.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>Do notice that the <code>tail</code> pointer doesn't move, rather it points to the next node <strong>after the sublist</strong>. Do also notice that <code>P</code> always points to the <strong>start of the sublist</strong>.</p>
-<video src="https://static.ioloop.io/ReverseSublistTailStatic.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/ReverseSublistTailStatic.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>For this rewiring to take place, a <code>tmp</code> variable is used to iterate over the nodes that need changing.</p>
-<video src="https://static.ioloop.io//ReverseSublistTailStaticTmpMoving.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/ReverseSublistTailStaticTmpMoving.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>The <code>tmp</code> variable acts as an iterator of sorts, it's the main point of interest during the iteration. During the iteration we:</p>

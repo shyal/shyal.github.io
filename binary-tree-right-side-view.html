@@ -43,9 +43,9 @@
     <title>binary tree right side view - Shyal Beardsley</title>
     <style>
       pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: #ffffcc }
 .highlight { background: #ffffff; }
@@ -260,7 +260,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 
 <h2 id="solution">Solution</h2>
 <p>Performing a traversal of the tree, while keeping track of the current depth, and updating a dictionary at that given depth, with the current node value, in-order naturally results in the right-side view being stored in the dict.</p>
-<video src="https://static.ioloop.io/BinaryTreeRightSideView.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/BinaryTreeRightSideView.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>This will work as long as we first visit the left child, update the dictionary, then visit the right child. If we were to visit the right child first, update the dictionary, then visit the left child, this would result in a left-side view of the tree.</p>

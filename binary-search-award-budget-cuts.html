@@ -43,9 +43,9 @@
     <title>binary search award budget cuts - Shyal Beardsley</title>
     <style>
       pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: #ffffcc }
 .highlight { background: #ffffff; }
@@ -256,13 +256,13 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </pre></div>
 
 <p>In the code above, we <strong>cap</strong> the grants to a maximum value of <code>50</code>. As a result the total of the grants allocated is now <code>210</code>. We now have a mechanism for testing out various caps, to decide whether the cap is too low or too high. Since <code>210 &gt; 190</code>, a cap of <code>50</code> is still too high.</p>
-<video src="https://static.ioloop.io/GrantCuts.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/GrantCuts.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>In the animation above, you can see the grants getting capped by binary search, and gravitating towards the optimal cap amount of <code>47</code>.</p>
 <h3 id="computing-the-cap">Computing the cap</h3>
 <p>The cap is the value we are searching for, or optimising. Its maximum value (the <code>right</code> pointer in our binary search) is the entire budget. Its minimum value (the <code>left</code> pointer in our binary search) is <code>0</code>.</p>
-<video src="https://static.ioloop.io/MidSearch.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/MidSearch.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>The search, as any binary search, consists of <code>guessing</code> the value by taking the average of the min and max. The key difference is we then attempt to validate this guess by computing whether it leads us to being over, or under the given budget.</p>
@@ -279,7 +279,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </pre></div>
 
 <p>Below, we can view these values being optimised simultaneously. </p>
-<video src="https://static.ioloop.io/AwardBudgetCuts.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/AwardBudgetCuts.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>This algorithm is very interesting and fun to watch, as it details very clearly how binary search can be used for numerical optimisation as opposed to simply searching for a value in a sorted array.</p>

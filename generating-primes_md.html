@@ -43,9 +43,9 @@
     <title>generating primes - Shyal Beardsley</title>
     <style>
       pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: #ffffcc }
 .highlight { background: #ffffff; }
@@ -257,7 +257,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class="linenos">11</span><span class="nb">print</span><span class="p">(</span><span class="n">generate_primes</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
 </pre></div>
 
-<video src="https://static.ioloop.io/PrimesTrialDivision.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/PrimesTrialDivision.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>That's fine, however it's horribly inefficient for large prime numbers.</p>
@@ -271,7 +271,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class="linenos">6</span>    <span class="k">return</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">if</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
 </pre></div>
 
-<video src="https://static.ioloop.io/PrimesSieve.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/PrimesSieve.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
     </main>
     

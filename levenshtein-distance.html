@@ -43,9 +43,9 @@
     <title>levenshtein distance - Shyal Beardsley</title>
     <style>
       pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: #ffffcc }
 .highlight { background: #ffffff; }
@@ -249,12 +249,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <p>The <strong>levenstein distance</strong> is symmetrical, meaning transforming word <strong>A</strong> into word <strong>B</strong> takes as many operations as transforming word <strong>B</strong> into word <strong>A</strong>.</p>
 <p>When computing the levenshtein distance using <a href="https://en.wikipedia.org/wiki/Dynamic_programming">dynamic programming</a>, the first step should be to focus on the transformations, and decisions taking place at each step.</p>
 <p>Let's take <code>saturday</code> and <code>sunday</code> as examples.</p>
-<video src="https://static.ioloop.io/LevenshteinDistance.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/LevenshteinDistance.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>By simply removing the letters in common, we can already get a hint that the distance is <code>3</code>. </p>
 <p>Let's now think about this in terms of transformations of <strong>saturday</strong>. Starting with:</p>
-<video src="https://static.ioloop.io/LevenshteinDistanceEdits.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/LevenshteinDistanceEdits.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>Looking at the animation above should make it clear as day that 3 edits are required, thus the levenshtein distance is <code>3</code>.</p>
@@ -399,7 +399,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </pre></div>
 
 <video width="640" height="480" controls>
-  <source src="https://static.ioloop.io/algorithms/paste-c6eac6e192c8e3d1e4f438a3ba4f6c6f650cf3c6.mp4" type="video/mp4">
+  <source src="https://manim.s3.us-east-2.amazonaws.com/algorithms/paste-c6eac6e192c8e3d1e4f438a3ba4f6c6f650cf3c6.mp4" type="video/mp4">
 </video>
 
 <h2 id="passing-around-indices-instead-of-substrings">passing around indices instead of substrings</h2>

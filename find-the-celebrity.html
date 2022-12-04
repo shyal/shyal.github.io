@@ -43,9 +43,9 @@
     <title>find the celebrity - Shyal Beardsley</title>
     <style>
       pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: #ffffcc }
 .highlight { background: #ffffff; }
@@ -261,8 +261,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </pre></div>
 
 <p>If you were to ask <strong>"does person <code>2</code> know person <code>3</code>"</strong> you'd perform a look at <code>M[2][3]</code>. We can therefore observe that everyone knows person <code>1</code>, but person <code>1</code> doesn't know anyone (besides themselves).</p>
-<p>The nave way of doing this, is to ask if each person knows every other person, which obviously has a time complexity of<script type="math/tex">O(n^2)</script>, and it thus inefficient.</p>
-<video src="https://static.ioloop.io/CelebrityNaive.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<p>The naive way of doing this, is to ask if each person knows every other person, which obviously has a time complexity of <script type="math/tex">O(n^2)</script>, and it thus inefficient.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/CelebrityNaive.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">M</span> <span class="o">=</span> <span class="p">[</span>
@@ -298,7 +298,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </ul>
 </li>
 </ul>
-<video src="https://static.ioloop.io/CelebrityGraph.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/CelebrityGraph.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">find_celebrity</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -307,14 +307,14 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </pre></div>
 
 <p><code>reduce</code> with a ternary handles this logic beautifully. Our celebrity candidate is <code>0</code> which is the initialiser to <code>reduce</code>. We then iterate from <code>1</code> through to the last guest, while holding on to the most well-known person in the room as our candidate.</p>
-<video src="https://static.ioloop.io/CelebrityGraphDFS.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/CelebrityGraphDFS.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <h2 id="celebrity-confirmation">Celebrity Confirmation</h2>
 <div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">)[</span><span class="nb">all</span><span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="n">j</span> <span class="ow">or</span> <span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">g</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))]</span>
 </pre></div>
 
-<video src="https://static.ioloop.io/CelebrityConfirmation.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/CelebrityConfirmation.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>Our final step is making sure our candidate is indeed a celebrity. This is easily done with <code>all</code> handling the simple logic of being known to all, but knowing no-one.</p>

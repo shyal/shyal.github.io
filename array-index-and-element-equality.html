@@ -43,9 +43,9 @@
     <title>array index and element equality - Shyal Beardsley</title>
     <style>
       pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: #ffffcc }
 .highlight { background: #ffffff; }
@@ -263,7 +263,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <li>output: integer</li>
 </ul>
 <h2 id="solution">Solution</h2>
-<video src="https://static.ioloop.io/ArrayIndexElement.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/ArrayIndexElement.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>You may be tempted to do something clever, like a binary search, but a max array length of <code>100</code> and a time limit of <code>5000ms</code> begs for a linear search. The problem does not ask for the <em>most optimal</em> solution, so any solution that fulfills the constraints and passes the tests will do. Since a linear search is simpler than a binary search, the path of least resistance is the correct one.</p>

@@ -43,9 +43,9 @@
     <title>shortest distance from all buildings - Shyal Beardsley</title>
     <style>
       pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: #ffffcc }
 .highlight { background: #ffffff; }
@@ -260,11 +260,11 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </blockquote>
 <h2 id="solution">Solution</h2>
 <p>This question is labeled as "hard" although once you understand the approach it's fairly straight-forward. We begin by performing a BFS starting from each <strong>house</strong>, while keeping track of the distance from the BFS origin.</p>
-<video src="https://static.ioloop.io/ShortestDistanceFromAllBuildings.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" allowfullscreen autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/ShortestDistanceFromAllBuildings.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" allowfullscreen autoplay loop playsinline muted>
 </video>
 
 <p>Above we are seeing the BFS for each house take place consecutively. In actuality they can all run at once. One a cell has been visited by all N houses, we store the sum of its distances (in white).</p>
-<video  id='fs_player' src="https://static.ioloop.io/ShortestDistanceFromAllBuildingsTotal.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" allowfullscreen autoplay loop playsinline muted>
+<video  id='fs_player' src="https://manim.s3.us-east-2.amazonaws.com/ShortestDistanceFromAllBuildingsTotal.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" allowfullscreen autoplay loop playsinline muted>
 </video>
 <p><button class='btn btn-primary' onclick="goFullscreen('fs_player'); return false">fullscreen</button></p>
 <script>
@@ -279,7 +279,7 @@ function goFullscreen(id) {
 </script>
 
 <p>The optimal shortest path to each house is the smallest sum. To save space, we store the number of visits in the Matrix itself.</p>
-<video src="https://static.ioloop.io/ShortestDistanceFromAllBuildingsFinal.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" allowfullscreen autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/ShortestDistanceFromAllBuildingsFinal.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" allowfullscreen autoplay loop playsinline muted>
 </video>
 
 <p>https://leetcode.com/problems/shortest-distance-from-all-buildings/</p>

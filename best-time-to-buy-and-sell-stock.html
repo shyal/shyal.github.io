@@ -43,9 +43,9 @@
     <title>best time to buy and sell stock - Shyal Beardsley</title>
     <style>
       pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: #ffffcc }
 .highlight { background: #ffffff; }
@@ -247,12 +247,12 @@ If you were only permitted to complete exactly two transaction (i.e., buy one an
 </blockquote>
 </blockquote>
 <p>The title of this question could lead us down the wrong track, since we are in fact not looking for the best <em>time</em> to buy and sell, rather, we need to compute the <strong>max profit</strong> from a single buy trade, followed by a single sell trade.</p>
-<video src="https://static.ioloop.io/BestTimeToBuyAndSellStockSimplePrice.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/BestTimeToBuyAndSellStockSimplePrice.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <h2 id="solution">Solution</h2>
 <p>This algorithm is incredibly simple once you see it. As we iterate through the values, we want to compute the <strong>min</strong> value seen thus far.</p>
-<video src="https://static.ioloop.io/BestTimeToBuyAndSellStockMinPrice.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/BestTimeToBuyAndSellStockMinPrice.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>Computing the min value so far is of course trivial:</p>
@@ -275,11 +275,11 @@ If you were only permitted to complete exactly two transaction (i.e., buy one an
 <span class="linenos">8</span><span class="n">max_profit</span><span class="p">([</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
 </pre></div>
 
-<video src="https://static.ioloop.io/BestTimeToBuyAndSellStockMinPriceMarkers.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/BestTimeToBuyAndSellStockMinPriceMarkers.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>The max overall profit is the greatest such value. However the reasons for this may not be obvious at first.</p>
-<video src="https://static.ioloop.io/BestTimeToBuyAndSellStockMinPriceMarkersTrade.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/BestTimeToBuyAndSellStockMinPriceMarkersTrade.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>As you can see above, the <strong>min price thus far</strong> on any given day is in fact the value at which the trade would have been opened, and the current stock value is the price of our hypothetical close.</p>

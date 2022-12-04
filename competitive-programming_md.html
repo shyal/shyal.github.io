@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+    />
+
+    <meta
+      name="keywords"
+      content="shyal beardsley, shyal.com, shyal, oliver, beardsley"
+    />
+    <meta name="description" content="competitive programming" />
+    <script
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"
+    ></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        config: ["MMLorHTML.js"],
+        jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+        extensions: ["MathMenu.js", "MathZoom.js"]
+      });
+    </script>
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.5.2/mermaid.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.js"></script>
+    
+    <link rel="stylesheet" href="/static/styles.css" />
+    <!-- <script src="/static/mermaid.min.js"></script> -->
+    <link href="/static/lightbox.css" rel="stylesheet" />
+    
+    <title>competitive programming - Shyal Beardsley</title>
+    <style>
+      pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #ffffcc }
+.highlight { background: #ffffff; }
+.highlight .c { color: #888888 } /* Comment */
+.highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.highlight .k { color: #008800; font-weight: bold } /* Keyword */
+.highlight .ch { color: #888888 } /* Comment.Hashbang */
+.highlight .cm { color: #888888 } /* Comment.Multiline */
+.highlight .cp { color: #cc0000; font-weight: bold } /* Comment.Preproc */
+.highlight .cpf { color: #888888 } /* Comment.PreprocFile */
+.highlight .c1 { color: #888888 } /* Comment.Single */
+.highlight .cs { color: #cc0000; font-weight: bold; background-color: #fff0f0 } /* Comment.Special */
+.highlight .gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #aa0000 } /* Generic.Error */
+.highlight .gh { color: #333333 } /* Generic.Heading */
+.highlight .gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #555555 } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #666666 } /* Generic.Subheading */
+.highlight .gt { color: #aa0000 } /* Generic.Traceback */
+.highlight .kc { color: #008800; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008800; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008800; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008800 } /* Keyword.Pseudo */
+.highlight .kr { color: #008800; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #888888; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #0000DD; font-weight: bold } /* Literal.Number */
+.highlight .s { color: #dd2200; background-color: #fff0f0 } /* Literal.String */
+.highlight .na { color: #336699 } /* Name.Attribute */
+.highlight .nb { color: #003388 } /* Name.Builtin */
+.highlight .nc { color: #bb0066; font-weight: bold } /* Name.Class */
+.highlight .no { color: #003366; font-weight: bold } /* Name.Constant */
+.highlight .nd { color: #555555 } /* Name.Decorator */
+.highlight .ne { color: #bb0066; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0066bb; font-weight: bold } /* Name.Function */
+.highlight .nl { color: #336699; font-style: italic } /* Name.Label */
+.highlight .nn { color: #bb0066; font-weight: bold } /* Name.Namespace */
+.highlight .py { color: #336699; font-weight: bold } /* Name.Property */
+.highlight .nt { color: #bb0066; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #336699 } /* Name.Variable */
+.highlight .ow { color: #008800 } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #0000DD; font-weight: bold } /* Literal.Number.Bin */
+.highlight .mf { color: #0000DD; font-weight: bold } /* Literal.Number.Float */
+.highlight .mh { color: #0000DD; font-weight: bold } /* Literal.Number.Hex */
+.highlight .mi { color: #0000DD; font-weight: bold } /* Literal.Number.Integer */
+.highlight .mo { color: #0000DD; font-weight: bold } /* Literal.Number.Oct */
+.highlight .sa { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Affix */
+.highlight .sb { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Backtick */
+.highlight .sc { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Char */
+.highlight .dl { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Delimiter */
+.highlight .sd { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Doc */
+.highlight .s2 { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Double */
+.highlight .se { color: #0044dd; background-color: #fff0f0 } /* Literal.String.Escape */
+.highlight .sh { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Heredoc */
+.highlight .si { color: #3333bb; background-color: #fff0f0 } /* Literal.String.Interpol */
+.highlight .sx { color: #22bb22; background-color: #f0fff0 } /* Literal.String.Other */
+.highlight .sr { color: #008800; background-color: #fff0ff } /* Literal.String.Regex */
+.highlight .s1 { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Single */
+.highlight .ss { color: #aa6600; background-color: #fff0f0 } /* Literal.String.Symbol */
+.highlight .bp { color: #003388 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0066bb; font-weight: bold } /* Name.Function.Magic */
+.highlight .vc { color: #336699 } /* Name.Variable.Class */
+.highlight .vg { color: #dd7700 } /* Name.Variable.Global */
+.highlight .vi { color: #3333bb } /* Name.Variable.Instance */
+.highlight .vm { color: #336699 } /* Name.Variable.Magic */
+.highlight .il { color: #0000DD; font-weight: bold } /* Literal.Number.Integer.Long */
+      
+
+      .MathJax_Display{
+        /*text-align: left !important;*/
+        margin: 0 !important;
+      }
+
+      pre {
+      /*line-height: 1em;*/
+      white-space: pre-wrap;       /* css-3 */
+      white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+      white-space: -pre-wrap;      /* Opera 4-6 */
+      white-space: -o-pre-wrap;    /* Opera 7 */
+      word-wrap: break-word;       /* Internet Explorer 5.5+ */
+      }
+
+      div.mermaid {
+        max-width: 500px;
+      }
+
+      body {
+        text-align: left !important;
+        margin: 0px;
+        padding: 0px;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      .lineno {
+        margin-right: 10px;
+        color: #a5b4a3;
+      }
+
+      .linenodiv {
+        border-left: 2px solid #69c;
+        color: #89ac9a;
+        background-color: #f5f7f9 !important;
+      }
+
+      .codehilitetable td {
+        background-color: #f5f7f9;
+      }
+
+      th, td {
+        text-align: left;
+      }
+
+      tr:nth-child(even) {background-color: #f2f2f2;}
+
+      img {
+        max-width: 50em;
+        max-height: 30em;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 2em 1em;
+      }
+
+      .text-center{
+        text-align: center;
+      }
+
+      main,
+      footer,
+      .narrow {
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        margin: 0 auto;
+        max-width: 50em;
+        line-height: 1.5;
+        padding: 2em 1em;
+        color: #566b78;
+      }
+
+      .lb-image {
+        background: white;
+      }
+
+      div {
+        padding: 0px;
+        margin: 0px;
+      }
+
+      code,
+      pre {
+        background: #f7f9fb;
+      }
+
+      .linenodiv {
+        width: 10px;
+        padding-right: 0px;
+      }
+
+      h2 {
+        margin-top: 0.5em;
+        padding-top: 0.5em;
+      }
+
+      h1,
+      h2,
+      strong {
+        color: #333;
+      }
+
+      a {
+        color: #e81c4f;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <main>
+      <!-- <img src='/Attachments/me.png' height='150px'> -->
+
+      
+      <div><h1 class="main-title">competitive programming</h1></div>
+       
+      <a href="javascript:history.back()">←</a>
+      <a href="/">🏠</a>
+      
+      <!-- if has_fences -->
+      <!-- <div><a href='/black'><img src='/Attachments/black.svg'/></a></div> -->
+      <!--  end  -->
+      <p>This was definitely an interesting challenge, as i started with being very bad and become good (good enough?) exponentially quickly. In this note, i'll review my performance, my approach, as well as some of my favourite algorithms with visualizations.</p>
+<p><img alt="Pasted image 20221204063516.png" src="/Attachments/Pasted image 20221204063516.png" /></p>
+<h1 id="table-of-contents">Table of Contents</h1>
+<div class="toc">
+<ul>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#how-did-i-do">How did i do?</a></li>
+<li><a href="#things-i-need-to-improve">Things i need to improve</a><ul>
+<li><a href="#time-complexity-analysis">time complexity analysis</a></li>
+<li><a href="#double-triple-checking-my-work">double &amp; triple checking my work</a></li>
+<li><a href="#more-thoughts">More thoughts</a></li>
+</ul>
+</li>
+<li><a href="#leetcode-progress">Leetcode Progress</a><ul>
+<li><a href="#classes-of-problems-covered">Classes of problems covered</a></li>
+</ul>
+</li>
+<li><a href="#my-learning-setup">My Learning setup</a><ul>
+<li><a href="#does-it-make-you-a-better-programmer">Does it make you a better programmer?</a><ul>
+<li><a href="#pros">Pros:</a><ul>
+<li><a href="#write-more-interesting-software">Write more interesting software</a></li>
+<li><a href="#learn-how-to-handle-complexity">Learn how to handle complexity</a></li>
+<li><a href="#raise-your-complexity-threshold">Raise your complexity threshold</a></li>
+<li><a href="#build-a-general-framework-for-problem-solving">Build a general framework for problem solving</a></li>
+</ul>
+</li>
+<li><a href="#cons">Cons</a><ul>
+<li><a href="#narrow-mindedness">Narrow mindedness</a></li>
+<li><a href="#expert-beginner">Expert beginner</a></li>
+<li><a href="#going-too-fast">Going too fast</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#its-about-the-problem-space">It's about the problem space</a></li>
+</ul>
+</li>
+<li><a href="#overview">Overview</a><ul>
+<li><a href="#preliminary-skills">Preliminary skills</a><ul>
+<li><a href="#drawing-data-tables">drawing data tables</a></li>
+<li><a href="#tracing-recursion-trees">tracing recursion trees</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#visualisations">Visualisations</a><ul>
+<li><a href="#rabin-karp">Rabin Karp</a></li>
+<li><a href="#linked-list-algorithms">Linked list algorithms</a></li>
+<li><a href="#drone-flight-planner">drone flight planner</a></li>
+<li><a href="#longest-arithmetic-sequence">longest arithmetic sequence</a></li>
+<li><a href="#best-time-to-buy-and-sell-stock">best time to buy and sell stock</a></li>
+<li><a href="#depth-first-search">depth first search</a></li>
+<li><a href="#validate-sudoku">Validate Sudoku</a></li>
+<li><a href="#levenshtein-distance">Levenshtein distance</a></li>
+<li><a href="#find-the-celebrity">Find the celebrity</a></li>
+</ul>
+</li>
+<li><a href="#somewhat-documented">Somewhat documented</a></li>
+<li><a href="#undocumented">Undocumented</a></li>
+<li><a href="#pythonic-tricks">pythonic tricks</a><ul>
+<li><a href="#advanced-python">Advanced Python</a></li>
+<li><a href="#trees">Trees</a></li>
+</ul>
+</li>
+<li><a href="#pramp-algorithms">pramp algorithms</a></li>
+<li><a href="#epip">EPIP</a></li>
+<li><a href="#time-complexity-analysis_1">time complexity analysis</a></li>
+</ul>
+</div>
+<h1 id="how-did-i-do">How did i do?</h1>
+<p>After many months of learning and practice <strong>i became good</strong>, by good i mean i could:</p>
+<ul>
+<li>solve easy questions</li>
+<li>solve medium questions</li>
+<li>solve hard questions</li>
+<li>all within the time limit</li>
+<li>pass FAANG-grade mock exams (e.g for Facebook)</li>
+<li>pass FAANG-grade systems design mock interviews</li>
+<li>pass FAANG-grade  behavioural interviews</li>
+</ul>
+<p>Since i did lots of pramp interviews i got a lot of feedback from my peers.</p>
+<p><img alt="Pasted image 20221204063843.png" src="/Attachments/Pasted image 20221204063843.png" /></p>
+<p><img alt="Pasted image 20221204064035.png" src="/Attachments/Pasted image 20221204064035.png" /></p>
+<p><img alt="Pasted image 20221204064128.png" src="/Attachments/Pasted image 20221204064128.png" /></p>
+<p><img alt="Pasted image 20221204064151.png" src="/Attachments/Pasted image 20221204064151.png" /><br />
+<img alt="Pasted image 20221204064236.png" src="/Attachments/Pasted image 20221204064236.png" /><br />
+<img alt="Pasted image 20221204064319.png" src="/Attachments/Pasted image 20221204064319.png" /><br />
+<img alt="Pasted image 20221204064452.png" src="/Attachments/Pasted image 20221204064452.png" /><br />
+<img alt="Pasted image 20221204064521.png" src="/Attachments/Pasted image 20221204064521.png" /><br />
+<img alt="Pasted image 20221204064544.png" src="/Attachments/Pasted image 20221204064544.png" /></p>
+<p><img alt="Pasted image 20221204064641.png" src="/Attachments/Pasted image 20221204064641.png" /><br />
+<img alt="Pasted image 20221204064711.png" src="/Attachments/Pasted image 20221204064711.png" /><br />
+<img alt="Pasted image 20221204064816.png" src="/Attachments/Pasted image 20221204064816.png" /><br />
+<img alt="Pasted image 20221204064847.png" src="/Attachments/Pasted image 20221204064847.png" /><br />
+My special abilities were a very strong focus on highly expressive python functional syntax and programming to write incredibly concise code, and an uncanny ability to condense complex algorithms down to a 1-liner (the former is useful, the latter is a useless trick at best).</p>
+<blockquote>
+<p>"Succinctness is Power."<br />
+ - <em>Paul Graham</em><br />
+<a href="http://www.paulgraham.com/power.html">paulgraham.com/power.html</a></p>
+</blockquote>
+<p>Unleashing Python's incredibly succinct, powerful syntax and functional libraries on my coding peers was the most impressive to them, that combined with clean and crisp explanations of what the code was doing.</p>
+<p>In one session i was swapping notes about Python's syntax and tricks with a Computer Science Ivy leagues professor, which is when i realised i'd climbed that hill pretty successfully.</p>
+<p>I genuinely enjoyed the interactions with my peers, and made many friends along the way. We'd connect and do study sessions together. I met so many nice and really smart people; absolute blessing.</p>
+<h1 id="things-i-need-to-improve">Things i need to improve</h1>
+<h2 id="time-complexity-analysis">time complexity analysis</h2>
+<p>I feel my weakest area is time complexity analysis. I can wing it, however the mathematical proofs are brutal e.g <a href="/./recurrence-relation-with-for-loop">recurrence relation with for loop</a> or <a href="/./recurrence-relation-for-a-simple-decreasing-function">recurrence relation for a simple decreasing function</a>.</p>
+<h2 id="double-triple-checking-my-work">double &amp; triple checking my work</h2>
+<p>My stats on Leetcode are not that impressive because for the majority of my time doing this work, i'd submit my answer too quickly.</p>
+<p>I did get into the habit of double and triple checking my work, but Leetcode's unit tests are utterly brutal so my ratio of failed / correct submissions is not where i'd want it to be.</p>
+<h2 id="more-thoughts">More thoughts</h2>
+<p>Overall i feel i could spend a lifetime studying, implementing, optimizing, and writing about algorithms. As such, i feel i'm hardly even dented the subject.</p>
+<p>But that's the point isn't it? The moment you start knowing a subject is the moment you get utterly humbled by how little you know about it.</p>
+<h1 id="leetcode-progress">Leetcode Progress</h1>
+<p><img alt="Pasted image 20221204061429.png" src="/Attachments/Pasted image 20221204061429.png" /></p>
+<p><img alt="Pasted image 20221204061452.png" src="/Attachments/Pasted image 20221204061452.png" /><br />
+<img alt="Pasted image 20221204061607.png" src="/Attachments/Pasted image 20221204061607.png" /></p>
+<h2 id="classes-of-problems-covered">Classes of problems covered</h2>
+<ul>
+<li>Dynamic programming</li>
+<li>Backtracking</li>
+<li>Divide and Conquer</li>
+<li>Quickselect</li>
+<li>Union Find</li>
+<li>Monotonic Stack</li>
+<li>Trie</li>
+<li>Binary Index Tree</li>
+<li>Tabla Hash</li>
+<li>DFS</li>
+<li>Tree</li>
+<li>Binary Tree</li>
+<li>BST</li>
+<li>Math</li>
+<li>BFS</li>
+<li>Recursion</li>
+<li>Arrays</li>
+<li>Strings</li>
+<li>Two Pointers</li>
+<li>Sorting</li>
+<li>Matrices</li>
+<li>Linked Lists</li>
+<li>Stracks</li>
+<li>Simulations</li>
+</ul>
+<h1 id="my-learning-setup">My Learning setup</h1>
+<p>Following my initial failure to solve even easy questions on leetcode, i quickly decided to purchase <a href="https://elementsofprogramminginterviews.com/sample/epilight_python_new.pdf">Elements of Programming Interviews in Python</a> (aka EPIP - <strong>highly</strong> recommend).</p>
+<ul>
+<li><a href="https://leetcode.com">Leetcode pro account.</a></li>
+<li><a href="Pramp">Pramp.com</a> account.</li>
+<li>iPad pro 12.9 + Apple Pencil 2 .</li>
+<li><a href="https://apps.apple.com/us/app/goodnotes-5/id1444383602">Good Notes</a>.</li>
+<li><a href="https://apps.ankiweb.net/">Anki</a></li>
+</ul>
+<p>I also wrote a custom plugin for Anki. The plugin enabled me to:</p>
+<ul>
+<li>answer cards by typing in 1 line of code within a multi-line code answer.</li>
+<li>the better i knew the code snippet, the longer the selected line would get.</li>
+</ul>
+<h2 id="does-it-make-you-a-better-programmer">Does it make you a better programmer?</h2>
+<p>Yes! Absolutely. <strong>But</strong> there are some caveats.</p>
+<h3 id="pros">Pros:</h3>
+<h4 id="write-more-interesting-software">Write more interesting software</h4>
+<p>Algorithms help you solve hard and interesting problems. This makes you more likely to work on interesting things, rather than plain old CRUD.</p>
+<h4 id="learn-how-to-handle-complexity">Learn how to handle complexity</h4>
+<p>It's really interesting how even things that seem really complex can be broken down into simpler parts. For me, illustrations helped me a lot. I also developed a process for debugging code by hand that enables me to evaluate code.. well.. by hand and with 100% accuracy.</p>
+<h4 id="raise-your-complexity-threshold">Raise your complexity threshold</h4>
+<p>Some of the problems are really really hard to reason about. Spending time reasoning about hard things makes your daily work seem easy in comparison.</p>
+<h4 id="build-a-general-framework-for-problem-solving">Build a general framework for problem solving</h4>
+<p>Competitive algorithmic programming builds you a cognitive framework to solve many problems, not just algorithmic ones.</p>
+<h3 id="cons">Cons</h3>
+<h4 id="narrow-mindedness">Narrow mindedness</h4>
+<p>This point is very well illustrated in this <a href="https://www.youtube.com/watch?v=5bId3N7QZec">Joma comedy skit </a> where he over-prepares for the interview, and answers "hash map" to a soft-skill question.</p>
+<p>When you're a hammer everything looks like a nail.</p>
+<h4 id="expert-beginner">Expert beginner</h4>
+<p>Competitive programming helped me escape the <a href="https://daedtech.com/how-developers-stop-learning-rise-of-the-expert-beginner/">expert beginner trap</a>, and strangely landed me back into a new one. </p>
+<p><img alt="Pasted image 20221203085908.png" src="/Attachments/Pasted image 20221203085908.png" /></p>
+<p>It is very closely tied to <strong>narrow mindedness</strong>. After getting really good at this, i thought i was invincible and the quality of my work deteriorated as a result. After noticing this i was able to relax, slow down, open my mind, and pick up again.</p>
+<h4 id="going-too-fast">Going too fast</h4>
+<p>Competitive programming really trains you to solve problems fast! But the problems are actually a very narrow set, and when returning to real world everyday programming, most of the skills are not transferrable.</p>
+<p>As a result, i was plowing through things too quickly.</p>
+<h2 id="its-about-the-problem-space">It's about the problem space</h2>
+<p>The most important skill i got to learn is to spend as much time as possible in the problem space before jumping into the solution space.</p>
+<p>This may sound counter-intuitive... why waste time lingering on the problem? The reason is simple: even if you can't think of the solution, you can walk on the edges of the wrong paths, even if they are the wrong paths. Just don't take them. You're mapping out the territory. You don't know the answer yet, so you keep on contemplating the wrong paths. Just don't take them until you find the good one.</p>
+<p>The steps to solving any algorithmic problem at speed basically go like this:</p>
+<ul>
+<li>Make sure you fully understand the question... really.</li>
+<li>Flesh out the problem space.</li>
+<li>What class of problem is it?</li>
+<li>Think of the solution space.</li>
+<li>Propose an approach.</li>
+<li>Discuss space &amp; time complexity.</li>
+<li>Pseudocode it.</li>
+<li>Code it.</li>
+<li>Think of edge-cases.</li>
+<li>Test it.</li>
+<li>Submit.</li>
+</ul>
+<p>Of course, these problems can land in many classes, e.g they may involve statistics, set theory, recursion, dynamic programming etc. it's really challenging, and rather addictive.</p>
+<h1 id="overview">Overview</h1>
+<h2 id="preliminary-skills">Preliminary skills</h2>
+<h3 id="drawing-data-tables">drawing data tables</h3>
+<p>It may sound obvious, but one of the advantages i often had over my peers when working through these problems was my meticulousness at writing down all the required tables of data required before starting to work through the problem space.</p>
+<p><a href="/./data-tables">data tables</a></p>
+<p>Writing the actual data, and being able to represent it neatly in the editor in ASCII definitely confers a strong advantage.</p>
+<h3 id="tracing-recursion-trees">tracing recursion trees</h3>
+<p>Before embarking on his journey i was hopeless at recursion. EPIP helped me a lot get good at it, and i was surprised by how many problems involved recursion. For example dynamic programming problems can usually be solved with either data tables or recursion, not to mention graph or tree problems.</p>
+<p>So not only is mastering recursion a pre-requisite for many classes of problems, but the ability of quickly <a href="/./tracing-the-recursion-tree">tracing the recursion tree</a> helps a lot with solving many classes of problems.</p>
+<h1 id="visualisations">Visualisations</h1>
+<p>I'm a visual &amp; kinesthetic thinker. Initially i started drawing out the problems on the iPad using <a href="https://apps.apple.com/us/app/goodnotes-5/id1444383602">Good Notes</a>. By the end of this process, i created high quality animations of some of my favourite problems using <a href="https://github.com/3b1b/manim">manim from 3 blue 1 brown</a> .</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/ShortestDistanceFromAllBuildings.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" allowfullscreen autoplay loop playsinline muted>
+</video>
+<p>Above is a video of one of my favourite problems, <a href="/./shortest-distance-from-all-buildings">shortest distance from all buildings</a>. Good example of a problem labelled 'hard' but is actually quite easy once visualized properly.</p>
+<h3 id="rabin-karp">Rabin Karp</h3>
+<p><a href="/./rabin-karp">rabin karp</a> offers a really elegant solution for string matching in linear time. It's quite often used in DNA sequencing!</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/RabinRollingHash.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<h3 id="linked-list-algorithms">Linked list algorithms</h3>
+<p>Linked list algorithms are a really great primer to getting used to the meticulousness involved with data structure work.</p>
+<p>The <a href="/./reverse-sublist">reverse sublist</a> problem is definitely harder than it sounds.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/ReverseSublistTailStaticTmpMoving.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>Finding a <a href="/./linked-list-cycle">linked list cycle</a> is, once again, one of these things that has to be seen to be believed.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/LinkedListCycleStartNode.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>The <a href="/./add-two-numbers">add two numbers</a> problem sounds simple, but is a lot harder to implement than it sounds.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/AddTwoNumbers3.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>I could never imagine deeply grasping this algorithm without actually seeing it in action: <a href="/./merge-k-sorted-lists">merge k sorted lists</a>.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/MergeKSortedLists1.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+<h3 id="drone-flight-planner"><a href="/./drone-flight-planner">drone flight planner</a></h3>
+<video src="https://manim.s3.us-east-2.amazonaws.com/Drone2DSuccess.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+<h3 id="longest-arithmetic-sequence"><a href="/./longest-arithmetic-sequence">longest arithmetic sequence</a></h3>
+<video src="https://manim.s3.us-east-2.amazonaws.com/LongestArithmeticSequenceFirst.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+<h3 id="best-time-to-buy-and-sell-stock">best time to buy and sell stock</h3>
+<p>Given time &amp; price data, pick the <a href="/./best-time-to-buy-and-sell-stock">best time to buy and sell stock</a>.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/BestTimeToBuyAndSellStockMinPriceMarkersTrade.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+<h3 id="depth-first-search"><a href="/./depth-first-search">depth first search</a></h3>
+<p>Visualisations of pre-order, in-order and post-order <a href="/./depth-first-search">depth first search</a>.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/PostOrder.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+<p>Before </p>
+<h3 id="validate-sudoku">Validate Sudoku</h3>
+<p>writing a sudoku solver, it's important to fully understand how to <a href="/./validate-sudoku">validate sudoku</a>.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/SudokuValidateAll.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+<p>Here's my implementation of a <a href="/./sudoku-solver">sudoku solver</a>. Fastest Python solver i've come across to date.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/SolveSudoku.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+<p>We use a visual metaphor of hopping down a road to gain a visceral understanding of <a href="/./subarray-sum-equals-k">subarray sum equals k</a>.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/HoppingBackKSubs.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+<p><a href="/./generating-primes">generating primes</a> is one of the true classics in computer science. We explore brute force versus using a sieve.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/PrimesSieve.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+<h3 id="levenshtein-distance">Levenshtein distance</h3>
+<p><a href="/./levenshtein-distance">levenshtein distance</a> is quite a simple problem with a fascinating dynamic programming solution.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/LevenshteinDistance.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<h3 id="find-the-celebrity">Find the celebrity</h3>
+<p>Fascinating graph problem. Solution can be expressed as a 2 line <a href="/./find-the-celebrity">find the celebrity</a>.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/CelebrityGraph.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<h1 id="somewhat-documented">Somewhat documented</h1>
+<p>Here's a list of my realtime notes. It's still unstructured and probably unfinished.</p>
+<p><a href="/./binary-search">binary search</a><br />
+<a href="/./splitting-a-list-into-two-distinct-sublists">splitting a list into two distinct sublists</a><br />
+<a href="/./huffman-encoding">huffman encoding</a><br />
+<a href="/./optimal-merge-pattern">optimal merge pattern</a></p>
+<h1 id="undocumented">Undocumented</h1>
+<p><a href="/./divide-two-integers">divide two integers</a><br />
+<a href="/./roman-to-numeral">roman to numeral</a><br />
+<a href="/./reorder-routes-to-make-all-paths-lead-to-city-zero">reorder routes to make all paths lead to city zero</a><br />
+<a href="/./number-of-submatrices">number of submatrices</a><br />
+<a href="/./number-of-paths">number of paths</a><br />
+<a href="/./rotated-digits">rotated digits</a><br />
+<a href="/./next-closest-time">next closest time</a><br />
+<a href="/./rotten-oranges">rotten oranges</a><br />
+<a href="/./spiral-matrix-II">spiral matrix II</a><br />
+[[trapping rain water]]<br />
+<a href="/./product-of-array-except-self">product of array except self</a><br />
+<a href="/./diameter-of-binary-tree">diameter of binary tree</a><br />
+<a href="/./merge-intervals">merge intervals</a><br />
+<a href="/./minimum-remove-to-make-valid-parentheses">minimum remove to make valid parentheses</a><br />
+<a href="/./integer-to-english-words">integer to english words</a><br />
+<a href="/./serialize-and-deserialize-binary-tree">serialize and deserialize binary tree</a><br />
+<a href="/./alien-dictionary">alien dictionary</a><br />
+<a href="/./word-break">word break</a><br />
+<a href="/./verifying-an-alien-dictionary">verifying an alien dictionary</a><br />
+<a href="/./next-permutation">next permutation</a><br />
+<a href="/./add-strings">add strings</a><br />
+<a href="/./minimum-window-substring">minimum window substring</a><br />
+<a href="/./merge-sorted-array">merge sorted array</a><br />
+<a href="/./binary-tree-right-side-view">binary tree right side view</a><br />
+<a href="/./binary-tree-maximum-path-sum">binary tree maximum path sum</a><br />
+<a href="/./remove-invalid-parentheses">remove invalid parentheses</a><br />
+<a href="/./valid-palindrome">valid palindrome</a><br />
+<a href="/./vertical-order-traversal-of-a-binary-tree">vertical order traversal of a binary tree</a><br />
+<a href="/./binary-tree-vertical-order-traversal">binary tree vertical order traversal</a><br />
+<a href="/./task-scheduler">task scheduler</a><br />
+<a href="/./random-pick-with-weight">random pick with weight</a><br />
+<a href="/./longest-substrinct-with-at-most-k-distinct-characters">longest substrinct with at most k distinct characters</a><br />
+<a href="/./exclusive-time-of-functions">exclusive time of functions</a><br />
+<a href="/./intersection-of-two-arrays">intersection of two arrays</a></p>
+<p><a href="/./accounts-merge-wip">accounts merge wip</a><br />
+<a href="/./range-sum-of-bst">range sum of bst</a><br />
+<a href="/./continuous-subarray-sum">continuous subarray sum</a><br />
+<a href="/./closest-binary-search-tree-value">closest binary search tree value</a><br />
+<a href="/./maximum-swap">maximum swap</a><br />
+<a href="/./k-closest-points-to-origin">k closest points to origin</a><br />
+<a href="/./is-graph-bipartitie">is graph bipartitie</a><br />
+<a href="/./random-pick-index">random pick index</a><br />
+<a href="/./maximum-sum-of-3-non-overlapping-subarrays">maximum sum of 3 non overlapping subarrays</a><br />
+<a href="/./maximum-difference-between-node-and-ancestor">maximum difference between node and ancestor</a><br />
+<a href="/./binary-tree-vertical-order-traversal">binary tree vertical order traversal</a><br />
+<a href="/./online-stock-span">online stock span</a><br />
+<a href="/./maximum-size-subarray-sum-equals-k">maximum size subarray sum equals k</a><br />
+<a href="/./longest-palindrome">longest palindrome</a><br />
+<a href="/./zigzag-conversion">zigzag conversion</a><br />
+<a href="/./regular-expression-matching">regular expression matching</a><br />
+<a href="/./multiply-strings">multiply strings</a><br />
+<a href="/./mincost-tickets">mincost tickets</a><br />
+<a href="/./permuting-a-string">permuting a string</a><br />
+<a href="/./binary-search-tree-iterator">binary search tree iterator</a><br />
+<a href="/./pow-x-n">pow x n</a><br />
+<a href="/./find-connected-components">find connected components</a><br />
+<a href="/./num-encodings">num encodings</a><br />
+<a href="/./subsets">subsets</a><br />
+<a href="/./subsets-II">subsets II</a><br />
+<a href="/./the-skyline-problem">the skyline problem</a><br />
+<a href="/./split-array-with-equal-sums">split array with equal sums</a><br />
+<a href="/./exclusive-time-of-functions">exclusive time of functions</a><br />
+<a href="/./basic-calculator-II">basic calculator II</a><br />
+<a href="/./maximum-sum-of-3-non-overlapping-subarrays">maximum sum of 3 non overlapping subarrays</a><br />
+<a href="/./design-add-and-search-words-data-structure">design add and search words data structure</a><br />
+<a href="/./matrix-diagonal-sum">matrix diagonal sum</a><br />
+<a href="/./path-sum-iii">path sum iii</a><br />
+<a href="/./power-of-two">power of two</a><br />
+<a href="/./meeting-rooms-ii">meeting rooms ii</a><br />
+<a href="/./lru-cache">lru cache</a><br />
+<a href="/./inorder-successor-in-bst">inorder successor in bst</a><br />
+<a href="/./largest-time-for-given-digits">largest time for given digits</a><br />
+<a href="/./range-sum-query-mutable">range sum query mutable</a><br />
+<a href="/./intersection-of-three-sorted-arrays">intersection of three sorted arrays</a><br />
+<a href="/./next-greater-element-i">next greater element i</a></p>
+<h1 id="pythonic-tricks">pythonic tricks</h1>
+<p><a href="/./string-formatting">string formatting</a><br />
+<a href="/./enumerate">enumerate</a><br />
+<a href="/./reversing-a-subarray">reversing a subarray</a><br />
+<a href="/./shifted-zip">shifted zip</a><br />
+<a href="/./return-a-list-with-0-or-1-items">return a list with 0 or 1 items</a><br />
+<a href="/./slicing-to-prevent-list-index-out-of-range">slicing to prevent list index out of range</a><br />
+<a href="/./array-min">array min</a><br />
+<a href="/./max-array">max array</a><br />
+<a href="/./max-array-from-right">max array from right</a><br />
+<a href="/./matrix-transpose">matrix transpose</a><br />
+<a href="/./matrix-clockwise-rotation">matrix clockwise rotation</a><br />
+<a href="/./matrix-anticlockwise-rotation">matrix anticlockwise rotation</a><br />
+<a href="/./itertools.product">itertools.product</a><br />
+<a href="/./single-bidirectional-pass">single bidirectional pass</a><br />
+<a href="/./string-contains-all-chars-unordered">string contains all chars unordered</a><br />
+<a href="/./string-contains-all-chars-ordered">string contains all chars ordered</a><br />
+<a href="/./using-xor-for-signedness">using xor for signedness</a><br />
+<a href="/./find-missing-number-in-array">find missing number in array</a><br />
+<a href="/./int-to-base">int to base</a><br />
+<a href="/./depth-first-search">depth first search</a><br />
+<a href="/./bfs">bfs</a><br />
+<a href="/./dp-array-sum">dp array sum</a><br />
+<a href="https://dev.to/shyal">enum</a><br />
+<a href="https://shyaldc.wordpress.com/">Huffman Encoding</a><br />
+<a href="https://shyaldc.blogspot.com/2020/11/splitting-list-into-two-distinct.html">Splitting a list into to distinct lists</a></p>
+<h2 id="advanced-python">Advanced Python</h2>
+<p><a href="/./python-array-module">python array module</a></p>
+<h2 id="trees">Trees</h2>
+<p><a href="/./minimum-cost-spanning-tree">minimum cost spanning tree</a><br />
+<a href="/./multistage-graph">multistage graph</a></p>
+<h1 id="pramp-algorithms">pramp algorithms</h1>
+<p><a href="/./budget-cuts">budget cuts</a><br />
+<a href="/./flatten-a-dictionary">flatten a dictionary</a><br />
+<a href="/./find-first-occurrence-of-k-in-array">find first occurrence of k in array</a><br />
+<a href="/./substring-search">substring search</a><br />
+<a href="/./move-zeroes-to-end">move zeroes to end</a><br />
+<a href="/./toeplitz-matrix">toeplitz matrix</a><br />
+<a href="/./spiral-order-matrix">spiral order matrix</a><br />
+<a href="/./number-of-islands">number of islands</a><br />
+<a href="/./product-of-array-except-self">product of array except self</a><br />
+<a href="/./pancake-sort">pancake sort</a><br />
+<a href="/./draw-h-tree">draw h tree</a><br />
+<a href="/./decoding-a-string">decoding a string</a><br />
+<a href="/./getting-a-different-number">getting a different number</a><br />
+<a href="/./shifted-array-search">shifted array search</a><br />
+<a href="/./busiest-time-at-the-mall">busiest time at the mall</a><br />
+<a href="/./bracket-match">bracket match</a><br />
+<a href="/./minimum-deletion">minimum deletion</a><br />
+<a href="/./diff-between-two-strings">diff between two strings</a><br />
+<a href="/./word-count-engine">word count engine</a></p>
+<p>TBD:</p>
+<p><a href="/./largest-smaller-BST-key">largest smaller BST key</a></p>
+<h1 id="epip">EPIP</h1>
+<p><a href="/./rotate-a-2d-array">rotate a 2d array</a><br />
+<a href="/./binary-tree-level-order-traversal">binary tree level order traversal</a><br />
+<a href="/./search-first-key">search first key</a><br />
+<a href="/./remove-duplicates">remove duplicates</a><br />
+<a href="/./levenshtein-distance">levenshtein distance</a><br />
+<a href="/./2d-matrix-ways">2d matrix ways</a><br />
+<a href="/./binomial-coefficients">binomial coefficients</a></p>
+<h1 id="time-complexity-analysis_1">time complexity analysis</h1>
+<p><a href="/./n">n</a><br />
+<a href="/./quadratic">quadratic</a><br />
+<a href="/./n(n+1)-over-2">n(n+1) over 2</a><br />
+<a href="/./sqrt(n)">sqrt(n)</a><br />
+<a href="/./recurrence-relation-for-a-simple-decreasing-function">recurrence relation for a simple decreasing function</a><br />
+<a href="/./recurrence-relation-with-for-loop">recurrence relation with for loop</a><br />
+<a href="/./big-oh-definition">big oh definition</a><br />
+<a href="/./theta-definition">theta definition</a><br />
+<a href="/./big-omega-definition">big omega definition</a></p>
+    </main>
+    
+    <footer>
+      <!-- All content rights reserved Shyal Beardsley 2020. -->
+    </footer>
+    
+  </body>
+
+  
+  <script>
+    var i = 0;
+    $("img").each(function () {
+      imgsrc = this.src;
+
+      if (imgsrc.includes(".mp4")) {
+        $(this).replaceWith(
+          $(
+            "<video width='640' height='480' controls> <source src='" +
+              imgsrc +
+              "' type='video/mp4'></video>"
+          )
+        );
+      } else {
+        $(this).wrap(
+          '<a href="' +
+            this.src +
+            '" data-lightbox="image-' +
+            i +
+            '" data-title=""></a>'
+        );
+      }
+      i += 1;
+    });
+  </script>
+
+  <script src="/static/lightbox.js"></script>
+  <script>
+    lightbox.option({
+      resizeDuration: 200,
+      wrapAround: true,
+      fitImagesInViewport: true,
+    });
+  </script>
+
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=UA-78427660-1"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "UA-78427660-1");
+  </script>
+  
+</html>

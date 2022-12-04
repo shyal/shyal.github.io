@@ -43,9 +43,9 @@
     <title>add two numbers - Shyal Beardsley</title>
     <style>
       pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: #ffffcc }
 .highlight { background: #ffffff; }
@@ -255,11 +255,11 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <h2 id="solution">Solution</h2>
 <p>The nave solution is to convert the linked lists to integers, add them, and convert the result back to a linked list. This approach however is three times slower than doing it in one pass.</p>
 <p>Since the number is reversed, we can do elementary school addition, by adding both numbers, and passing the <code>1</code> (if there is one) to the next set of numbers to be added.</p>
-<video src="https://static.ioloop.io/AddTwoNumbers1.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/AddTwoNumbers1.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>Please note the lists do not need to be of the same length. As such, it's important for the algorithm to properly handle reaching the end of one list early.</p>
-<video src="https://static.ioloop.io/AddTwoNumbers2.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/AddTwoNumbers2.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
@@ -279,7 +279,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class="linenos">15</span>    <span class="k">return</span> <span class="n">dummy_head</span><span class="o">.</span><span class="n">next</span>
 </pre></div>
 
-<video src="https://static.ioloop.io/AddTwoNumbers3.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/AddTwoNumbers3.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>This may be the first time you come across the use of a <code>dummy_head</code>; those are very useful, as they prevent us from treating the start of our list as a special case. It also means we return <code>dummy_head.next</code>.</p>

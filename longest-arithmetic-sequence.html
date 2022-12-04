@@ -43,9 +43,9 @@
     <title>longest arithmetic sequence - Shyal Beardsley</title>
     <style>
       pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: #ffffcc }
 .highlight { background: #ffffff; }
@@ -245,7 +245,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <p>Given a sequence of integers, find the longest non-contiguous ordered subsequence that forms an arithmetic sequence.</p>
 </blockquote>
 </blockquote>
-<video src="https://static.ioloop.io/LongestArithmeticSequenceProblemStatement.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/LongestArithmeticSequenceProblemStatement.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>As you can see above, the aim is to find monotonically increasing or decreasing ordered, sequences, e.g:</p>
@@ -256,12 +256,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 
 <p>The ultimate goal is to find the length of the longest one, <code>6</code> in this case.</p>
 <p>To solve this, we'll use dynamic programming, where we both read and write partial results in and out of a table. We'll scan the array with a double for loop as so:</p>
-<video src="https://static.ioloop.io/LongestArithmeticSequenceIteration.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/LongestArithmeticSequenceIteration.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>Our DP table is a 2D matrix. The <code>row</code> represents the <code>delta</code> between <code>i</code> and <code>j</code>, while the columns represent the values for <code>i</code> and <code>j</code>. In other words, the cells represent the values for <code>i</code> and <code>j</code> at their given <code>i - j</code> delta.</p>
 <p>It's interesting that, once again, a DP solution requires populating a data-structure where the dimensions are somewhat intangible. It's difficult to grasp that the depth dimension of the Matrix is the <code>delta</code> between two numbers.</p>
-<video src="https://static.ioloop.io/LongestArithmeticSequenceFirst.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+<video src="https://manim.s3.us-east-2.amazonaws.com/LongestArithmeticSequenceFirst.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
 </video>
 
 <p>Please note that the <code>1</code>s are not actually getting written into the Matrix, but are displayed for clarity. </p>
