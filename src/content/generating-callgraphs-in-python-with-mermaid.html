@@ -1,0 +1,33 @@
+<p>Generating callsgraphs is very handy, to actually <em>see</em> what your recursion tree is doing. Rather than having to use fancy tools, you can do so with a couple of print statements, like so:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">3</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">[func </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">] --&gt;|print| </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">p[</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+<span class="linenos">4</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">[func </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">] --&gt;|call| </span><span class="si">{</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s2">[func </span><span class="si">{</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+<span class="linenos">5</span>    <span class="n">func</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">6</span>
+<span class="linenos">7</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graph TD&#39;</span><span class="p">)</span>
+<span class="linenos">8</span><span class="n">func</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+<p>Which outputs the following:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">graph</span> <span class="n">TD</span>
+<span class="linenos">2</span><span class="mi">3</span><span class="p">[</span><span class="n">func</span> <span class="mi">3</span><span class="p">]</span> <span class="o">--&gt;|</span><span class="nb">print</span><span class="o">|</span> <span class="mi">3</span><span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="linenos">3</span><span class="mi">3</span><span class="p">[</span><span class="n">func</span> <span class="mi">3</span><span class="p">]</span> <span class="o">--&gt;|</span><span class="n">call</span><span class="o">|</span> <span class="mi">2</span><span class="p">[</span><span class="n">func</span> <span class="mi">2</span><span class="p">]</span>
+<span class="linenos">4</span><span class="mi">2</span><span class="p">[</span><span class="n">func</span> <span class="mi">2</span><span class="p">]</span> <span class="o">--&gt;|</span><span class="nb">print</span><span class="o">|</span> <span class="mi">2</span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="linenos">5</span><span class="mi">2</span><span class="p">[</span><span class="n">func</span> <span class="mi">2</span><span class="p">]</span> <span class="o">--&gt;|</span><span class="n">call</span><span class="o">|</span> <span class="mi">1</span><span class="p">[</span><span class="n">func</span> <span class="mi">1</span><span class="p">]</span>
+<span class="linenos">6</span><span class="mi">1</span><span class="p">[</span><span class="n">func</span> <span class="mi">1</span><span class="p">]</span> <span class="o">--&gt;|</span><span class="nb">print</span><span class="o">|</span> <span class="mi">1</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">7</span><span class="mi">1</span><span class="p">[</span><span class="n">func</span> <span class="mi">1</span><span class="p">]</span> <span class="o">--&gt;|</span><span class="n">call</span><span class="o">|</span> <span class="mi">0</span><span class="p">[</span><span class="n">func</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+<p>at which point the markdown mermaid extension to render it in the browser:</p>
+<div class="mermaid">
+graph TD
+3[func 3] -->|print| 3p[3]
+3[func 3] -->|call| 2[func 2]
+2[func 2] -->|print| 2p[2]
+2[func 2] -->|call| 1[func 1]
+1[func 1] -->|print| 1p[1]
+1[func 1] -->|call| 0[func 0]
+</div>
+
+<p>Or you can paste it into the <a href="https://mermaid-js.github.io/mermaid-live-editor/">live mermaid editor</a>.</p>

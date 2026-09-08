@@ -1,0 +1,82 @@
+<p>Let's explore how to express a recurrence relation for a simple decreasing function and evaluate it using the substitution method. We'll analyse this piece of code:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">3</span>      <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="linenos">4</span>      <span class="n">test</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+<p>This is the function's call graph:</p>
+<div class="mermaid">
+graph TD
+3[func 3] -->|print| 3p[3]
+3[func 3] -->|call| 2[func 2]
+2[func 2] -->|print| 2p[2]
+2[func 2] -->|call| 1[func 1]
+1[func 1] -->|print| 1p[1]
+1[func 1] -->|call| 0[func 0]
+</div>
+
+<p>Notice <code>func</code> gets called <code>n+1</code> times. <code>print</code> gets called <code>n</code> times. So the total number of pieces of <code>work</code> being done is <code>2n+1</code>, or in big oh notation <code>O(n)</code>.</p>
+<p>Let's find our recurrence relation:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">3</span>      <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>     <span class="c1"># unit of time: 1 </span>
+<span class="linenos">4</span>      <span class="n">test</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>    <span class="c1"># unit of time: T(n-1)</span>
+</pre></div>
+
+<p>So total time: <script type="math/tex; mode=display">T(n) = T(n-1) + 1</script>
+</p>
+<p>You may be wondering why we didn't include the <code>if n &gt; 0</code> and we could. But the recurrence relation would still be: <code>T(n) = T(n-1) + 1</code>, because our constant work simply gets counted as the <code>1</code>. We could also use <code>a</code> or <code>c</code>.</p>
+<p>Let's rewrite our recurrence relation as a piecewise function:</p>
+<p>
+<script type="math/tex; mode=display">T(n) = \left\{
+        \begin{array}{ll}
+            1 & \quad n = 0 \\
+            T(n-1)+1 & \quad n > 0
+        \end{array}
+    \right.</script>
+</p>
+<p>So we know what <code>T(n)</code> is, it is  <code>T(n) = T(n-1) + 1</code>. But what is <code>T(n-1)</code>? We need to solve it by substitution.</p>
+<p>since: <script type="math/tex; mode=display">T(n) = T(n-1) + 1</script>
+<br />
+therefore: <script type="math/tex; mode=display">T(n-1) = T(n-2) + 1</script>
+<br />
+therefore: <script type="math/tex; mode=display">T(n-2) = T(n-3) + 1</script>
+</p>
+<p>Now we can substitute back into our original equation:</p>
+<p>
+<script type="math/tex; mode=display">T(n) = \left[ T(n-1) \right] + 1</script>
+<br />
+<script type="math/tex; mode=display">T(n) = \left[ T(n-2) + 1 \right] + 1</script>
+<br />
+<script type="math/tex; mode=display">T(n) = T(n-2) + 2</script>
+</p>
+<p>As well as:<br />
+<script type="math/tex; mode=display">T(n) = \left[ T(n-3) + 1 \right] + 2</script>
+<br />
+<script type="math/tex; mode=display">T(n) = T(n-3) + 3</script>
+</p>
+<p>At this point, this proof is tugging at the leash for its general form of:</p>
+<p>
+<script type="math/tex; mode=display">T(n) = T(n-k) + k</script>
+</p>
+<p>Now let's assume that: <script type="math/tex; mode=display">n - k = 0</script>  which also implies that <script type="math/tex; mode=display">n = k</script>, therefore <script type="math/tex; mode=display">T(n) = T(k-k) + n</script> meaning that <script type="math/tex; mode=display">T(n) = T(0) + n</script>, and if you remember from our piecewise function </p>
+<p>
+<script type="math/tex; mode=display">T(n) = \left\{
+        \begin{array}{ll}
+            1 & \quad n = 0 \\
+            T(n-1)+1 & \quad n > 0
+        \end{array}
+    \right.</script>
+</p>
+<p>when <code>n = 0</code> we get a <code>1</code>, thus</p>
+<p>
+<script type="math/tex; mode=display">T(n) = 1 + n</script>
+</p>
+<p>or</p>
+<p>
+<script type="math/tex; mode=display">T(n) = n + 1</script>
+</p>
+<p>See also:</p>
+<p><a href="/generating-callgraphs-in-python-with-mermaid">generating callgraphs in python with mermaid</a><br />
+<a href="/recurrence-relation-with-for-loop">recurrence relation with for loop</a></p>

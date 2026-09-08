@@ -1,0 +1,120 @@
+<p>https://www.pramp.com/challenge/pK6A4GA5YES09qKmqG33</p>
+<p>I successfully managed this problem. The interviewer was relentless in trying to make me optimise my code, which he succeeded in doing. </p>
+<div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1">##########################################################</span>
+<span class="linenos">  2</span><span class="c1"># CODE INSTRUCTIONS:                                     #</span>
+<span class="linenos">  3</span><span class="c1"># 1) The method findLargestSmallerKey you&#39;re asked       #</span>
+<span class="linenos">  4</span><span class="c1">#    to implement is located at line 30.                 #</span>
+<span class="linenos">  5</span><span class="c1"># 2) Use the helper code below to implement it.          #</span>
+<span class="linenos">  6</span><span class="c1"># 3) In a nutshell, the helper code allows you to        #</span>
+<span class="linenos">  7</span><span class="c1">#    to build a Binary Search Tree.                      #</span>
+<span class="linenos">  8</span><span class="c1"># 4) Jump to line 71 to see an example for how the       #</span>
+<span class="linenos">  9</span><span class="c1">#    helper code is used to test findLargestSmallerKey.  #</span>
+<span class="linenos"> 10</span><span class="c1">##########################################################</span>
+<span class="linenos"> 11</span>
+<span class="linenos"> 12</span><span class="c1"># do an in-order traversal</span>
+<span class="linenos"> 13</span><span class="c1"># if the current value is greater than num</span>
+<span class="linenos"> 14</span><span class="c1"># the previous key was the greatest smaller value</span>
+<span class="linenos"> 15</span>
+<span class="linenos"> 16</span>
+<span class="linenos"> 17</span><span class="c1"># A node </span>
+<span class="linenos"> 18</span><span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
+<span class="linenos"> 19</span>
+<span class="linenos"> 20</span><span class="c1"># Constructor to create a new node</span>
+<span class="linenos"> 21</span>  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+<span class="linenos"> 22</span>      <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+<span class="linenos"> 23</span>      <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="kc">None</span> 
+<span class="linenos"> 24</span>      <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 25</span>      <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 26</span>
+<span class="linenos"> 27</span><span class="c1"># A binary search tree </span>
+<span class="linenos"> 28</span><span class="k">class</span> <span class="nc">BinarySearchTree</span><span class="p">:</span>
+<span class="linenos"> 29</span>
+<span class="linenos"> 30</span>  <span class="c1"># Constructor to create a new BST</span>
+<span class="linenos"> 31</span>  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos"> 32</span>      <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 33</span>
+<span class="linenos"> 34</span>  <span class="k">def</span> <span class="nf">find_largest_smaller_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
+<span class="linenos"> 35</span>    
+<span class="linenos"> 36</span>    <span class="k">def</span> <span class="nf">in_order</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+<span class="linenos"> 37</span>      <span class="k">if</span> <span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">n_inf</span><span class="p">:</span>
+<span class="linenos"> 38</span>        <span class="k">return</span>
+<span class="linenos"> 39</span>      
+<span class="linenos"> 40</span>      <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span> <span class="ow">and</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+<span class="linenos"> 41</span>        <span class="n">in_order</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+<span class="linenos"> 42</span>      
+<span class="linenos"> 43</span>      <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">key</span> <span class="o">&gt;=</span> <span class="n">num</span> <span class="ow">and</span> <span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">n_inf</span><span class="p">:</span>
+<span class="linenos"> 44</span>        <span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos"> 45</span>        <span class="k">return</span>
+<span class="linenos"> 46</span>
+<span class="linenos"> 47</span>      <span class="n">prev_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">key</span>
+<span class="linenos"> 48</span>      
+<span class="linenos"> 49</span>      <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span> <span class="ow">and</span> <span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">n_inf</span><span class="p">:</span>
+<span class="linenos"> 50</span>        <span class="n">in_order</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+<span class="linenos"> 51</span>        
+<span class="linenos"> 52</span>
+<span class="linenos"> 53</span>    <span class="n">n_inf</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">)</span>
+<span class="linenos"> 54</span>    <span class="n">prev_value</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos"> 55</span>    <span class="n">solution</span> <span class="o">=</span> <span class="p">[</span><span class="n">n_inf</span><span class="p">]</span>
+<span class="linenos"> 56</span>    <span class="n">vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">n_inf</span><span class="p">,</span> <span class="n">n_inf</span><span class="p">,</span> <span class="n">n_inf</span><span class="p">]</span>
+<span class="linenos"> 57</span>    <span class="n">in_order</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+<span class="linenos"> 58</span>    <span class="k">if</span> <span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">n_inf</span><span class="p">:</span>
+<span class="linenos"> 59</span>      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+<span class="linenos"> 60</span>    <span class="k">return</span> <span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos"> 61</span>        
+<span class="linenos"> 62</span>  <span class="c1"># Given a binary search tree and a number, inserts a</span>
+<span class="linenos"> 63</span>  <span class="c1"># new node with the given number in the correct place</span>
+<span class="linenos"> 64</span>  <span class="c1"># in the tree. Returns the new root pointer which the</span>
+<span class="linenos"> 65</span>  <span class="c1"># caller should then use(the standard trick to avoid</span>
+<span class="linenos"> 66</span>  <span class="c1"># using reference parameters)</span>
+<span class="linenos"> 67</span>  <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+<span class="linenos"> 68</span>
+<span class="linenos"> 69</span>      <span class="c1"># 1) If tree is empty, create the root</span>
+<span class="linenos"> 70</span>      <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+<span class="linenos"> 71</span>          <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="linenos"> 72</span>          <span class="k">return</span>
+<span class="linenos"> 73</span>
+<span class="linenos"> 74</span>      <span class="c1"># 2) Otherwise, create a node with the key</span>
+<span class="linenos"> 75</span>      <span class="c1">#    and traverse down the tree to find where to</span>
+<span class="linenos"> 76</span>      <span class="c1">#    to insert the new node</span>
+<span class="linenos"> 77</span>      <span class="n">currentNode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span>
+<span class="linenos"> 78</span>      <span class="n">newNode</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="linenos"> 79</span>
+<span class="linenos"> 80</span>      <span class="k">while</span><span class="p">(</span><span class="n">currentNode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+<span class="linenos"> 81</span>        <span class="k">if</span><span class="p">(</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">key</span><span class="p">):</span>
+<span class="linenos"> 82</span>          <span class="k">if</span><span class="p">(</span><span class="n">currentNode</span><span class="o">.</span><span class="n">left</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+<span class="linenos"> 83</span>            <span class="n">currentNode</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">newNode</span>
+<span class="linenos"> 84</span>            <span class="n">newNode</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">currentNode</span>
+<span class="linenos"> 85</span>            <span class="k">break</span>
+<span class="linenos"> 86</span>          <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 87</span>            <span class="n">currentNode</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">left</span>
+<span class="linenos"> 88</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 89</span>          <span class="k">if</span><span class="p">(</span><span class="n">currentNode</span><span class="o">.</span><span class="n">right</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+<span class="linenos"> 90</span>            <span class="n">currentNode</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">newNode</span>
+<span class="linenos"> 91</span>            <span class="n">newNode</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">currentNode</span>
+<span class="linenos"> 92</span>            <span class="k">break</span>
+<span class="linenos"> 93</span>          <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 94</span>            <span class="n">currentNode</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">right</span>
+<span class="linenos"> 95</span>
+<span class="linenos"> 96</span><span class="c1">######################################### </span>
+<span class="linenos"> 97</span><span class="c1"># Driver program to test above function #</span>
+<span class="linenos"> 98</span><span class="c1">#########################################</span>
+<span class="linenos"> 99</span>
+<span class="linenos">100</span><span class="n">bst</span>  <span class="o">=</span> <span class="n">BinarySearchTree</span><span class="p">()</span>
+<span class="linenos">101</span> 
+<span class="linenos">102</span><span class="c1"># Create the tree given in the above diagram </span>
+<span class="linenos">103</span><span class="n">bst</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="linenos">104</span><span class="n">bst</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">9</span><span class="p">);</span>
+<span class="linenos">105</span><span class="n">bst</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">25</span><span class="p">);</span>
+<span class="linenos">106</span><span class="n">bst</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="linenos">107</span><span class="n">bst</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span>
+<span class="linenos">108</span><span class="n">bst</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">11</span><span class="p">);</span>  
+<span class="linenos">109</span><span class="n">bst</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">14</span><span class="p">);</span>    
+<span class="linenos">110</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">25</span><span class="p">]:</span>
+<span class="linenos">111</span>  <span class="n">result</span> <span class="o">=</span> <span class="n">bst</span><span class="o">.</span><span class="n">find_largest_smaller_key</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="linenos">112</span>  <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="linenos">113</span>
+<span class="linenos">114</span><span class="c1"># Time: best -&gt; O(1) worst -&gt; O(N)</span>
+<span class="linenos">115</span><span class="c1"># Average: (n(n+1)/2/n) -&gt; O(n)</span>
+<span class="linenos">116</span><span class="c1"># Space: best -&gt; O(1) worst -&gt; O(N)</span>
+<span class="linenos">117</span><span class="c1"># Space Average: (n(n+1)/2/n) -&gt; O(n)</span>
+</pre></div>

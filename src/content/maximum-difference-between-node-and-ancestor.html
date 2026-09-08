@@ -1,0 +1,21 @@
+<p>Credit: <a href="https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/discuss/365896/easy-peasy-python-Top-Down-recursive-solution-just-pass-min-and-max-ta-da">lostworld21</a></p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="nf">maxAncestorDiff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">mn</span><span class="p">,</span> <span class="n">mx</span><span class="p">):</span>
+<span class="linenos"> 4</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">n</span><span class="p">:</span>
+<span class="linenos"> 5</span>                <span class="k">return</span> <span class="mi">0</span>
+<span class="linenos"> 6</span>            <span class="n">new_mn</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">mn</span><span class="p">)</span>
+<span class="linenos"> 7</span>            <span class="n">new_mx</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">mx</span><span class="p">)</span>
+<span class="linenos"> 8</span>            <span class="k">return</span> <span class="nb">max</span><span class="p">(</span>
+<span class="linenos"> 9</span>                <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">val</span> <span class="o">-</span> <span class="n">mn</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">val</span> <span class="o">-</span> <span class="n">mx</span><span class="p">)),</span>
+<span class="linenos">10</span>                <span class="n">dfs</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">new_mn</span><span class="p">,</span> <span class="n">new_mx</span><span class="p">),</span>
+<span class="linenos">11</span>                <span class="n">dfs</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">new_mn</span><span class="p">,</span> <span class="n">new_mx</span><span class="p">),</span>
+<span class="linenos">12</span>            <span class="p">)</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span>    <span class="k">return</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">root</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">root</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+</pre></div>
+
+<p>The mistake i made on this problem was to take a bottom up approach rather than a top down approach.</p>
+<p>The bottom up approach was too complex, as you're basically uncertain whether you have a left child, a right child, both, or neither.</p>
+<p>Making queries like <code>node.left.val</code> is totally impossible and it was a huge mistake even trying to do such a thing.</p>
+<p>In this implementation (above) the base case gracefully handles children not existing, and the top down approach leads to very clean code.</p>

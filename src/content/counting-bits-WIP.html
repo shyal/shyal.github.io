@@ -1,0 +1,8 @@
+<div class="highlight"><pre><span></span><span class="linenos">1</span>    <span class="k">def</span> <span class="nf">countBits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
+<span class="linenos">2</span>        
+<span class="linenos">3</span>        <span class="n">setBits</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">4</span>        <span class="c1"># (i &amp; (i -1)) is actually Brian Kernighans Algorithm, so always keep it handy for counting ones</span>
+<span class="linenos">5</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span> <span class="p">,</span><span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+<span class="linenos">6</span>            <span class="n">setBits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">setBits</span><span class="p">[</span><span class="n">i</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">7</span>        <span class="k">return</span> <span class="n">setBits</span>
+</pre></div>

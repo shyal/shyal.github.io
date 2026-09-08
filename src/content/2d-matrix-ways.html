@@ -1,0 +1,25 @@
+<p>Calculate the number of ways of traversing a matrix from <code>0,0</code> to <code>n,m</code> by only moving to the right or down.</p>
+<p><img alt="Pasted image 16.png" src="https://shyal.s3.us-east-2.amazonaws.com/Pasted image 16.png" /></p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">test_framework</span> <span class="kn">import</span> <span class="n">generic_test</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">lru_cache</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="k">def</span> <span class="nf">number_of_ways</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">m</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos"> 6</span>    <span class="nd">@lru_cache</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="linenos"> 7</span>    <span class="k">def</span> <span class="nf">dp</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+<span class="linenos"> 8</span>        <span class="k">if</span> <span class="n">w</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">h</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos"> 9</span>            <span class="k">return</span> <span class="mi">1</span>
+<span class="linenos">10</span>        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="n">w</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>    <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">16</span>    <span class="n">exit</span><span class="p">(</span>
+<span class="linenos">17</span>        <span class="n">generic_test</span><span class="o">.</span><span class="n">generic_test_main</span><span class="p">(</span>
+<span class="linenos">18</span>            <span class="s2">&quot;number_of_traversals_matrix.py&quot;</span><span class="p">,</span>
+<span class="linenos">19</span>            <span class="s2">&quot;number_of_traversals_matrix.tsv&quot;</span><span class="p">,</span>
+<span class="linenos">20</span>            <span class="n">number_of_ways</span><span class="p">,</span>
+<span class="linenos">21</span>        <span class="p">)</span>
+<span class="linenos">22</span>    <span class="p">)</span>
+</pre></div>

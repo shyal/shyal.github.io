@@ -1,0 +1,35 @@
+<blockquote>
+<blockquote>
+<p>Given a collection of integers that might contain duplicates, nums, return all possible subsets (the power set).<br />
+Note: The solution set must not contain duplicate subsets.</p>
+</blockquote>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">Input</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="linenos"> 2</span><span class="n">Output</span><span class="p">:</span>
+<span class="linenos"> 3</span><span class="p">[</span>
+<span class="linenos"> 4</span>  <span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+<span class="linenos"> 5</span>  <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+<span class="linenos"> 6</span>  <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
+<span class="linenos"> 7</span>  <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
+<span class="linenos"> 8</span>  <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
+<span class="linenos"> 9</span>  <span class="p">[]</span>
+<span class="linenos">10</span><span class="p">]</span>
+</pre></div>
+
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">subsetsWithDup</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="n">nums</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="linenos">3</span>  <span class="n">res</span> <span class="o">=</span> <span class="p">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">nums</span><span class="p">)}</span>
+<span class="linenos">4</span>  <span class="n">subs</span> <span class="o">=</span> <span class="p">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">nums</span><span class="p">)}</span>
+<span class="linenos">5</span>  <span class="k">while</span> <span class="n">subs</span><span class="p">:</span>
+<span class="linenos">6</span>      <span class="n">subs</span> <span class="o">=</span> <span class="p">{</span><span class="n">sub</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">sub</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">subs</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sub</span><span class="p">))}</span>
+<span class="linenos">7</span>      <span class="n">res</span> <span class="o">|=</span> <span class="n">subs</span>
+<span class="linenos">8</span>  <span class="k">return</span> <span class="n">res</span>
+</pre></div>
+
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">subsetsWithDup</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="n">res</span> <span class="o">=</span> <span class="p">[[]]</span>
+<span class="linenos">3</span>  <span class="n">nums</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="linenos">4</span>  <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span> 
+<span class="linenos">5</span>      <span class="n">res</span> <span class="o">+=</span> <span class="p">[</span> <span class="n">i</span> <span class="o">+</span> <span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">res</span> <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">res</span><span class="p">]</span>
+<span class="linenos">6</span>  <span class="k">return</span> <span class="n">res</span>
+</pre></div>

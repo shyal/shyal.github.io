@@ -1,0 +1,41 @@
+<blockquote>
+<blockquote>
+<p>Given a sequence of integers, find the longest non-contiguous ordered subsequence that forms an arithmetic sequence.</p>
+</blockquote>
+</blockquote>
+<video src="https://manim.s3.us-east-2.amazonaws.com/LongestArithmeticSequenceProblemStatement.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>As you can see above, the aim is to find monotonically increasing or decreasing ordered, sequences, e.g:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="linenos">2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="linenos">3</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+</pre></div>
+
+<p>The ultimate goal is to find the length of the longest one, <code>6</code> in this case.</p>
+<p>To solve this, we'll use dynamic programming, where we both read and write partial results in and out of a table. We'll scan the array with a double for loop as so:</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/LongestArithmeticSequenceIteration.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>Our DP table is a 2D matrix. The <code>row</code> represents the <code>delta</code> between <code>i</code> and <code>j</code>, while the columns represent the values for <code>i</code> and <code>j</code>. In other words, the cells represent the values for <code>i</code> and <code>j</code> at their given <code>i - j</code> delta.</p>
+<p>It's interesting that, once again, a DP solution requires populating a data-structure where the dimensions are somewhat intangible. It's difficult to grasp that the depth dimension of the Matrix is the <code>delta</code> between two numbers.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/LongestArithmeticSequenceFirst.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>Please note that the <code>1</code>s are not actually getting written into the Matrix, but are displayed for clarity. </p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<span class="linenos">2</span>    <span class="k">def</span> <span class="nf">longestArithSeqLength</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
+<span class="linenos">3</span>        <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos">4</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+<span class="linenos">5</span>            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+<span class="linenos">6</span>                <span class="n">delta</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+<span class="linenos">7</span>                <span class="n">d</span><span class="p">[(</span><span class="n">delta</span><span class="p">,</span> <span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">delta</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">8</span>        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</pre></div>
+
+<p>Please also note that, for simplicity, we do not need to write into a 2D matrix, and instead we can simply use a dictionary with the <code>(delta, i)</code> tuple as index lookup.</p>
+<h2 id="time-and-space-complexity">Time and Space Complexity</h2>
+<p>
+<script type="math/tex; mode=display">time = O(n^2)</script>
+<script type="math/tex; mode=display">space = O(n^2)</script>
+</p>

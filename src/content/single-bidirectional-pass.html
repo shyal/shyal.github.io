@@ -1,0 +1,93 @@
+<p>The "single bidirectional pass" is an algorithmic pattern that can be seen from time to time in super-duper optimized algos.</p>
+<p>Let's say you want to sum the elements of a list, from left to right. This is a very straightforward task:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="linenos">2</span><span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">3</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+<span class="linenos">4</span>  <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">5</span>  <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="linenos">6</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+
+<p>Output:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="mi">1</span> <span class="mi">3</span> <span class="mi">6</span> <span class="mi">10</span>
+</pre></div>
+
+<p>Please note this is equivalent to:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">accumulate</span>
+<span class="linenos">2</span><span class="p">[</span><span class="o">*</span><span class="n">accumulate</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])]</span>
+</pre></div>
+
+<p>Now let's say you want to do the same thing, but:</p>
+<ul>
+<li>you now need to sum the values from the <strong>right to the left</strong> of the list</li>
+<li>you also want to add these two sums (from the left, and from the right) and store the result in a new list</li>
+<li>you want to do this in one pass, without using additional space (the resulting list non-withstanding)</li>
+</ul>
+<p>The sum from the right is easy to conceptualise:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="linenos">2</span><span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">3</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+<span class="linenos">4</span>  <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="o">~</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">5</span>  <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="linenos">6</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+
+<p>Output:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span>
+</pre></div>
+
+<p>Please note this is equivalent to:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">accumulate</span>
+<span class="linenos">2</span><span class="p">[</span><span class="o">*</span><span class="n">accumulate</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">])]</span>
+</pre></div>
+
+<p>The issue is that, we want to add values from the opposite ends of each list:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="mi">3</span> <span class="mi">6</span> <span class="mi">10</span>       <span class="mi">1</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="mi">6</span> <span class="mi">10</span>       <span class="mi">1</span> <span class="mi">3</span> <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="mi">10</span>       <span class="mi">1</span> <span class="mi">3</span> <span class="mi">6</span>  <span class="p">[</span><span class="mi">10</span><span class="p">]</span>       
+<span class="linenos">2</span><span class="mi">4</span>   <span class="mi">7</span> <span class="mi">9</span> <span class="p">[</span><span class="mi">10</span><span class="p">]</span>     <span class="mi">4</span> <span class="mi">7</span> <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="mi">10</span>       <span class="mi">4</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="mi">9</span> <span class="mi">10</span>       <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="mi">7</span> <span class="mi">9</span> <span class="mi">10</span>     
+<span class="linenos">3</span> <span class="o">+</span>                 <span class="o">+</span>                <span class="o">+</span>              <span class="o">+</span>
+<span class="linenos">4</span><span class="o">=</span><span class="mi">11</span>               <span class="o">=</span><span class="mi">12</span>              <span class="o">=</span><span class="mi">13</span>             <span class="mi">14</span>
+</pre></div>
+
+<p>Q: The first addition consists of 1 being added to 10. But <strong>how can you access that 10, since it only gets computed at the end of the loop?</strong></p>
+<p>You may be tempted to pre-compute the RTL sum and store the result into a list for later use.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">accumulate</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="linenos"> 4</span><span class="n">rtl_sum</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">accumulate</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">])][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos"> 5</span><span class="n">ltr_sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 6</span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+<span class="linenos"> 9</span> <span class="n">ltr_sum</span> <span class="o">=</span> <span class="n">ltr_sum</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">10</span> <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ltr_sum</span> <span class="o">+</span> <span class="n">rtl_sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">11</span> 
+<span class="linenos">12</span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+
+<p>Output:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">]</span>
+</pre></div>
+
+<p>Although the result would be correct, you'd be using additional space unnecessarily, not to mention inverting the data twice with slicing is ugly and confusing.</p>
+<p>A: The trick is to stop thinking from left to right only! That's when the single bidirectional pass comes into play: add the LTR sum <em>so far</em> and also the RTL sum <em>so far</em> by using the array index complement <code>~</code>. By the time the single pass has finished, our resulting array contains the sums of the LTR and RTL computations.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">two_way_swipe</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<span class="linenos"> 2</span> <span class="n">l_s</span><span class="p">,</span> <span class="n">r_s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="linenos"> 3</span> <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="linenos"> 4</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+<span class="linenos"> 5</span>     <span class="n">l_s</span> <span class="o">=</span> <span class="n">l_s</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos"> 6</span>     <span class="n">r_s</span> <span class="o">=</span> <span class="n">r_s</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="o">~</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos"> 7</span>     <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">l_s</span>
+<span class="linenos"> 8</span>     <span class="n">res</span><span class="p">[</span><span class="o">~</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">r_s</span>
+<span class="linenos"> 9</span> <span class="k">return</span> <span class="n">res</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="nb">print</span><span class="p">(</span><span class="n">two_way_swipe</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]))</span>
+</pre></div>
+
+<p>Output:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">]</span>
+</pre></div>
+
+<p>See also:</p>
+<p>[[list index complement]]<br />
+<a href="/product-of-array-except-self">product of array except self</a><br />
+[[trapping rain water]]</p>

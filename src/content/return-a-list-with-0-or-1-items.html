@@ -1,0 +1,44 @@
+<p>Pre-requisites:</p>
+<p><a href="/slicing-to-prevent-list-index-out-of-range">slicing to prevent list index out of range</a></p>
+<p>Returning a list with 1 item may not seem like the most useful thing in the world. But it can actually simplify your logic a lot, especially when the caller is also working with lists.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="n">uid</span><span class="p">):</span>
+<span class="linenos"> 2</span>    <span class="n">names</span> <span class="o">=</span> <span class="s1">&#39;john mike mo&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="linenos"> 3</span>    <span class="k">return</span> <span class="n">names</span><span class="p">[</span><span class="n">uid</span><span class="p">:</span><span class="n">uid</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="k">def</span> <span class="nf">get_act</span><span class="p">(</span><span class="n">act</span><span class="p">):</span>
+<span class="linenos"> 6</span>    <span class="n">activities</span> <span class="o">=</span> <span class="s1">&#39;game chat&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="linenos"> 7</span>    <span class="k">return</span> <span class="n">activities</span><span class="p">[</span><span class="n">act</span><span class="p">:</span><span class="n">act</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<span class="linenos">10</span>    <span class="n">s</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">get_name</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;joined&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">get_act</span><span class="p">(</span><span class="n">i</span><span class="o">//</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;session&#39;</span><span class="p">]</span>
+<span class="linenos">11</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+</pre></div>
+
+<p>Output:</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">user</span> <span class="n">john</span> <span class="n">joined</span> <span class="n">game</span> <span class="n">session</span>
+<span class="linenos"> 2</span><span class="n">user</span> <span class="n">mike</span> <span class="n">joined</span> <span class="n">game</span> <span class="n">session</span>
+<span class="linenos"> 3</span><span class="n">user</span> <span class="n">mo</span> <span class="n">joined</span> <span class="n">game</span> <span class="n">session</span>
+<span class="linenos"> 4</span><span class="n">user</span> <span class="n">joined</span> <span class="n">chat</span> <span class="n">session</span>
+<span class="linenos"> 5</span><span class="n">user</span> <span class="n">joined</span> <span class="n">chat</span> <span class="n">session</span>
+<span class="linenos"> 6</span><span class="n">user</span> <span class="n">joined</span> <span class="n">chat</span> <span class="n">session</span>
+<span class="linenos"> 7</span><span class="n">user</span> <span class="n">joined</span> <span class="n">session</span>
+<span class="linenos"> 8</span><span class="n">user</span> <span class="n">joined</span> <span class="n">session</span>
+<span class="linenos"> 9</span><span class="n">user</span> <span class="n">joined</span> <span class="n">session</span>
+<span class="linenos">10</span><span class="n">user</span> <span class="n">joined</span> <span class="n">session</span>
+</pre></div>
+
+<p>Another interesting trick with slicing, is the ability to ignore the zeroeth item:</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="n">uid</span><span class="p">):</span>
+<span class="linenos"> 2</span>    <span class="n">names</span> <span class="o">=</span> <span class="s1">&#39;john mike mo&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="linenos"> 3</span>    <span class="k">return</span> <span class="n">names</span><span class="p">[</span><span class="n">uid</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">uid</span><span class="p">]</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="k">def</span> <span class="nf">get_act</span><span class="p">(</span><span class="n">act</span><span class="p">):</span>
+<span class="linenos"> 6</span>    <span class="n">activities</span> <span class="o">=</span> <span class="s1">&#39;game chat&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="linenos"> 7</span>    <span class="k">return</span> <span class="n">activities</span><span class="p">[</span><span class="n">act</span><span class="p">:</span><span class="n">act</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<span class="linenos">10</span>    <span class="n">s</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">get_name</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;joined&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">get_act</span><span class="p">(</span><span class="n">i</span><span class="o">//</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;session&#39;</span><span class="p">]</span>
+<span class="linenos">11</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+</pre></div>
+
+<p>In this case we ignore uid 0. This is very useful since it's quite frequent for your input to start counting from 1.</p>

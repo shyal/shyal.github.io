@@ -1,0 +1,37 @@
+<p>https://www.pramp.com/challenge/W5EJq2Jld3t2ny9jyZXG</p>
+<p>Nailed it.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">Entry</span><span class="p">:</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">first_pos</span><span class="p">):</span>
+<span class="linenos"> 6</span>    <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">count</span>
+<span class="linenos"> 7</span>    <span class="bp">self</span><span class="o">.</span><span class="n">first_pos</span> <span class="o">=</span> <span class="n">first_pos</span>
+<span class="linenos"> 8</span>  
+<span class="linenos"> 9</span>  <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="linenos">10</span>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">count</span><span class="p">:</span>
+<span class="linenos">11</span>      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_pos</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">first_pos</span>
+<span class="linenos">12</span>    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">count</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="k">def</span> <span class="nf">word_count_engine</span><span class="p">(</span><span class="n">document</span><span class="p">):</span>
+<span class="linenos">15</span>  <span class="n">c</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos">16</span>  <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)):</span>
+<span class="linenos">17</span>    <span class="n">w</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">isalnum</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos">18</span>    <span class="k">if</span> <span class="n">w</span><span class="p">:</span>
+<span class="linenos">19</span>      <span class="k">if</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
+<span class="linenos">20</span>        <span class="n">c</span><span class="p">[</span><span class="n">w</span><span class="p">]</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">21</span>      <span class="k">else</span><span class="p">:</span>
+<span class="linenos">22</span>        <span class="n">c</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<span class="linenos">23</span>  <span class="n">words_sorted</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">24</span>  <span class="k">return</span> <span class="p">[[</span><span class="n">w</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">count</span><span class="p">)]</span> <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">words_sorted</span><span class="p">]</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="c1"># time: O(n^2 + nlogn)</span>
+<span class="linenos">27</span><span class="c1"># space: O(n)</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="n">document</span> <span class="o">=</span> <span class="s2">&quot;Practice makes perfect. you&#39;ll only get Perfect by practice. just practice!&quot;</span>
+<span class="linenos">30</span><span class="n">output</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s2">&quot;practice&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;perfect&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;makes&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;youll&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;only&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">],</span> 
+<span class="linenos">31</span>          <span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;by&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;just&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">]</span> <span class="p">]</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="n">r</span> <span class="o">=</span> <span class="n">word_count_engine</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+<span class="linenos">34</span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>

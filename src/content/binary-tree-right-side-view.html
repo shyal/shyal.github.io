@@ -1,0 +1,53 @@
+<blockquote>
+<blockquote>
+<p>Given a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.</p>
+</blockquote>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">Example</span><span class="p">:</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="n">Input</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="linenos"> 4</span><span class="n">Output</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="linenos"> 5</span><span class="n">Explanation</span><span class="p">:</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span>   <span class="mi">1</span>            <span class="o">&lt;---</span>
+<span class="linenos"> 8</span> <span class="o">/</span>   \
+<span class="linenos"> 9</span><span class="mi">2</span>     <span class="mi">3</span>         <span class="o">&lt;---</span>
+<span class="linenos">10</span> \     \
+<span class="linenos">11</span>  <span class="mi">5</span>     <span class="mi">4</span>       <span class="o">&lt;---</span>
+</pre></div>
+
+<h2 id="solution">Solution</h2>
+<p>Performing a traversal of the tree, while keeping track of the current depth, and updating a dictionary at that given depth, with the current node value, in-order naturally results in the right-side view being stored in the dict.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/BinaryTreeRightSideView.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>This will work as long as we first visit the left child, update the dictionary, then visit the right child. If we were to visit the right child first, update the dictionary, then visit the left child, this would result in a left-side view of the tree.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">right_side_view</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="k">if</span> <span class="n">node</span><span class="p">:</span>
+<span class="linenos"> 4</span>            <span class="n">dfs</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">depth</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos"> 5</span>            <span class="n">res</span><span class="p">[</span><span class="n">depth</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">key</span>
+<span class="linenos"> 6</span>            <span class="n">dfs</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">depth</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos"> 7</span>    <span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos"> 8</span>    <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<span class="linenos"> 9</span>    <span class="k">return</span> <span class="p">[</span><span class="o">*</span><span class="n">res</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="k">class</span> <span class="nc">Tree</span><span class="p">:</span>
+<span class="linenos">12</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="linenos">13</span>        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+<span class="linenos">14</span>        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">left</span>
+<span class="linenos">15</span>        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">right</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="n">tree</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">Tree</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">Tree</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">Tree</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">),</span> <span class="n">Tree</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">)),</span> <span class="n">Tree</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="n">Tree</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">),</span> <span class="n">Tree</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">))),</span> <span class="n">Tree</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="n">Tree</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="n">Tree</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">),</span> <span class="n">Tree</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">)),</span> <span class="n">Tree</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">Tree</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">),</span> <span class="n">Tree</span><span class="p">(</span><span class="s1">&#39;o&#39;</span><span class="p">))))</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="n">result</span> <span class="o">=</span> <span class="n">right_side_view</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+<span class="linenos">20</span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+
+<h2 id="time-and-space-complexity">Time and Space Complexity</h2>
+<p>
+<script type="math/tex; mode=display">time = O(n)</script>
+<script type="math/tex; mode=display">space = O(H)</script>
+</p>
+<h2 id="note">Note</h2>
+<p>A BFS approach is also possible, and is slightly more memory efficient. The space requirement for a DFS is <code>H</code>, where <code>H</code> is the height of the tree, which can, in the worst case, be <code>N</code>. The BFS uses at most the width of the tree in terms of space. The simpler DFS approach is preferred, since there is little point adding extra complexity of theoretical 'worst case' gains.</p>

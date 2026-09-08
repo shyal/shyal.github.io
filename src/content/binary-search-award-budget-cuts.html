@@ -1,0 +1,48 @@
+<p>On pramp, this question is called <a href="https://www.pramp.com/challenge/r1Kw0vwG6OhK9AEGAyWV">"Award Budget Cuts"</a>. The wording of the question is a little complex, but basically says that there are N companies receiving grants each year, e.g:</p>
+<p><code>G = [10, 50, 100, 120, 200]</code></p>
+<p>However there have been budget cuts, and thus the new budget requires <em>some</em> grants to be capped.</p>
+<p><code>B = 190</code></p>
+<p>Write a function that finds a cap such that the least number of recipients is impacted and such that the new budget constraint is met (i.e sum of the <code>N</code> reallocated grants equals to <code>B</code>).</p>
+<h2 id="solution">Solution</h2>
+<p>This problem can easily be solved with a <strong>binary search</strong> but is more interesting than a regular binary search, since the <em>solution space</em> involves a trial and error process of capping values, rather than searching for a value in a sorted list.</p>
+<h3 id="capping-grant-values">Capping grant values</h3>
+<p>We want to <strong>cap</strong> the grants, and sum the capped grants, to figure whether we are still over or under the total funding amount.</p>
+<p>Since we are familiar with lambdas and generators, we can easily do this in a one-liner:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">G</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span> <span class="c1"># total: 480</span>
+<span class="linenos">2</span><span class="n">comp_total</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">G</span><span class="p">)</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="n">comp_total</span><span class="p">(</span><span class="mi">50</span><span class="p">))</span> <span class="c1"># 210</span>
+</pre></div>
+
+<p>In the code above, we <strong>cap</strong> the grants to a maximum value of <code>50</code>. As a result the total of the grants allocated is now <code>210</code>. We now have a mechanism for testing out various caps, to decide whether the cap is too low or too high. Since <code>210 &gt; 190</code>, a cap of <code>50</code> is still too high.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/GrantCuts.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>In the animation above, you can see the grants getting capped by binary search, and gravitating towards the optimal cap amount of <code>47</code>.</p>
+<h3 id="computing-the-cap">Computing the cap</h3>
+<p>The cap is the value we are searching for, or optimising. Its maximum value (the <code>right</code> pointer in our binary search) is the entire budget. Its minimum value (the <code>left</code> pointer in our binary search) is <code>0</code>.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/MidSearch.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>The search, as any binary search, consists of <code>guessing</code> the value by taking the average of the min and max. The key difference is we then attempt to validate this guess by computing whether it leads us to being over, or under the given budget.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">find_grants_cap</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="linenos"> 2</span>  <span class="n">comp_total</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">G</span><span class="p">)</span>
+<span class="linenos"> 3</span>  <span class="n">l</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">b</span>
+<span class="linenos"> 4</span>  <span class="k">while</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span><span class="p">:</span>
+<span class="linenos"> 5</span>    <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="linenos"> 6</span>    <span class="n">total</span> <span class="o">=</span> <span class="n">comp_total</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="linenos"> 7</span>    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">total</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.0001</span><span class="p">:</span>
+<span class="linenos"> 8</span>      <span class="k">return</span> <span class="n">m</span>
+<span class="linenos"> 9</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">10</span>      <span class="n">l</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">r</span><span class="p">),(</span><span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">))[</span><span class="n">total</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">]</span>
+</pre></div>
+
+<p>Below, we can view these values being optimised simultaneously. </p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/AwardBudgetCuts.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>This algorithm is very interesting and fun to watch, as it details very clearly how binary search can be used for numerical optimisation as opposed to simply searching for a value in a sorted array.</p>
+<h2 id="time-and-space-complexity">Time and Space Complexity</h2>
+<p>
+<script type="math/tex; mode=display">time = O(n \times log(n))</script>
+<script type="math/tex; mode=display">space = O(1)</script>
+</p>

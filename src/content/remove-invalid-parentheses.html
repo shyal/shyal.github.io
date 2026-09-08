@@ -1,0 +1,23 @@
+<p>Credit: Stephan Pochmann</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">removeInvalidParentheses</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="nf">isvalid</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="n">ctr</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 4</span>        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+<span class="linenos"> 5</span>            <span class="n">ctr</span> <span class="o">+=</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;(&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;)&quot;</span><span class="p">)</span>
+<span class="linenos"> 6</span>            <span class="k">if</span> <span class="n">ctr</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 7</span>                <span class="k">return</span> <span class="kc">False</span>
+<span class="linenos"> 8</span>        <span class="k">return</span> <span class="n">ctr</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>    <span class="n">level</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">}</span>
+<span class="linenos">11</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">12</span>        <span class="n">valid</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="nb">filter</span><span class="p">(</span><span class="n">isvalid</span><span class="p">,</span> <span class="n">level</span><span class="p">)]</span>
+<span class="linenos">13</span>        <span class="k">if</span> <span class="n">valid</span><span class="p">:</span>
+<span class="linenos">14</span>            <span class="k">return</span> <span class="n">valid</span>
+<span class="linenos">15</span>        <span class="n">level</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">level</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))}</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="n">r</span> <span class="o">=</span> <span class="n">removeInvalidParentheses</span><span class="p">(</span><span class="s2">&quot;(a)())()&quot;</span><span class="p">)</span>
+<span class="linenos">19</span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="p">[</span><span class="s2">&quot;(a)()()&quot;</span><span class="p">,</span> <span class="s2">&quot;(a())()&quot;</span><span class="p">]</span>
+</pre></div>

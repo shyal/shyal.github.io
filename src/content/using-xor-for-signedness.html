@@ -1,0 +1,25 @@
+<p>When multiplying or diving  2 numbers, determining the signedness of the result is not straightforward:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="linenos">2</span><span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="linenos">3</span><span class="n">sign</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+
+<p>Here we are actually going ahead and performing the multiplication. If we do not want to do so, then things get even more complicated:</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="linenos"> 2</span><span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="linenos"> 3</span><span class="n">sign</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos"> 4</span><span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 5</span> <span class="n">sign</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos"> 6</span><span class="k">elif</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 7</span> <span class="n">sign</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos"> 8</span><span class="k">elif</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 9</span> <span class="n">sign</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="linenos">10</span><span class="k">elif</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">11</span> <span class="n">sign</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+
+<p>However you may notice that signedness of two numbers follows the same rules as xoring two bits, therefore the most efficient and simplest method is:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="linenos">2</span><span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="linenos">3</span><span class="n">sign</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">^</span> <span class="p">(</span><span class="n">b</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span>
+</pre></div>

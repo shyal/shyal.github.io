@@ -1,0 +1,148 @@
+<blockquote>
+<blockquote>
+<p>Question: Given a partially filled Sudoku board, write an efficient solver to complete the board according to the rules of Sudoku.</p>
+</blockquote>
+</blockquote>
+<h3 id="the-rules-of-sudoku">The rules of Sudoku</h3>
+<p>The rules are very simple:</p>
+<ul>
+<li>cells need to be filled with numbers ranging from 0 to 9.</li>
+<li>each row must contain unique numbers</li>
+<li>each column must contain unique numbers</li>
+<li>each 3x3 square section must contain unique numbers</li>
+</ul>
+<h2 id="solution">Solution</h2>
+<p>You may think of solving a Sudoku board as a highly complex problem, but as you'll see it's actually very straightforward, and only involves:</p>
+<ul>
+<li>a DFS </li>
+<li>set membership checking</li>
+<li>backtracking.</li>
+</ul>
+<p>Backtracking doesn't really mean much, either, since Backtracking happens as a consequence of the DFS and set membership checking. It occurs naturally.</p>
+<h3 id="constraints-checking">Constraints checking</h3>
+<h4 id="each-row-must-contain-unique-numbers">Each row must contain unique numbers</h4>
+<p>Checking whether a number is in a set is an <code>O(1)</code> operation, so filling a row with unique numbers can be done in <code>O(n)</code>.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/SudokuRows.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<h4 id="each-column-must-contain-unique-numbers">Each column must contain unique numbers</h4>
+<p>The same rule applies to columns. Once again, filling up a column with unique numbers is a fairly trivial problem.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/SudokuColumns.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<h4 id="each-section-must-contain-unique-numbers">Each section must contain unique numbers</h4>
+<p>Likewise, filling a square with unique numbers is a trivial task. Let's depict it to be as explicit as possible.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/SudokuSquares.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<h3 id="linear-scan">Linear scan</h3>
+<p>We'll scan the board in a linear manner, one cell at a time. </p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/SudokuLinearScan.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>At each cell, if it's empty, we'll:</p>
+<ul>
+<li>guess a number</li>
+<li>perform constraints checking</li>
+<li>if the guess passes all constraints, then we recurse into the next cell, else we recurse up the stack.</li>
+</ul>
+<h3 id="solving-with-all-constraints">Solving with all constraints</h3>
+<p>This solver is already in the 80% fastest on leetcode; it is fast, and due to its simplicity, it's easy to remember.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/SolveSudoku.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>Below we can see the backtracking in action.</p>
+<p><img src='https://manim.s3.us-east-2.amazonaws.com/sudoku.gif' /></p>
+<p>When the solver can no longer progress; when it reaches a <em>deadend</em> in the solution space; it has no choice but to recurse back up the call stack, and explore new paths.</p>
+<p>Let's break down the solution.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span>    <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">triples</span> <span class="o">=</span> <span class="n">ddict</span><span class="p">(</span><span class="nb">set</span><span class="p">),</span> <span class="n">ddict</span><span class="p">(</span><span class="nb">set</span><span class="p">),</span> <span class="n">ddict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
+<span class="linenos">2</span>    <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<span class="linenos">3</span>        <span class="k">if</span> <span class="n">board</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;.&quot;</span><span class="p">:</span>
+<span class="linenos">4</span>            <span class="n">rows</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">])</span>
+<span class="linenos">5</span>            <span class="n">cols</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">])</span>
+<span class="linenos">6</span>            <span class="n">triples</span><span class="p">[(</span><span class="n">r</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span> <span class="n">c</span> <span class="o">//</span> <span class="mi">3</span><span class="p">)]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">])</span>
+</pre></div>
+
+<p>Above, we begin by populating row, column, and section sets of the pre-existing numbers. Those allow us to check our constraints in <code>O(1)</code> time.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span>    <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="linenos">2</span>        <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+<span class="linenos">3</span>            <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+
+<p>This is our dfs basecase, in case we are done exploring the board.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span>        <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;.&#39;</span><span class="p">:</span>
+<span class="linenos">2</span>            <span class="k">return</span> <span class="n">dfs</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="n">c</span><span class="o">==</span><span class="mi">8</span><span class="p">],</span> <span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)[</span><span class="n">c</span><span class="o">==</span><span class="mi">8</span><span class="p">])</span>
+</pre></div>
+
+<p>In case we already have a digit in the current cell, we move on to the next one.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span>        <span class="k">for</span> <span class="n">dig</span> <span class="ow">in</span> <span class="s1">&#39;123456789&#39;</span><span class="p">:</span>
+<span class="linenos">2</span>            <span class="k">if</span> <span class="n">dig</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="ow">and</span> <span class="n">dig</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="ow">and</span> <span class="n">dig</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">triples</span><span class="p">[</span><span class="n">t</span><span class="p">]:</span>
+<span class="linenos">3</span>                <span class="n">board</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">dig</span>
+<span class="linenos">4</span>                <span class="n">rows</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dig</span><span class="p">)</span>
+<span class="linenos">5</span>                <span class="n">cols</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dig</span><span class="p">)</span>
+<span class="linenos">6</span>                <span class="n">triples</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dig</span><span class="p">)</span>
+</pre></div>
+
+<p>We loop over all numbers from 1 through to 9, to test them out. The test in this case is set membership in the current <strong>row</strong>, <strong>column</strong> or <strong>section</strong>.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span>                <span class="k">if</span> <span class="n">dfs</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="n">c</span><span class="o">==</span><span class="mi">8</span><span class="p">],</span> <span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)[</span><span class="n">c</span><span class="o">==</span><span class="mi">8</span><span class="p">]):</span>
+<span class="linenos">2</span>                    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+
+<p>If there are no clashes, we simply recurse into the following cell.</p>
+<hr />
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span> <span class="k">as</span> <span class="n">ddict</span>
+<span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="k">def</span> <span class="nf">solveSudoku</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+<span class="linenos"> 7</span>    <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="linenos"> 8</span>        <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+<span class="linenos"> 9</span>            <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos">10</span>        <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;.&#39;</span><span class="p">:</span>
+<span class="linenos">11</span>            <span class="k">return</span> <span class="n">dfs</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="n">c</span><span class="o">==</span><span class="mi">8</span><span class="p">],</span> <span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)[</span><span class="n">c</span><span class="o">==</span><span class="mi">8</span><span class="p">])</span>
+<span class="linenos">12</span>        <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span> <span class="n">c</span> <span class="o">//</span> <span class="mi">3</span><span class="p">)</span>
+<span class="linenos">13</span>        <span class="k">for</span> <span class="n">dig</span> <span class="ow">in</span> <span class="s1">&#39;123456789&#39;</span><span class="p">:</span>
+<span class="linenos">14</span>            <span class="k">if</span> <span class="n">dig</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="ow">and</span> <span class="n">dig</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="ow">and</span> <span class="n">dig</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">triples</span><span class="p">[</span><span class="n">t</span><span class="p">]:</span>
+<span class="linenos">15</span>                <span class="n">board</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">dig</span>
+<span class="linenos">16</span>                <span class="n">rows</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dig</span><span class="p">)</span>
+<span class="linenos">17</span>                <span class="n">cols</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dig</span><span class="p">)</span>
+<span class="linenos">18</span>                <span class="n">triples</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dig</span><span class="p">)</span>
+<span class="linenos">19</span>                <span class="k">if</span> <span class="n">dfs</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="n">c</span><span class="o">==</span><span class="mi">8</span><span class="p">],</span> <span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)[</span><span class="n">c</span><span class="o">==</span><span class="mi">8</span><span class="p">]):</span>
+<span class="linenos">20</span>                    <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos">21</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos">22</span>                    <span class="n">board</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span>
+<span class="linenos">23</span>                    <span class="n">rows</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">dig</span><span class="p">)</span>
+<span class="linenos">24</span>                    <span class="n">cols</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">dig</span><span class="p">)</span>
+<span class="linenos">25</span>                    <span class="n">triples</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">dig</span><span class="p">)</span>
+<span class="linenos">26</span>        <span class="k">return</span> <span class="kc">False</span>
+<span class="linenos">27</span>    <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">triples</span> <span class="o">=</span> <span class="n">ddict</span><span class="p">(</span><span class="nb">set</span><span class="p">),</span> <span class="n">ddict</span><span class="p">(</span><span class="nb">set</span><span class="p">),</span> <span class="n">ddict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
+<span class="linenos">28</span>    <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<span class="linenos">29</span>        <span class="k">if</span> <span class="n">board</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;.&quot;</span><span class="p">:</span>
+<span class="linenos">30</span>            <span class="n">rows</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">])</span>
+<span class="linenos">31</span>            <span class="n">cols</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">])</span>
+<span class="linenos">32</span>            <span class="n">triples</span><span class="p">[(</span><span class="n">r</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span> <span class="n">c</span> <span class="o">//</span> <span class="mi">3</span><span class="p">)]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">])</span>
+<span class="linenos">33</span>    <span class="n">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span><span class="k">def</span> <span class="nf">print_sudoku</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<span class="linenos">36</span>    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">A</span><span class="p">:</span>
+<span class="linenos">37</span>        <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="linenos">38</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span><span class="n">A</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;3&quot;</span><span class="p">,</span><span class="s2">&quot;8&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;4&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">],</span>
+<span class="linenos">41</span>    <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;7&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">],</span>
+<span class="linenos">42</span>    <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;6&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;5&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;9&quot;</span><span class="p">],</span>
+<span class="linenos">43</span>    <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;9&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;6&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">],</span>
+<span class="linenos">44</span>    <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">],</span>
+<span class="linenos">45</span>    <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;4&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;3&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;2&quot;</span><span class="p">],</span>
+<span class="linenos">46</span>    <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;8&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">],</span>
+<span class="linenos">47</span>    <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;5&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">],</span>
+<span class="linenos">48</span>    <span class="p">[</span><span class="s2">&quot;9&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;7&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;3&quot;</span><span class="p">]]</span>
+<span class="linenos">49</span>
+<span class="linenos">50</span>
+<span class="linenos">51</span>
+<span class="linenos">52</span><span class="n">s</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="linenos">53</span><span class="nb">print</span><span class="p">(</span><span class="n">solveSudoku</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="linenos">54</span><span class="n">print_sudoku</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="linenos">55</span><span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span>
+</pre></div>

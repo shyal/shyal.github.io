@@ -1,0 +1,191 @@
+<style>
+video {
+    border: 1px solid #ddd;
+}
+</style>
+
+<p>Recursive functions become a lot easier to grasp once visualised:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">depth</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="k">if</span> <span class="n">depth</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">:</span>
+<span class="linenos">3</span>      <span class="k">return</span>
+<span class="linenos">4</span>  <span class="nb">print</span><span class="p">(</span><span class="n">depth</span><span class="p">)</span>
+<span class="linenos">5</span>  <span class="n">func</span><span class="p">(</span><span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">6</span>
+<span class="linenos">7</span><span class="n">func</span><span class="p">()</span>
+</pre></div>
+
+<video src="https://manim.s3.us-east-2.amazonaws.com/tracing1.mov" style="margin: 0 auto; width: 320px;" class='center' width="320" height="240" autoplay loop playsinline muted>
+</video>
+
+<p>The number on the branch is the number that gets printed, while the <code>func(n)</code> is the actual function call. Let's execute this code by hand, and add some 'syntax highlighting' to the call graph.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/tracing2.mov" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>Executing a recursive function by hand, and drawing the call-graph with the values of the variables dramatically improves your ability to think and code recursively. By doing so, you're tracking the values of all the variables at each step of the call stack.</p>
+<p>It may appear trivial with such a trivial function; however with more complex recursive functions, it becomes a lot more interesting.</p>
+<h2 id="tower-of-hanoi">Tower of Hanoi</h2>
+<p>The tower of Hanoi is a classic problem, and has the tendency to create huge classic recursion headaches, as it's very difficult to visualise and intuitively grasp what it's doing.</p>
+<p>The aim is to move the disks from one (<code>src</code>) peg to another (<code>dest</code>) peg, while only having <strong>smaller</strong> disks sitting on top of <strong>larger</strong> ones.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/hanoi1.mov" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>This recursive algorithm only uses 1 extra <code>tmp</code> peg, as a buffer.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">hanoi</span><span class="p">():</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">tmp</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 4</span>            <span class="n">move</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+<span class="linenos"> 5</span>            <span class="n">pegs</span><span class="p">[</span><span class="n">dest</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pegs</span><span class="p">[</span><span class="n">src</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+<span class="linenos"> 6</span>            <span class="n">move</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">src</span><span class="p">)</span>
+<span class="linenos"> 7</span>    <span class="n">pegs</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[]]</span>
+<span class="linenos"> 8</span>    <span class="n">move</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">tmp</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">hanoi</span><span class="p">()</span>
+</pre></div>
+
+<p>Now before jumping in, let's lay down some further foundations in your thinking toolset, that'll make reasoning and truly understanding it a lot easier, and more intuitive.</p>
+<h3 id="decreasing-the-depth">Decreasing the <code>depth</code></h3>
+<p>Instead of incrementing the <code>depth</code> variable, we could initialise it at the depth we are after, and decrement it on each successive call. Let's also rename it to <code>n</code>.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">3</span>      <span class="k">return</span>
+<span class="linenos">4</span>  <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="linenos">5</span>  <span class="n">func</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">6</span>
+<span class="linenos">7</span><span class="n">func</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+<p>Output:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="mi">5</span>
+<span class="linenos">2</span><span class="mi">4</span>
+<span class="linenos">3</span><span class="mi">3</span>
+<span class="linenos">4</span><span class="mi">2</span>
+<span class="linenos">5</span><span class="mi">1</span>
+<span class="linenos">6</span><span class="mi">0</span>
+</pre></div>
+
+<p>It's now a lot easier to control the recursion depth from the caller. It's also very useful, since the <code>depth</code> or <code>n</code>is the number of disks we'll be working with.</p>
+<p><img src='https://manim.s3.us-east-2.amazonaws.com/depth_decrease.gif'/></p>
+<h3 id="switching-two-variables">Switching two variables</h3>
+<p>Now observe what happens in the following code snippet:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">3</span>      <span class="k">return</span>
+<span class="linenos">4</span>  <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="linenos">5</span>  <span class="n">func</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="linenos">6</span>
+<span class="linenos">7</span><span class="n">func</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="mi">0</span> <span class="mi">1</span>
+<span class="linenos">2</span><span class="mi">1</span> <span class="mi">0</span>
+<span class="linenos">3</span><span class="mi">0</span> <span class="mi">1</span>
+<span class="linenos">4</span><span class="mi">1</span> <span class="mi">0</span>
+<span class="linenos">5</span><span class="mi">0</span> <span class="mi">1</span>
+<span class="linenos">6</span><span class="mi">1</span> <span class="mi">0</span>
+</pre></div>
+
+<p><img src='https://manim.s3.us-east-2.amazonaws.com/switching_var.gif'/></p>
+<p>With each call, we swap the variables <code>a</code> and <code>b</code>. This is pretty similar to what we'll be doing with the Tower of Hanoi problem: with each recursion, we'll swap which disks we refer to as the <em>source</em>, the <em>temp</em> and the <em>dest</em> peg.</p>
+<h3 id="switching-three-variables">Switching three variables</h3>
+<p>Now observe what happens in the following code snippet:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">3</span>      <span class="k">return</span>
+<span class="linenos">4</span>  <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="linenos">5</span>  <span class="n">func</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="linenos">6</span>
+<span class="linenos">7</span><span class="n">func</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span>
+<span class="linenos">2</span><span class="mi">2</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="linenos">3</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">0</span>
+<span class="linenos">4</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span>
+<span class="linenos">5</span><span class="mi">2</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="linenos">6</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">0</span>
+</pre></div>
+
+<p><img src='https://manim.s3.us-east-2.amazonaws.com/switching_three_var.gif'/></p>
+<p>We are now sliding the values to the right. Again, pretty easy. </p>
+<h3 id="branching">Branching</h3>
+<p>So far, tracing the calls has been easy: there's only one call meaning our recursion "graph" is pretty much a straight line. But what happens when we make two calls instead of one?</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">ascii_lowercase</span> <span class="k">as</span> <span class="n">asc</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<span class="linenos"> 4</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 5</span>     <span class="k">return</span>
+<span class="linenos"> 6</span> <span class="n">func</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos"> 7</span> <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="linenos"> 8</span> <span class="n">func</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">func</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+<p><img src='https://manim.s3.us-east-2.amazonaws.com/branching.gif'/></p>
+<p>Well our call-graph now looks like a binary tree, and the values we are printing can, in a way, be thought of as being printed <strong>in-order</strong> since the <code>print</code> statement is between the two calls.</p>
+<h3 id="1-disk">1 disk</h3>
+<p>The best way to approach any complex algorithm is to simplify the data on which its working to a bare minimum. So let's begin with a single disk.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/hanoi3.mov" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>With a single disk, things could not be easier: no recursion actually takes place, since we hit the base case. The work we did was equivalent to this:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">hanoi</span><span class="p">():</span>
+<span class="linenos">2</span>    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">tmp</span><span class="p">):</span>
+<span class="linenos">3</span>      <span class="n">pegs</span><span class="p">[</span><span class="n">dest</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pegs</span><span class="p">[</span><span class="n">src</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+<span class="linenos">4</span>    <span class="n">pegs</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[]]</span>
+<span class="linenos">5</span>    <span class="n">move</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">tmp</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">6</span>
+<span class="linenos">7</span><span class="n">hanoi</span><span class="p">()</span>
+</pre></div>
+
+<p>Another way of look at things is, imagine we had guards before our recursive calls:</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">hanoi</span><span class="p">():</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">tmp</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 4</span>            <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos"> 5</span>             <span class="n">move</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+<span class="linenos"> 6</span>            <span class="n">pegs</span><span class="p">[</span><span class="n">dest</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pegs</span><span class="p">[</span><span class="n">src</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+<span class="linenos"> 7</span>            <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos"> 8</span>             <span class="n">move</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">src</span><span class="p">)</span>
+<span class="linenos"> 9</span>    <span class="n">pegs</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[]]</span>
+<span class="linenos">10</span>    <span class="n">move</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">tmp</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="n">hanoi</span><span class="p">()</span>
+</pre></div>
+
+<p>When writing recursive functions, it can be useful to add a guard around the recursive calls rather than hitting the base case. This makes tracing the tree dramatically easier, and greatly reduces the number of calls, and improves the time &amp; space complexity by reducing the call stack size. It does however come at the detriment of legibility.</p>
+<h2 id="2-disks">2 disks</h2>
+<p>With two disks, things get more interesting. The first call to <code>move</code> invokes <code>move</code> recursively, switching <code>tmp</code> and <code>dest</code>; this performs the preparation work of moving the top disk to the <code>tmp</code> peg. The call then returns, next the actual intended action of moving the large disk from peg 0 to 2 can take place.</p>
+<p>Next <code>move</code> gets invoked again, on line <code>6</code>, thereby switching the <code>src</code> and <code>tmp</code> pegs; this moves the initial smaller disk onto the peg <code>2</code>, and the puzzle is complete.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/hanoi5.mov" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>Finally we can trace our function with <code>3</code> disks.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">hanoi</span><span class="p">():</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">tmp</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 4</span>            <span class="n">move</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+<span class="linenos"> 5</span>            <span class="n">pegs</span><span class="p">[</span><span class="n">dest</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pegs</span><span class="p">[</span><span class="n">src</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+<span class="linenos"> 6</span>            <span class="n">move</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">src</span><span class="p">)</span>
+<span class="linenos"> 7</span>    <span class="n">pegs</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[]]</span>
+<span class="linenos"> 8</span>    <span class="n">move</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">tmp</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">hanoi</span><span class="p">()</span>
+</pre></div>
+
+<p>Obviously the more disks there are, the more complex it becomes tracking precisely what is taking place, and why. But it is absolutely doable; and the reader is encouraged to do so as an exercise.</p>
+<script>
+function goFullscreen(id) {
+  var element = document.getElementById(id);       
+  if (element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if (element.webkitRequestFullScreen) {
+    element.webkitRequestFullScreen();
+  }  
+}
+</script>
+
+<video id='fs_player' src="https://manim.s3.us-east-2.amazonaws.com/hanoi2.mov" style="margin: 0 auto; width: 100%;" class='center' autoplay loop playsinline muted>
+</video>
+<p><button onclick="goFullscreen('fs_player'); return false">fullscreen</button></p>
+<p>Recursion is difficult, and in many cases, there are no shortcuts to tracing the calls by hand, and tracking the variables carefully. The more often you do so, the better you'll become at thinking recursively, but it does take time and practice to improve in this particular skill.</p>

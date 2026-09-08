@@ -1,0 +1,81 @@
+<p>Now that we are more comfortable with lambdas, how could we write a calculator that takes in 2 integers, and allows performing either addition, subtraction, multiplication, or division?</p>
+<h2 id="solution-1-using-lambdas">Solution #1, using lambdas</h2>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">ops</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos"> 2</span> <span class="s1">&#39;+&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span>
+<span class="linenos"> 3</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">,</span>
+<span class="linenos"> 4</span> <span class="s1">&#39;*&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">,</span>
+<span class="linenos"> 5</span> <span class="s1">&#39;/&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+<span class="linenos"> 6</span><span class="p">}</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="n">op</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter operation: +,-,*,/&#39;</span><span class="p">)</span>
+<span class="linenos"> 9</span><span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter first integer&#39;</span><span class="p">))</span>
+<span class="linenos">10</span><span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter second integer&#39;</span><span class="p">))</span>
+<span class="linenos">11</span><span class="n">res</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="n">op</span><span class="p">](</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="linenos">12</span><span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+
+<h2 id="solution-2-using-operators">Solution #2, using operators</h2>
+<p>Python truly has thought of everything; the <code>operator</code> contains the operations required.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">operator</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="n">ops</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos"> 4</span>    <span class="s2">&quot;+&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">,</span>
+<span class="linenos"> 5</span>    <span class="s2">&quot;-&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">sub</span><span class="p">,</span>
+<span class="linenos"> 6</span>    <span class="s2">&quot;/&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">truediv</span><span class="p">,</span>
+<span class="linenos"> 7</span>    <span class="s2">&quot;*&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">mul</span>
+<span class="linenos"> 8</span><span class="p">}</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">op</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter operation: +,-,*,/&#39;</span><span class="p">)</span>
+<span class="linenos">11</span><span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter first integer&#39;</span><span class="p">))</span>
+<span class="linenos">12</span><span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter second integer&#39;</span><span class="p">))</span>
+<span class="linenos">13</span><span class="n">res</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="n">op</span><span class="p">](</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="linenos">14</span><span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+
+<hr />
+<h2 id="discussion-dict-as-a-switch-statement">Discussion: dict as a switch statement</h2>
+<p>What we have done with:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">ops</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos">2</span>    <span class="s2">&quot;+&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">,</span>
+<span class="linenos">3</span>    <span class="s2">&quot;-&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">sub</span><span class="p">,</span>
+<span class="linenos">4</span>    <span class="s2">&quot;/&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">truediv</span><span class="p">,</span>
+<span class="linenos">5</span>    <span class="s2">&quot;*&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">mul</span>
+<span class="linenos">6</span><span class="p">}</span>
+<span class="linenos">7</span>
+<span class="linenos">8</span><span class="nb">print</span><span class="p">(</span><span class="n">ops</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">)(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+
+<p>Is created a lightweight <code>switch</code> statement. Using <code>dict.get</code> even enables us to re-create the <code>default</code> behaviour of a traditional switch statement. Please note this is very Pythonic, so make sure the team you are working with is comfortable enough with Python before employing these types of techniques.</p>
+<hr />
+<h2 id="conditional-function-call">Conditional function call</h2>
+<p>What if we now wanted to <strong>add</strong> the numbers if a is greater than b, else <strong>subtract</strong> them?</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">operator</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="n">ops</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos"> 4</span>    <span class="s2">&quot;+&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">,</span>
+<span class="linenos"> 5</span>    <span class="s2">&quot;-&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">sub</span><span class="p">,</span>
+<span class="linenos"> 6</span><span class="p">}</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter first integer&#39;</span><span class="p">))</span>
+<span class="linenos"> 9</span><span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter second integer&#39;</span><span class="p">))</span>
+<span class="linenos">10</span><span class="n">res</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="s1">&#39;+&#39;</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="k">else</span> <span class="s1">&#39;-&#39;</span><span class="p">](</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="linenos">11</span><span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+
+<p>Since we no longer need user input for the operator, we could also express this as:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">add</span><span class="p">,</span> <span class="n">sub</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter first integer&#39;</span><span class="p">))</span>
+<span class="linenos">4</span><span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter second integer&#39;</span><span class="p">))</span>
+<span class="linenos">5</span><span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">add</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="k">else</span> <span class="n">sub</span><span class="p">)(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="linenos">6</span><span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+
+<p>Or using tuples as ternaries:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">add</span><span class="p">,</span> <span class="n">sub</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter first integer&quot;</span><span class="p">))</span>
+<span class="linenos">4</span><span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter second integer&quot;</span><span class="p">))</span>
+<span class="linenos">5</span><span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">add</span><span class="p">)[</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">](</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="linenos">6</span><span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>

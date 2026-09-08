@@ -1,2 +1,12 @@
+# The /archive/* pages are excluded from search results with a
+# "noindex" meta tag on each page, not with a Disallow rule here.
+#
+# That is deliberate: a Disallow rule blocks crawling, and a crawler that
+# cannot fetch the page never sees the noindex — so already-indexed URLs
+# would linger in results as bare links. Letting crawlers fetch the pages
+# and read the noindex is what actually removes them.
+
 User-agent: *
-Allow: *
+Allow: /
+
+Sitemap: https://www.shyal.com/sitemap.xml

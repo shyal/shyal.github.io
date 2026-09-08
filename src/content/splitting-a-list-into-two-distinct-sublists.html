@@ -1,0 +1,32 @@
+<p>Let's say you have the following list, or string:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">ababcdcd</span>
+</pre></div>
+
+<p>How would you find the point between <code>abab</code> and <code>cdcd</code>? i.e the point where the substrings contain distinct characters from one another?</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;ababcdcd&quot;</span>
+<span class="linenos">2</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
+<span class="linenos">3</span>    <span class="k">if</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">(</span><span class="n">s</span><span class="p">[:</span><span class="n">i</span><span class="p">])</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:]):</span>
+<span class="linenos">4</span>        <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[:</span><span class="n">i</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:])</span>
+<span class="linenos">5</span>        <span class="k">break</span>
+</pre></div>
+
+<p>This solution converts the substrings into sets, and <code>&amp;</code> them. When the intersection of both sets is empty, both substrings are distinct.</p>
+<p>The solution can also be expressed as a <code>generator expression</code>:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;ababcdcd&quot;</span>
+<span class="linenos">2</span><span class="n">gen</span> <span class="o">=</span> <span class="p">((</span><span class="n">s</span><span class="p">[:</span><span class="n">i</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">(</span><span class="n">s</span><span class="p">[:</span><span class="n">i</span><span class="p">])</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:]))</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">))</span>
+</pre></div>
+
+<h2 id="getting-all-distinct-substrings">Getting all distinct substrings</h2>
+<p>Printing out all distinct substrings is also straightforward:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;ababcdcdefefef&quot;</span>
+<span class="linenos">2</span><span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">(</span><span class="n">s</span><span class="p">[:</span><span class="n">i</span><span class="p">])</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:])]</span> <span class="o">+</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">([</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="n">indices</span><span class="p">[</span><span class="mi">1</span><span class="p">:])])</span>
+</pre></div>
+
+<p>Output:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="p">[</span><span class="s1">&#39;abab&#39;</span><span class="p">,</span> <span class="s1">&#39;cdcd&#39;</span><span class="p">,</span> <span class="s1">&#39;efefef&#39;</span><span class="p">]</span>
+</pre></div>
+
+<p>See also:</p>
+<p><a href="/shifted-zip">shifted zip</a></p>

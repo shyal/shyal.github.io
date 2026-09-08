@@ -1,0 +1,19 @@
+<p>There are various approaches to help us ascertain whether all characters in <code>ar</code> appear in the string <code>st</code>.</p>
+<h2 id="time-on2-space-o1">time O(n^2), space O(1)</h2>
+<p>The first is to use a <code>generator expression</code> that checks the existance using the <code>in</code> keyword, and being input into <code>all</code>. </p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">st</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span>
+<span class="linenos">2</span><span class="n">ar</span> <span class="o">=</span> <span class="s1">&#39;el&#39;</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="nb">all</span><span class="p">(</span><span class="n">c</span> <span class="ow">in</span> <span class="n">st</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ar</span><span class="p">))</span>
+</pre></div>
+
+<h2 id="time-on-space-on">time O(n), space O(n)</h2>
+<p>Trading off some space for some time, we can convert our string to a set. This is probably a far better solution in practice.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">st</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="n">ar</span> <span class="o">=</span> <span class="s1">&#39;el&#39;</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="nb">all</span><span class="p">(</span><span class="n">c</span> <span class="ow">in</span> <span class="n">st</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ar</span><span class="p">))</span>
+</pre></div>
+
+<p>This takes <code>N</code> of <code>s</code> to build the set, and <code>N</code> of <code>el</code> for the lookups. So <script type="math/tex">N_s+N_a = O(N)</script>
+</p>
+<p>See also:</p>
+<p><a href="/string-contains-all-chars-ordered">string contains all chars ordered</a></p>

@@ -1,0 +1,44 @@
+<p>While a DFS explores down the branches of a tree, a BFS visits all the children of a given node, and then the children of those children, etc. level per level.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/BinaryTreeBFS.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+<span class="linenos"> 4</span>        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">left</span>
+<span class="linenos"> 5</span>        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">right</span>
+<span class="linenos"> 6</span>        
+<span class="linenos"> 7</span><span class="n">tree</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> 
+<span class="linenos"> 8</span>        <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> 
+<span class="linenos"> 9</span>            <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">),</span> <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">)),</span>
+<span class="linenos">10</span>            <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">),</span> <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">))),</span> 
+<span class="linenos">11</span>        <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> 
+<span class="linenos">12</span>            <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">),</span> <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">)),</span> 
+<span class="linenos">13</span>            <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">),</span> <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;o&#39;</span><span class="p">))))</span>
+</pre></div>
+
+<p>The code for a BFS is pretty straightforward to understand. We create a queue (any iterable container will do) initilised with the root.</p>
+<p>We then iterate over it, and collect all the children (as long as they are not <code>None</code>), and assign the <code>children</code> container to the <code>q</code> container.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">BFS</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+<span class="linenos"> 2</span>    <span class="n">q</span> <span class="o">=</span> <span class="p">[</span><span class="n">root</span><span class="p">]</span>
+<span class="linenos"> 3</span>    <span class="k">while</span> <span class="n">q</span><span class="p">:</span>
+<span class="linenos"> 4</span>        <span class="n">children</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 5</span>        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">q</span><span class="p">:</span>
+<span class="linenos"> 6</span>            <span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+<span class="linenos"> 7</span>            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">:</span>
+<span class="linenos"> 8</span>                <span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+<span class="linenos"> 9</span>            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
+<span class="linenos">10</span>                <span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+<span class="linenos">11</span>        <span class="n">q</span> <span class="o">=</span> <span class="n">children</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="n">BFS</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+</pre></div>
+
+<p>The pythonic one-liner is a little harder to stomach. To check whether the children are valid, in the list comprehension, we <em>iterate</em> over <code>[node.left, node.right]</code> once you've accepted that, it becomes are lot easier remembering and coding it up.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">BFS</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="n">q</span> <span class="o">=</span> <span class="p">[</span><span class="n">root</span><span class="p">]</span>
+<span class="linenos">3</span>    <span class="k">while</span> <span class="n">q</span><span class="p">:</span>
+<span class="linenos">4</span>        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">q</span><span class="p">:</span>
+<span class="linenos">5</span>            <span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+<span class="linenos">6</span>        <span class="n">q</span> <span class="o">=</span> <span class="p">[</span><span class="n">child</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">q</span> <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">]</span> <span class="k">if</span> <span class="n">child</span><span class="p">]</span>
+</pre></div>

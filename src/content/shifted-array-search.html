@@ -1,0 +1,52 @@
+<p>This is an interesting algorithm i very recently encountered. Finding the first element in a sorted and <strong>shifted</strong> array. Let's begin with a definitive refresher on <a href="/binary-search">binary search</a>.</p>
+<p>Now let's think of all the configurations:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span>
+<span class="linenos">2</span><span class="mi">8</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span>
+<span class="linenos">3</span><span class="mi">7</span> <span class="mi">8</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span>
+<span class="linenos">4</span><span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span>
+<span class="linenos">5</span><span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span>
+<span class="linenos">6</span><span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span>
+<span class="linenos">7</span><span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span> <span class="mi">1</span> <span class="mi">2</span>
+<span class="linenos">8</span><span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span> <span class="mi">1</span>
+</pre></div>
+
+<p>What's the crucial pattern above, which we can look for? Spotted it? There's only one item in the list with a neighbour greater than itself, or, vice versa, only 1 item who's right neighbour is smaller than itself.</p>
+<h2 id="iterative">iterative</h2>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">find_smallest_in_shifted_array</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<span class="linenos"> 2</span>  <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 3</span>  <span class="n">r</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+<span class="linenos"> 4</span>  <span class="k">while</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">:</span>
+<span class="linenos"> 5</span>    <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="linenos"> 6</span>    <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">A</span><span class="p">[</span><span class="n">m</span><span class="p">]:</span>
+<span class="linenos"> 7</span>      <span class="k">return</span> <span class="n">m</span>
+<span class="linenos"> 8</span>    <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">]:</span>
+<span class="linenos"> 9</span>      <span class="n">r</span> <span class="o">=</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="linenos">10</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">11</span>      <span class="n">l</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">12</span>    
+<span class="linenos">13</span>  <span class="k">return</span> <span class="mi">0</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="nb">print</span><span class="p">(</span><span class="n">find_smallest_in_shifted_array</span><span class="p">([</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span><span class="o">+</span><span class="p">[</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]))</span>
+</pre></div>
+
+<p>The key is <code>A[m-1] &gt; A[m]</code> because since the data is sorted, the rule for sorted data remains: an entry is <em>always</em> greater than its left neighbour. That's just how sorted data works.</p>
+<p>The only time this is no longer true, is when the element being considered is the first one. Because we get a jump. Look carefully at the values above, the only time the left element is greater than the right, is at <code>... 8 1 ...</code> at this remains true for all configurations.</p>
+<p>The second key is if <code>A[m] &lt; A[r]</code> then we move the right pointer to the left. This also makes intuitive sense: if the right pointer is greater than the middle, then surely the smallest number is to the left. Check all the configurations, to see if you can convince yourself this rule remains true throughout.</p>
+<h2 id="recursive">recursive</h2>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">find_smallest_in_shifted_array</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">r</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+<span class="linenos"> 2</span>  <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+<span class="linenos"> 3</span>    <span class="n">r</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+<span class="linenos"> 4</span>  <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="linenos"> 5</span>  <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">A</span><span class="p">[</span><span class="n">m</span><span class="p">]:</span>
+<span class="linenos"> 6</span>    <span class="k">return</span> <span class="n">m</span>
+<span class="linenos"> 7</span>  <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">[</span><span class="n">m</span><span class="p">]:</span>
+<span class="linenos"> 8</span>    <span class="k">return</span> <span class="n">find_smallest_in_shifted_array</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+<span class="linenos"> 9</span>  <span class="k">else</span><span class="p">:</span>
+<span class="linenos">10</span>    <span class="k">return</span> <span class="n">find_smallest_in_shifted_array</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">11</span>  <span class="k">return</span> <span class="mi">0</span>
+<span class="linenos">12</span>  
+<span class="linenos">13</span><span class="nb">print</span><span class="p">(</span><span class="n">find_smallest_in_shifted_array</span><span class="p">([</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span><span class="o">+</span><span class="p">[</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]))</span>
+</pre></div>
+
+<p>See also:</p>
+<p><a href="/binary-search">binary search</a></p>

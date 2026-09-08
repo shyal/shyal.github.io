@@ -1,0 +1,148 @@
+<blockquote>
+<blockquote>
+<p>Given an m x n 2d grid map of '1's (land) and '0's (water), return the number of islands.</p>
+<p>An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.</p>
+</blockquote>
+</blockquote>
+<p><strong>Example 1:</strong></p>
+<p>Input:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">M</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">2</span>  <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">],</span>
+<span class="linenos">3</span>  <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">],</span>
+<span class="linenos">4</span>  <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">],</span>
+<span class="linenos">5</span>  <span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">]</span>
+<span class="linenos">6</span><span class="p">]</span>
+</pre></div>
+
+<p>Output: 1</p>
+<h2 id="solution">Solution</h2>
+<p>Counting the islands is done in two parts, the first is a linear scan of the matrix.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/NumberOfIslandsLinearScan.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+<span class="linenos">2</span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">])):</span>
+<span class="linenos">3</span>        <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">4</span>            <span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">5</span><span class="sd">            Do something.</span>
+<span class="linenos">6</span><span class="sd">            &quot;&quot;&quot;</span>
+</pre></div>
+
+<p>The second part is to recursively "explore" the neighbouring cells. The trick when exploring neighbours is to not fall off the edges of the Matrix.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">neighbours</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="n">z</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span> <span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="linenos">3</span>    <span class="k">return</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">z</span> <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="n">neighbours</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="c1"># [(1, 0), (0, 1)]</span>
+</pre></div>
+
+<p>Now that we have the indices of our valid neighbours, we can explore them recursively, i.e perform a DFS.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="k">if</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+<span class="linenos">3</span>        <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+<span class="linenos">4</span>        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">neighbours</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<span class="linenos">5</span>            <span class="n">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+<span class="linenos">6</span>        <span class="k">return</span> <span class="mi">1</span>
+<span class="linenos">7</span>    <span class="k">return</span> <span class="mi">0</span>
+</pre></div>
+
+<p>We set the cell to "0" as we explore it; this can be referred to as 'sinking' the cell, or can also be thought of as graph colouring. The final step is to return the sum of islands found within our linear scan.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">num_islands</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">2</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+<span class="linenos">3</span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">])):</span>
+<span class="linenos">4</span>      <span class="n">num_islands</span> <span class="o">+=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+<span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="n">num_islands</span><span class="p">)</span> <span class="c1"># 3</span>
+</pre></div>
+
+<video src="https://manim.s3.us-east-2.amazonaws.com/NumberOfIslands.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<h3 id="bringing-it-all-together">Bringing it all together</h3>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">M</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos"> 2</span>  <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">],</span>
+<span class="linenos"> 3</span>  <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">],</span>
+<span class="linenos"> 4</span>  <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">],</span>
+<span class="linenos"> 5</span>  <span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">]</span>
+<span class="linenos"> 6</span><span class="p">]</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="k">def</span> <span class="nf">number_of_islands</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+<span class="linenos"> 9</span>    <span class="k">def</span> <span class="nf">neighbours</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<span class="linenos">10</span>        <span class="n">z</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span> <span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="linenos">11</span>        <span class="k">return</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">z</span> <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>    <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<span class="linenos">14</span>        <span class="k">if</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+<span class="linenos">15</span>            <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+<span class="linenos">16</span>            <span class="k">for</span> <span class="n">ni</span><span class="p">,</span> <span class="n">nj</span> <span class="ow">in</span> <span class="n">neighbours</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<span class="linenos">17</span>                <span class="n">dfs</span><span class="p">(</span><span class="n">ni</span><span class="p">,</span> <span class="n">nj</span><span class="p">)</span>
+<span class="linenos">18</span>            <span class="k">return</span> <span class="mi">1</span>
+<span class="linenos">19</span>        <span class="k">return</span> <span class="mi">0</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>    <span class="n">num_islands</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">22</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">)):</span>
+<span class="linenos">23</span>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">])):</span>
+<span class="linenos">24</span>            <span class="n">num_islands</span> <span class="o">+=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span>    <span class="k">return</span> <span class="n">num_islands</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="nb">print</span><span class="p">(</span><span class="n">number_of_islands</span><span class="p">(</span><span class="n">M</span><span class="p">))</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="nb">print</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+</pre></div>
+
+<p>The equivalent code written more pythonically:</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">M</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos"> 2</span>  <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">],</span>
+<span class="linenos"> 3</span>  <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">],</span>
+<span class="linenos"> 4</span>  <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">],</span>
+<span class="linenos"> 5</span>  <span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">]</span>
+<span class="linenos"> 6</span><span class="p">]</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="k">def</span> <span class="nf">number_of_islands</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+<span class="linenos"> 9</span>    <span class="k">def</span> <span class="nf">neighbours</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<span class="linenos">10</span>        <span class="n">z</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span> <span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="linenos">11</span>        <span class="k">return</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">z</span> <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>    <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<span class="linenos">14</span>        <span class="k">if</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+<span class="linenos">15</span>            <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+<span class="linenos">16</span>            <span class="k">for</span> <span class="n">ni</span><span class="p">,</span> <span class="n">nj</span> <span class="ow">in</span> <span class="n">neighbours</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<span class="linenos">17</span>                <span class="n">dfs</span><span class="p">(</span><span class="n">ni</span><span class="p">,</span> <span class="n">nj</span><span class="p">)</span>
+<span class="linenos">18</span>            <span class="k">return</span> <span class="mi">1</span>
+<span class="linenos">19</span>        <span class="k">return</span> <span class="mi">0</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">))</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="nb">print</span><span class="p">(</span><span class="n">number_of_islands</span><span class="p">(</span><span class="n">M</span><span class="p">))</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="nb">print</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+</pre></div>
+
+<p>We can save a bit more space by moving the neighbour logic inside the DFS:</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">M</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos"> 2</span>  <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">],</span>
+<span class="linenos"> 3</span>  <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">],</span>
+<span class="linenos"> 4</span>  <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">],</span>
+<span class="linenos"> 5</span>  <span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">]</span>
+<span class="linenos"> 6</span><span class="p">]</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="k">def</span> <span class="nf">number_of_islands</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+<span class="linenos"> 9</span>    <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<span class="linenos">10</span>        <span class="k">if</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+<span class="linenos">11</span>            <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+<span class="linenos">12</span>            <span class="k">for</span> <span class="n">ni</span><span class="p">,</span> <span class="n">nj</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span> <span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)):</span>
+<span class="linenos">13</span>                <span class="n">dfs</span><span class="p">(</span><span class="n">ni</span><span class="p">,</span> <span class="n">nj</span><span class="p">)</span>
+<span class="linenos">14</span>            <span class="k">return</span> <span class="mi">1</span>
+<span class="linenos">15</span>        <span class="k">return</span> <span class="mi">0</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">))</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="nb">print</span><span class="p">(</span><span class="n">number_of_islands</span><span class="p">(</span><span class="n">M</span><span class="p">))</span>
+</pre></div>
+
+<h2 id="time-and-space-complexity">Time and Space Complexity</h2>
+<p>
+<script type="math/tex; mode=display">time = O(M \times N)</script>
+<script type="math/tex; mode=display">space = O(M \times N)</script>
+</p>
+<p>Attempt it on <a href="https://leetcode.com/problems/number-of-islands/">leetcode</a>.</p>

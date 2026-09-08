@@ -1,0 +1,18 @@
+<p>The problem consists of finding a set of letters, e.g <code>xyz</code> into a string of letters <code>yxzxzyzxyy</code>.</p>
+<h2 id="brute-force">brute force</h2>
+<p>Get all [[string substrings]], then check if [[string contains all chars unordered]].</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">get_shortest_unique_substring</span><span class="p">(</span><span class="n">ar</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+<span class="linenos"> 2</span>  <span class="n">min_length</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+<span class="linenos"> 3</span>  <span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="linenos"> 4</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
+<span class="linenos"> 5</span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
+<span class="linenos"> 6</span>      <span class="n">sub</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos"> 7</span>      <span class="n">contains</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">count</span><span class="p">,</span> <span class="n">ar</span><span class="p">))</span>
+<span class="linenos"> 8</span>      <span class="k">if</span> <span class="n">contains</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">sub</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">min_length</span><span class="p">:</span>
+<span class="linenos"> 9</span>        <span class="n">min_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sub</span><span class="p">)</span>
+<span class="linenos">10</span>        <span class="n">result</span> <span class="o">=</span> <span class="n">sub</span>
+<span class="linenos">11</span>  <span class="k">return</span> <span class="n">result</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="n">res</span> <span class="o">=</span> <span class="n">get_shortest_unique_substring</span><span class="p">(</span><span class="s1">&#39;xyyzyzyx&#39;</span><span class="p">,</span> <span class="s1">&#39;zyx&#39;</span><span class="p">)</span>
+<span class="linenos">14</span><span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>

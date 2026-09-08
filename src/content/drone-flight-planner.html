@@ -1,0 +1,81 @@
+<p><br></p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/Drone3D.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<blockquote>
+<blockquote>
+<p>Youre an engineer at a disruptive drone delivery startup and your CTO asks you to come up with an efficient algorithm that calculates the minimum amount of energy required for the companys drone to complete its flight. You know that the drone burns 1 kWh (kilowatt-hour is an energy unit) for every mile it ascends, and it gains 1 kWh for every mile it descends. Flying sideways neither burns nor adds any energy.</p>
+<p>Given an array route of 3D points, implement a function calcDroneMinEnergy that computes and returns the minimal amount of energy the drone would need to complete its route. Assume that the drone starts its flight at the first point in route. That is, no energy was expended to place the drone at the starting point.</p>
+<p>For simplicity, every 3D point will be represented as an integer array whose length is 3. Also, the values at indexes 0, 1, and 2 represent the x, y and z coordinates in a 3D point, respectively.</p>
+<p>Explain your solution and analyze its time and space complexities.</p>
+</blockquote>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">Example</span><span class="p">:</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="nb">input</span><span class="p">:</span>  <span class="n">route</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span>   <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+<span class="linenos"> 4</span>                  <span class="p">[</span><span class="mi">3</span><span class="p">,</span>   <span class="mi">5</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
+<span class="linenos"> 5</span>                  <span class="p">[</span><span class="mi">9</span><span class="p">,</span>  <span class="mi">20</span><span class="p">,</span>  <span class="mi">6</span><span class="p">],</span>
+<span class="linenos"> 6</span>                  <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+<span class="linenos"> 7</span>                  <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span>  <span class="mi">8</span><span class="p">]</span> <span class="p">]</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="n">output</span><span class="p">:</span> <span class="mi">5</span> <span class="c1"># less than 5 kWh and the drone would crash before the finish</span>
+<span class="linenos">10</span>          <span class="c1"># line. More than `5` kWh and itd end up with excess energy</span>
+<span class="linenos">11</span><span class="n">Constraints</span><span class="p">:</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="p">[</span><span class="n">time</span> <span class="n">limit</span><span class="p">]</span> <span class="mi">5000</span><span class="n">ms</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="p">[</span><span class="nb">input</span><span class="p">]</span> <span class="n">array</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">integer</span> <span class="n">route</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="mi">1</span> <span class="err"></span> <span class="n">route</span><span class="o">.</span><span class="n">length</span> <span class="err"></span> <span class="mi">100</span>
+<span class="linenos">18</span><span class="p">[</span><span class="n">output</span><span class="p">]</span> <span class="n">integer</span>
+</pre></div>
+
+<h2 id="solution">Solution</h2>
+<p>The first thing to notice, is that the drone only burns / gains kWhs in the vertical axis (the 'up' axis in this case is Z, even though it's not explicitly specified in the question).</p>
+<p>This is great, since we only need to focus on the up / down motions of the drone, and we can safely ignore the rest.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/Drone2D.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>As you can see, if we start with <code>0</code> fuel, we go into the negative when trying to fly above our starting point. You can also observe that, given our current trajectory, the minimum fuel level we reach is <code>-5</code>.</p>
+<p>In other words, if we start with <code>5</code> units of fuel, we can complete our flight.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/Drone2DSuccess.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<h3 id="solution-simulation">Solution (simulation)</h3>
+<p>We can simulate the fuel consumption of the drone, while tracking the <strong>minimum negative</strong> level the fuel reaches.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">route</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span>   <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+<span class="linenos"> 2</span>          <span class="p">[</span><span class="mi">3</span><span class="p">,</span>   <span class="mi">5</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
+<span class="linenos"> 3</span>          <span class="p">[</span><span class="mi">9</span><span class="p">,</span>  <span class="mi">20</span><span class="p">,</span>  <span class="mi">6</span><span class="p">],</span>
+<span class="linenos"> 4</span>          <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+<span class="linenos"> 5</span>          <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span>  <span class="mi">8</span><span class="p">]</span> <span class="p">]</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="k">class</span> <span class="nc">Axis</span><span class="p">:</span>
+<span class="linenos"> 8</span>  <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 9</span>  <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos">10</span>  <span class="n">z</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="k">def</span> <span class="nf">calc_drone_min_energy</span><span class="p">(</span><span class="n">route</span><span class="p">):</span>
+<span class="linenos">13</span>    <span class="n">fuel</span><span class="p">,</span> <span class="n">min_fuel</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+<span class="linenos">14</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">route</span><span class="p">)):</span>
+<span class="linenos">15</span>        <span class="n">fuel</span> <span class="o">-=</span> <span class="p">(</span><span class="n">route</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">Axis</span><span class="o">.</span><span class="n">z</span><span class="p">]</span> <span class="o">-</span> <span class="n">route</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">Axis</span><span class="o">.</span><span class="n">z</span><span class="p">])</span>
+<span class="linenos">16</span>        <span class="n">min_fuel</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">min_fuel</span><span class="p">,</span> <span class="n">fuel</span><span class="p">)</span>
+<span class="linenos">17</span>    <span class="k">return</span> <span class="o">-</span><span class="n">min_fuel</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="nb">print</span><span class="p">(</span><span class="n">calc_drone_min_energy</span><span class="p">(</span><span class="n">route</span><span class="p">))</span>
+</pre></div>
+
+<p>However this misses out on important observations that can significantly simplify our algorithm.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/Drone2DHomeostasis.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>Notice there is no impact on the fuel consumption for any back and forth below the starting point, and then back to the starting point. Any such journey leads to <strong>equlibrium</strong>. This means we can ignore anything that happens below our starting point.</p>
+<p>Then the only thing we need to worry about is the maximum height traveled above the starting point.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">calc_drone_min_energy</span><span class="p">(</span><span class="n">route</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">Axis</span><span class="o">.</span><span class="n">z</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">route</span><span class="p">)</span> <span class="o">-</span> <span class="n">route</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">Axis</span><span class="o">.</span><span class="n">z</span><span class="p">]</span>
+</pre></div>
+
+<h2 id="time-and-space-complexity">Time and Space Complexity</h2>
+<p>
+<script type="math/tex; mode=display">time = O(n)</script>
+<script type="math/tex; mode=display">space = O(1)</script>
+</p>

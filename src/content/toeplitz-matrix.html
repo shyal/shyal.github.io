@@ -1,0 +1,73 @@
+<p>#pramp #cs #matrix #interview</p>
+<p>A Toeplitz matrix is a matrix where every left-to-right-descending diagonal has the same element. Given a non-empty matrix arr, write a function that returns true if and only if it is a Toeplitz matrix. The matrix can be any dimensions, not necessarily square.</p>
+<p>For example,</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+<span class="linenos">2</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
+<span class="linenos">3</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
+</pre></div>
+
+<p>is a Toeplitz matrix, so we should return true, while</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+<span class="linenos">2</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
+<span class="linenos">3</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
+</pre></div>
+
+<p>Isnt a Toeplitz matrix, so we should return false.</p>
+<p>This is the solution i came up with the first time i encountered this problem:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">isToeplitz</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="n">is_toep</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">3</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+<span class="linenos">4</span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">])):</span>
+<span class="linenos">5</span>      <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">6</span>        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+<span class="linenos">7</span>                <span class="n">is_toep</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">8</span>                <span class="k">break</span>
+<span class="linenos">9</span>  <span class="k">return</span> <span class="n">is_toep</span>
+</pre></div>
+
+<p>Same solution, in Javascript:</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">function</span> <span class="n">isToeplitz</span><span class="p">(</span><span class="n">A</span><span class="p">){</span>
+<span class="linenos"> 2</span>  <span class="n">var</span> <span class="n">is_toep</span> <span class="o">=</span> <span class="n">true</span>
+<span class="linenos"> 3</span>  <span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">A</span><span class="o">.</span><span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="linenos"> 4</span>    <span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">A</span><span class="o">.</span><span class="n">length</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+<span class="linenos"> 5</span>      <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos"> 6</span>        <span class="k">if</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]){</span>
+<span class="linenos"> 7</span>                <span class="n">is_toep</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos"> 8</span>                <span class="k">break</span>
+<span class="linenos"> 9</span>        <span class="p">}</span>
+<span class="linenos">10</span>  <span class="k">return</span> <span class="n">is_toep</span>
+<span class="linenos">11</span><span class="p">}</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="n">var</span> <span class="n">m</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+<span class="linenos">14</span>         <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
+<span class="linenos">15</span>         <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]];</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">isToeplitz</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+</pre></div>
+
+<p>I believe it to be the optimal solution to this problem. I'm simply exploiting the fact that one can simply look backwards to check whether it's <em>Toeplitz</em> properties continue appearing. If the current row is in accordance with the previous row, albeit each cell shifted to the right, then by simply moving on to the next row, and repeating the same rearview check, we know the previous row is correct, so the <em>Toeplitz</em> correctness propagates down the rows as we progress.</p>
+<p>Strangely i have yet to come across someone on <a href="https://pramp.com">Pramp</a> who implements this solution. All the other candidates start with the first row, and instead of ahead, and end up with very complex code instead. Even more strangely, even the official answer is a lot more convoluted.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">function</span> <span class="n">isToeplitz</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+<span class="linenos"> 2</span>    <span class="n">R</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">length</span><span class="p">,</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">length</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span>    <span class="c1"># For each diagonal starting in the first row at (0, c)</span>
+<span class="linenos"> 5</span>    <span class="k">for</span> <span class="n">c</span> <span class="kn">from</span> <span class="mi">0</span> <span class="n">to</span> <span class="n">C</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos"> 6</span>        <span class="n">start</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">c</span><span class="p">]</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>        <span class="c1"># For each element of that diagonal</span>
+<span class="linenos"> 9</span>        <span class="k">for</span> <span class="n">k</span> <span class="kn">from</span> <span class="mi">0</span> <span class="n">to</span> <span class="nb">min</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">C</span><span class="o">-</span><span class="n">c</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">10</span>            <span class="k">if</span> <span class="n">matrix</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">c</span><span class="o">+</span><span class="n">k</span><span class="p">]</span> <span class="o">!=</span> <span class="n">start</span><span class="p">:</span>
+<span class="linenos">11</span>                <span class="k">return</span> <span class="n">false</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>    <span class="c1"># Code repeated for starting in the first column</span>
+<span class="linenos">14</span>    <span class="k">for</span> <span class="n">r</span> <span class="kn">from</span> <span class="mi">0</span> <span class="n">to</span> <span class="n">R</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">15</span>        <span class="n">start</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">16</span>        <span class="k">for</span> <span class="n">k</span> <span class="kn">from</span> <span class="mi">0</span> <span class="n">to</span> <span class="nb">min</span><span class="p">(</span><span class="n">R</span><span class="o">-</span><span class="n">r</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">17</span>            <span class="k">if</span> <span class="n">matrix</span><span class="p">[</span><span class="n">r</span><span class="o">+</span><span class="n">k</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">!=</span> <span class="n">start</span><span class="p">:</span>
+<span class="linenos">18</span>                <span class="k">return</span> <span class="n">false</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span>    <span class="k">return</span> <span class="n">true</span>
+</pre></div>
+
+<p>So while sometimes i feel i am still behind, as other candidates code up better and more graceful solutions than i do, sometimes i feel i am ahead, and able to see simple solutions more rapidly than my counterparts.</p>
+<p>This gives me hope.</p>

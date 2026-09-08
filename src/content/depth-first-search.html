@@ -1,0 +1,79 @@
+<p>A depth first search is very simple to understand and implement, although i'm often surprised to see some developers are unable to perform a pre-order, in-order or post-order search by hand.</p>
+<p>A Depth First Search can be performed on trees, and as well graphs. To keep things simple, let's look at a DFS on a binary tree.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+<span class="linenos"> 4</span>        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">left</span>
+<span class="linenos"> 5</span>        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">right</span>
+<span class="linenos"> 6</span>        
+<span class="linenos"> 7</span><span class="n">tree</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> 
+<span class="linenos"> 8</span>        <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> 
+<span class="linenos"> 9</span>            <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">),</span> <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">)),</span>
+<span class="linenos">10</span>            <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">),</span> <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">))),</span> 
+<span class="linenos">11</span>        <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> 
+<span class="linenos">12</span>            <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">),</span> <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">)),</span> 
+<span class="linenos">13</span>            <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">),</span> <span class="n">Node</span><span class="p">(</span><span class="s1">&#39;o&#39;</span><span class="p">))))</span>
+</pre></div>
+
+<h2 id="pre-order-traversal">Pre-Order Traversal</h2>
+<p>In a pre-order traversal, we do a DFS, but print the node value before recursing into the left and right nodes. i.e</p>
+<ul>
+<li>print node value</li>
+<li>recurse left</li>
+<li>recurse right</li>
+</ul>
+<video src="https://manim.s3.us-east-2.amazonaws.com/PreOrder.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">pre_order</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="k">if</span> <span class="n">node</span><span class="p">:</span>
+<span class="linenos">3</span>        <span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="linenos">4</span>        <span class="n">pre_order</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+<span class="linenos">5</span>        <span class="n">pre_order</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+<span class="linenos">6</span>
+<span class="linenos">7</span><span class="n">pre_order</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+</pre></div>
+
+<hr />
+<h2 id="in-order-traversal">In-Order Traversal</h2>
+<p>In an in-order traversal, we do a DFS, but print the node value between recursing into the left and right nodes. i.e</p>
+<ul>
+<li>recurse left</li>
+<li>print node value</li>
+<li>recurse right</li>
+</ul>
+<video src="https://manim.s3.us-east-2.amazonaws.com/InOrder.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">in_order</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="k">if</span> <span class="n">node</span><span class="p">:</span>
+<span class="linenos">3</span>        <span class="n">in_order</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+<span class="linenos">4</span>        <span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="linenos">5</span>        <span class="n">in_order</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+<span class="linenos">6</span>
+<span class="linenos">7</span><span class="n">in_order</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+</pre></div>
+
+<hr />
+<h2 id="post-order-traversal">Post-Order Traversal</h2>
+<p>In an post-order traversal, we do a DFS, but print the node value after recursing into the left and right nodes. i.e</p>
+<ul>
+<li>recurse left</li>
+<li>recurse right</li>
+<li>print node value</li>
+</ul>
+<video src="https://manim.s3.us-east-2.amazonaws.com/PostOrder.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">post_order</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="k">if</span> <span class="n">node</span><span class="p">:</span>
+<span class="linenos">3</span>        <span class="n">post_order</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+<span class="linenos">4</span>        <span class="n">post_order</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+<span class="linenos">5</span>        <span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="linenos">6</span>
+<span class="linenos">7</span><span class="n">post_order</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+</pre></div>
+
+<hr />
+<p>Worst time complexity is <script type="math/tex">O(|V|+|N|)</script>, worst space complexity of <script type="math/tex">O(|V|)</script>. A DFS is very often employed to solve a wide variety of tree and graph problems. You'll see many examples of DFS being used in this course.</p>
+<p>The DFS variants presented on this page are <strong>recursive</strong>, and are as such very succinct to code up.</p>

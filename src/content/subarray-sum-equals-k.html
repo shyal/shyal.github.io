@@ -1,0 +1,82 @@
+<p>The <a href="https://leetcode.com/problems/subarray-sum-equals-k/">subarray sum equals k problem</a> asks:</p>
+<blockquote>
+<blockquote>
+<p>Given an array of integers and an integer k, you need to find the total number of continuous subarrays whose sum equals to k.</p>
+</blockquote>
+</blockquote>
+<p>In this problem, you are being asked to count the number of subarrays who's <strong>sum</strong> equals <code>k</code>. The emphasis is on the <strong>sum</strong>, so we should first focus on computing the sum as we go.</p>
+<p>Think about it this way: you are standing in the snow, and you're given a list of 'hops' (in meters) that you need to make: <code>1, 2, 2, 0, 3, 2, 5</code>. Initially you hop <code>1</code> meter, then <code>2</code>, and <code>2</code> again, then <code>0</code> meters, then <code>3</code> etc.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/HoppingDownTheRoad.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>The <strong>sum</strong> of these hops is the distance you've traveled at each hop.</p>
+<p>You are then asked: how many of these hops travelled <code>5</code> meters consecutively?  The answer is <code>6</code>:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span>             <span class="n">_</span>
+<span class="linenos">2</span>         <span class="n">___</span>
+<span class="linenos">3</span>       <span class="n">_____</span>
+<span class="linenos">4</span>     <span class="n">_____</span>     
+<span class="linenos">5</span><span class="n">________</span>
+<span class="linenos">6</span><span class="n">______</span>
+<span class="linenos">7</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+
+<p>This is, once again, something easy for us humans to do: we find the two pointer approach fairly intuitive; simply add numbers until they add up to <code>5</code>, i.e <code>1,2,2</code>, move the right pointer as long as the sum of the numbers is less than, or equal to 5, or move the left pointer if the sum is greater.</p>
+<p>However implementing a two pointer solution can be very hard, and working with the <strong>sums</strong>, or the <strong>distances</strong> traveled is actually a lot easier.</p>
+<h2 id="work-with-accumulation-values">Work with accumulation values</h2>
+<p>So our total distance traveled at each hop is:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">nums</span><span class="p">:</span>              <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">5</span>
+<span class="linenos">2</span><span class="n">accumulation</span><span class="p">:</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span>  <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span>
+</pre></div>
+
+<p>This is something that can often trip up beginners with DP questions: you can often end up working in a totally different solution space. We are no longer concerned with our input values.. only their accumulation values. That can take quite a leap of the imagination (no pun intended).</p>
+<p>The first distance is <code>0</code>, because before you've taken the first step in a journey, you've traveled 0 meters.</p>
+<h2 id="could-i-hop-back-k">Could i hop back 'k'?</h2>
+<p>This 'total distance travelled' data is invaluable, because we can ask it questions, namely: <em>"if i hop back by k, do i land on a previous hop (myt own footprints in the snow)?"</em></p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/HoppingBackK.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>If we do land on a previous hop, then we have a sub-array who's sum equals k. If you're standing in the snow, hop back <strong>k</strong> and land on your footprints, that means the <strong>sum</strong> of your footprints between these two points is equals to <strong>k</strong>.</p>
+<p>Please note, that if you hop twice on the same spot (you hopped <code>0</code> meters) that still counts as a hop, hence the repeated hops from and to <code>5</code>.</p>
+<h3 id="acc-k">acc - k</h3>
+<p>In other words, the question we are asking is: is there an accumulation value equal to <code>acc - k</code>. </p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/HoppingBackKSubs.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>Let's count the 'hits':</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span>
+<span class="linenos">2</span><span class="n">x</span><span class="o">........</span><span class="n">x</span>
+<span class="linenos">3</span><span class="n">x</span><span class="o">...........</span><span class="n">x</span>
+<span class="linenos">4</span>      <span class="n">x</span><span class="o">........</span><span class="n">x</span>
+<span class="linenos">5</span>         <span class="n">x</span><span class="o">..</span><span class="n">x</span><span class="o">......</span><span class="n">x</span>
+<span class="linenos">6</span>               <span class="n">x</span><span class="o">......</span><span class="n">x</span>
+</pre></div>
+
+<p>Now it gets a little trickier. When we travel 10 meters, and ask <strong>do i land on a hop if i travel 5 meters back?</strong> the answer is: <strong>actually you could land on two hops</strong>. Since there is a <code>0</code> in the array, there are two subarrays that add up to the same accumulation value. We need to account for that.</p>
+<h2 id="an-easy-to-understand-implementation">An easy to understand implementation</h2>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">accumulate</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="k">def</span> <span class="nf">subarraySum</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="linenos">4</span>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">5</span>    <span class="n">accum</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="o">*</span><span class="n">accumulate</span><span class="p">(</span><span class="n">nums</span><span class="p">)]</span>
+<span class="linenos">6</span>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">acc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">accum</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
+<span class="linenos">7</span>        <span class="n">total</span> <span class="o">+=</span> <span class="n">accum</span><span class="p">[:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">acc</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span>
+<span class="linenos">8</span>    <span class="k">return</span> <span class="n">total</span>
+</pre></div>
+
+<p>We begin by adding out starting position <code>0</code> to our accumulation array (when we hop back, it's valid to land on the starting position). We then iterate over our accumulate (barring 0).</p>
+<p>We then ask <strong>if i hop back k meters, how many valid hops do i find?</strong>. This works, but is highly inefficient.</p>
+<h2 id="a-more-efficient-implementation">A more efficient implementation</h2>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="linenos">2</span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">accumulate</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="k">def</span> <span class="nf">subarraySum</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="linenos">5</span>    <span class="n">count</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="mi">1</span><span class="p">}),</span> <span class="mi">0</span>
+<span class="linenos">6</span>    <span class="k">for</span> <span class="n">acc</span> <span class="ow">in</span> <span class="n">accumulate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<span class="linenos">7</span>        <span class="n">total</span> <span class="o">+=</span> <span class="n">count</span><span class="p">[</span><span class="n">acc</span> <span class="o">-</span> <span class="n">k</span><span class="p">]</span>
+<span class="linenos">8</span>        <span class="n">count</span><span class="p">[</span><span class="n">acc</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">9</span>    <span class="k">return</span> <span class="n">total</span>
+</pre></div>
+
+<p>A more efficient implementation is to count the <code>acc</code> (distance travelled) values in a counter, on line <code>8</code> as we go along (as we iterate over accumulate). This is purely for the <code>O(1)</code> lookup. </p>
+<p>We initialise the counter with <code>{0:1}</code> since if we land on our starting position, we've made a valid hop.</p>
+<p>We'll want to perform the lookup (ask the question, on line <code>7</code>) <em>before</em> adding our accumulation value (distance) to the counter. </p>

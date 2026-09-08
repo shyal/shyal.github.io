@@ -1,0 +1,47 @@
+<p>Another classic problem. And another one where i saw sacriligiously long solutions.</p>
+<p>If a list, e.g</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+
+<p>How would you move all the zeroes to the end of the list?</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+<h2 id="using-sort">Using Sort</h2>
+<p>By <strong>far</strong> the simplest solution is to use <code>sort</code>.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">moveZerosToEnd</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+
+<p>This works because the <code>key</code> to our call to <code>sorted</code>makes the sorting do one thing only mark zeroes with a <code>1</code>, meaning shifting the values to the right, and marking everything else with a <code>0</code> which keeps them in the same position.</p>
+<p>The default <code>sort</code> / <code>sorted</code> functions in python are stable (and <code>sort</code> is in place). The stability of the sort means the non-zero values remain in the same place.</p>
+<p>The time complexity is therefore <code>O(n log n)</code> which is perfectly acceptable. This solution was in fact provided by <a href="https://leetcode.com/stefanpochmann/">Stefan Pochmann</a> on <a href="http://leetcode.com">Leetcode</a>. </p>
+<h2 id="using-iteration">Using Iteration</h2>
+<p>Another great approach is to simply iterate through the list, with two pointers, from left to right.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">move_zeros_to_end</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="n">w</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">3</span>  <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+<span class="linenos">4</span>    <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">5</span>      <span class="n">A</span><span class="p">[</span><span class="n">w</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">w</span><span class="p">]</span>
+<span class="linenos">6</span>      <span class="n">w</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">7</span>    <span class="k">elif</span> <span class="n">A</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">8</span>      <span class="n">w</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+
+<p>If the left pointer's value is zero, and the right pointer's value is non zero, swap them, and increment. Another condition is that if the left pointer is non-zero then it needs to be incremented, since it really needs to be on a zero for a swap to take place.</p>
+<p>This solution is in-place, and runs in <code>O(n)</code> so is extremely optimal. However the astute reader will notice that <code>w += 1</code> takes place whether the left pointer is <code>0</code> or not. So what really determines whether we move the left pointer is actually whether the right pointer is non-zero.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">move_zeros_to_end</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="n">w</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">3</span>  <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+<span class="linenos">4</span>    <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">5</span>      <span class="n">A</span><span class="p">[</span><span class="n">w</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">w</span><span class="p">]</span>
+<span class="linenos">6</span>      <span class="n">w</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+
+<p>This code is now a lot more concise. If you want to start entering code golf territory, then all our assigments can be done on one line:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">move_zeros_to_end</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="n">w</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">3</span>  <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+<span class="linenos">4</span>    <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">5</span>      <span class="n">A</span><span class="p">[</span><span class="n">w</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">],</span> <span class="n">w</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">w</span><span class="p">],</span> <span class="n">w</span><span class="o">+</span><span class="mi">1</span>
+</pre></div>

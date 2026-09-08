@@ -1,0 +1,28 @@
+<p>Can't remember the exact name of this problem, but essentially involves counting the number of different ways a string of numbers representing letters of the alphabet can be interpreted.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">S</span> <span class="o">=</span> <span class="s2">&quot;26157&quot;</span>
+<span class="linenos"> 2</span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ways&#39;</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">def</span> <span class="nf">count_number_of_ways</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="linenos"> 5</span>    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ways&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos"> 6</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="n">count_number_of_ways</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+<span class="linenos"> 8</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mi">26</span><span class="p">:</span>
+<span class="linenos"> 9</span>        <span class="n">count_number_of_ways</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+<span class="linenos">10</span>    <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ways&#39;</span><span class="p">]</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="n">ways</span> <span class="o">=</span> <span class="n">count_number_of_ways</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+<span class="linenos">13</span><span class="nb">print</span><span class="p">(</span><span class="n">ways</span><span class="p">)</span>
+</pre></div>
+
+<p>Output:</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="mi">2</span> <span class="o">--&gt;</span> <span class="mi">6157</span>
+<span class="linenos"> 2</span><span class="mi">6</span> <span class="o">--&gt;</span> <span class="mi">157</span>
+<span class="linenos"> 3</span><span class="mi">1</span> <span class="o">--&gt;</span> <span class="mi">57</span>
+<span class="linenos"> 4</span><span class="mi">5</span> <span class="o">--&gt;</span> <span class="mi">7</span>
+<span class="linenos"> 5</span><span class="mi">15</span> <span class="o">--&gt;</span> <span class="mi">7</span>
+<span class="linenos"> 6</span><span class="mi">26</span> <span class="o">--&gt;</span> <span class="mi">157</span>
+<span class="linenos"> 7</span><span class="mi">1</span> <span class="o">--&gt;</span> <span class="mi">57</span>
+<span class="linenos"> 8</span><span class="mi">5</span> <span class="o">--&gt;</span> <span class="mi">7</span>
+<span class="linenos"> 9</span><span class="mi">15</span> <span class="o">--&gt;</span> <span class="mi">7</span>
+<span class="linenos">10</span><span class="mi">9</span>
+</pre></div>

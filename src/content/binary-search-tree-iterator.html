@@ -1,0 +1,88 @@
+<h2 id="tushar-solution">Tushar Solution</h2>
+<p>Credit: Tushar</p>
+<p>https://leetcode.com/problems/binary-search-tree-iterator/</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">TreeNode</span><span class="p">:</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">x</span>
+<span class="linenos"> 4</span>        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">left</span>
+<span class="linenos"> 5</span>        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">right</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="k">class</span> <span class="nc">BSTIterator</span><span class="p">:</span>
+<span class="linenos"> 8</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">):</span>
+<span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span>
+<span class="linenos">10</span>        <span class="bp">self</span><span class="o">.</span><span class="n">gen</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>    <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="linenos">13</span>        <span class="k">if</span> <span class="n">n</span><span class="p">:</span>
+<span class="linenos">14</span>            <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="p">:</span>
+<span class="linenos">15</span>                <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+<span class="linenos">16</span>            <span class="k">yield</span> <span class="n">n</span><span class="o">.</span><span class="n">val</span>
+<span class="linenos">17</span>            <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
+<span class="linenos">18</span>                <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span>    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">21</span>        <span class="k">return</span> <span class="bp">self</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span>    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos">24</span>        <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gen</span><span class="p">)</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="n">obj</span> <span class="o">=</span> <span class="n">BSTIterator</span><span class="p">(</span><span class="n">TreeNode</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">20</span><span class="p">))))</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">:</span>
+<span class="linenos">31</span>    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+
+<p>Output:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">sherlock</span> <span class="n">ran</span> <span class="mi">33</span> <span class="n">lines</span> <span class="n">of</span> <span class="n">Python</span> <span class="mi">3</span><span class="p">:</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="mi">3</span>
+<span class="linenos">4</span><span class="mi">7</span>
+<span class="linenos">5</span><span class="mi">9</span>
+<span class="linenos">6</span><span class="mi">15</span>
+<span class="linenos">7</span><span class="mi">20</span>
+<span class="linenos">8</span>
+<span class="linenos">9</span><span class="o">&gt;&gt;&gt;</span>                               <span class="p">(</span><span class="n">finished</span> <span class="ow">in</span> <span class="mf">1.21</span><span class="n">s</span><span class="p">):</span>            
+</pre></div>
+
+<h2 id="shyal-solution">Shyal Solution</h2>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">TreeNode</span><span class="p">:</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+<span class="linenos"> 4</span>        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">left</span>
+<span class="linenos"> 5</span>        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">right</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="k">class</span> <span class="nc">BSTIterator</span><span class="p">:</span>
+<span class="linenos"> 8</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">):</span>
+<span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span>
+<span class="linenos">10</span>        <span class="bp">self</span><span class="o">.</span><span class="n">iter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+<span class="linenos">11</span>        <span class="bp">self</span><span class="o">.</span><span class="n">next_item</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>    <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="linenos">14</span>        <span class="k">if</span> <span class="n">n</span><span class="p">:</span>
+<span class="linenos">15</span>            <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+<span class="linenos">16</span>            <span class="k">yield</span> <span class="n">n</span><span class="o">.</span><span class="n">val</span>
+<span class="linenos">17</span>            <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+<span class="linenos">18</span>        
+<span class="linenos">19</span>    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos">20</span>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">21</span><span class="sd">        Returns the next item if it&#39;s been cached,</span>
+<span class="linenos">22</span><span class="sd">        else calls next.</span>
+<span class="linenos">23</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">24</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">25</span>            <span class="n">tmp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_item</span><span class="p">,</span> <span class="kc">None</span>
+<span class="linenos">26</span>            <span class="k">return</span> <span class="n">tmp</span>
+<span class="linenos">27</span>        <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iter</span><span class="p">)</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span>    <span class="k">def</span> <span class="nf">hasNext</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">30</span>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">31</span><span class="sd">        Returns whether we have a next item in the iterator.</span>
+<span class="linenos">32</span><span class="sd">        Does so by actually calling next, and storing the result</span>
+<span class="linenos">33</span><span class="sd">        in a cache.</span>
+<span class="linenos">34</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">35</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_item</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">36</span>            <span class="bp">self</span><span class="o">.</span><span class="n">next_item</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iter</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="linenos">37</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="linenos">38</span>        
+</pre></div>

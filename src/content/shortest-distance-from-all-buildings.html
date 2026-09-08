@@ -1,0 +1,82 @@
+<blockquote>
+<blockquote>
+<p>You want to build a house on an empty land which reaches all buildings in the shortest amount of distance. You can only move up, down, left and right. You are given a 2D grid of values 0, 1 or 2, where:</p>
+</blockquote>
+</blockquote>
+<ul>
+<li>Each 0 marks an empty land which you can pass by freely.</li>
+<li>Each 1 marks a building which you cannot pass through.</li>
+<li>Each 2 marks an obstacle which you cannot pass through.</li>
+</ul>
+<blockquote>
+<blockquote>
+<p>Example:<br />
+    Input: [[1,0,2,0,1],[0,0,0,0,0],[0,0,1,0,0]]<br />
+    Output: 7</p>
+<p>Explanation: Given three buildings at <code>(0,0)</code>, <code>(0,4)</code>, <code>(2,2)</code>, and an obstacle at <code>(0,2)</code>, the point <code>(1,2)</code> is an ideal empty land to build a house, as the total travel distance of <code>3+3+1=7</code> is minimal. So return <code>7</code>. Note: There will be at least one building. If it is not possible to build such house according to the above rules, return -1.</p>
+</blockquote>
+</blockquote>
+<h2 id="solution">Solution</h2>
+<p>This question is labeled as "hard" although once you understand the approach it's fairly straight-forward. We begin by performing a BFS starting from each <strong>house</strong>, while keeping track of the distance from the BFS origin.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/ShortestDistanceFromAllBuildings.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" allowfullscreen autoplay loop playsinline muted>
+</video>
+
+<p>Above we are seeing the BFS for each house take place consecutively. In actuality they can all run at once. One a cell has been visited by all N houses, we store the sum of its distances (in white).</p>
+<video  id='fs_player' src="https://manim.s3.us-east-2.amazonaws.com/ShortestDistanceFromAllBuildingsTotal.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" allowfullscreen autoplay loop playsinline muted>
+</video>
+<p><button class='btn btn-primary' onclick="goFullscreen('fs_player'); return false">fullscreen</button></p>
+<script>
+function goFullscreen(id) {
+  var element = document.getElementById(id);       
+  if (element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if (element.webkitRequestFullScreen) {
+    element.webkitRequestFullScreen();
+  }  
+}
+</script>
+
+<p>The optimal shortest path to each house is the smallest sum. To save space, we store the number of visits in the Matrix itself.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/ShortestDistanceFromAllBuildingsFinal.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" allowfullscreen autoplay loop playsinline muted>
+</video>
+
+<p>https://leetcode.com/problems/shortest-distance-from-all-buildings/</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span> <span class="k">as</span> <span class="n">dd</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="nf">shortestDistance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">M</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="n">H</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">))</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="k">if</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">])</span>
+<span class="linenos"> 7</span>        <span class="n">dist</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">blocked</span><span class="p">,</span> <span class="n">house</span><span class="p">,</span> <span class="n">distances</span> <span class="o">=</span> <span class="n">dd</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span> <span class="n">dd</span><span class="p">(</span><span class="nb">set</span><span class="p">),</span> <span class="nb">set</span><span class="p">(),</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[]</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>        <span class="k">for</span> <span class="n">hi</span><span class="p">,</span> <span class="n">hj</span> <span class="ow">in</span> <span class="n">H</span><span class="p">:</span>
+<span class="linenos">10</span>            <span class="n">Q</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">hi</span><span class="p">,</span> <span class="n">hj</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="n">hj</span><span class="p">))</span>
+<span class="linenos">11</span>            <span class="n">visited</span><span class="p">[(</span><span class="n">hi</span><span class="p">,</span> <span class="n">hj</span><span class="p">)]</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">hi</span><span class="p">,</span> <span class="n">hj</span><span class="p">))</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>        <span class="k">while</span> <span class="n">Q</span><span class="p">:</span>
+<span class="linenos">14</span>            <span class="n">next_q</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="linenos">15</span>            <span class="k">for</span> <span class="n">hi</span><span class="p">,</span> <span class="n">hj</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">Q</span><span class="p">:</span>
+<span class="linenos">16</span>                <span class="k">for</span> <span class="n">ni</span><span class="p">,</span> <span class="n">nj</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]:</span>
+<span class="linenos">17</span>                    <span class="k">if</span> <span class="p">(</span><span class="n">ni</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">ni</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="n">nj</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nj</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+<span class="linenos">18</span>                        <span class="k">if</span> <span class="ow">not</span> <span class="p">(((</span><span class="n">ni</span><span class="p">,</span> <span class="n">nj</span><span class="p">)</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">[(</span><span class="n">hi</span><span class="p">,</span> <span class="n">hj</span><span class="p">)])</span> <span class="ow">or</span>\
+<span class="linenos">19</span>                         <span class="n">M</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="n">nj</span><span class="p">]</span> <span class="ow">is</span> <span class="n">blocked</span> <span class="ow">or</span> <span class="n">M</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="n">nj</span><span class="p">]</span> <span class="ow">is</span> <span class="n">house</span><span class="p">):</span>
+<span class="linenos">20</span>                            <span class="n">dist</span><span class="p">[(</span><span class="n">hi</span><span class="p">,</span> <span class="n">hj</span><span class="p">,</span> <span class="n">ni</span><span class="p">,</span> <span class="n">nj</span><span class="p">)]</span> <span class="o">=</span> <span class="n">dist</span><span class="p">[(</span><span class="n">hi</span><span class="p">,</span> <span class="n">hj</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">21</span>                            <span class="n">M</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="n">nj</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+<span class="linenos">22</span>                            <span class="k">if</span> <span class="n">M</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="n">nj</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">H</span><span class="p">):</span>
+<span class="linenos">23</span>                                <span class="n">distances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">dist</span><span class="p">[(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">ni</span><span class="p">,</span> <span class="n">nj</span><span class="p">)]</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">H</span><span class="p">))</span>
+<span class="linenos">24</span>                            <span class="n">visited</span><span class="p">[(</span><span class="n">hi</span><span class="p">,</span> <span class="n">hj</span><span class="p">)]</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">ni</span><span class="p">,</span> <span class="n">nj</span><span class="p">))</span>
+<span class="linenos">25</span>                            <span class="n">next_q</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">hi</span><span class="p">,</span> <span class="n">hj</span><span class="p">,</span> <span class="n">ni</span><span class="p">,</span> <span class="n">nj</span><span class="p">))</span>
+<span class="linenos">26</span>            <span class="n">Q</span> <span class="o">=</span> <span class="n">next_q</span>
+<span class="linenos">27</span>        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span> <span class="k">if</span> <span class="n">distances</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="n">M</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">30</span>  <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+<span class="linenos">31</span>  <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="linenos">32</span>  <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="linenos">33</span>  <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="linenos">34</span>  <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">35</span><span class="p">]</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span><span class="n">s</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">shortestDistance</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="linenos">38</span><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>

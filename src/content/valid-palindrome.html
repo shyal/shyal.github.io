@@ -1,0 +1,9 @@
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">is_pal</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="n">sl</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="nb">filter</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">isalnum</span><span class="p">,</span> <span class="n">s</span><span class="p">))]</span>
+<span class="linenos">3</span>    <span class="k">return</span> <span class="nb">all</span><span class="p">([</span><span class="n">sl</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">sl</span><span class="p">[</span><span class="o">~</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sl</span><span class="p">))])</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="n">is_pal</span><span class="p">(</span><span class="s2">&quot;A man, a plan, a canal: Panama&quot;</span><span class="p">))</span>
+</pre></div>
+
+<p>See also:</p>
+<p>[[list index complement]]</p>

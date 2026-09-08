@@ -1,0 +1,25 @@
+<pre><code>&lt;iframe id="embed_player" frameborder="0" width="280" height="216" src="https://alsoisland.airtime.pro/embed/player?stream=auto&amp;skin=1"&gt;&lt;/iframe&gt;
+</code></pre>
+<p>Two Sum is <a href="https://leetcode.com/problems/two-sum/">problem #1 on leetcode.com</a>, and can, as such, be considered a classic.</p>
+<iframe name="Framename" src="https://scrimba.com/scrim/c9rmLNtM" width="800" height="400" frameborder="0" scrolling="auto" class="frame-area">
+</iframe>
+
+<h2 id="the-gist">The gist</h2>
+<p>We're given a list: <code>[2, 7, 11, 15]</code> and want to find two numbers adding up to target <code>9</code>.</p>
+<p>The answer is <code>2 + 7 = 9</code>.</p>
+<h2 id="two-pointer-approach">Two pointer approach</h2>
+<p>The two pointer approach first involves sorting the array, as it will only work on sorted integers.</p>
+<div class="mermaid">
+graph TD
+A[start] --> C
+C{s = Ai + Aj}
+C -->|s == k| D[return i, j]
+C -->|s < k| E[i += 1]
+C -->|s > k| F[j -= 1]
+E --> C
+F --> C
+</div>
+
+<p>In other words, our pointer <code>i</code> starts at the left of the list, and our pointer <code>j</code> and the right. If <code>A[i] + A[j]</code> is equals to <code>k</code> we've found our solution. If it's less, then we need to increment <code>i</code>. If it's greater, then we need to decrement <code>j</code>.</p>
+<p>See also:</p>
+<p><a href="/ternary-conditionals">ternary conditionals</a></p>

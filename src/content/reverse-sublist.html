@@ -1,0 +1,51 @@
+<blockquote>
+<blockquote>
+<p>Reverse a linked list from position m to n. Do it in one-pass.<br />
+Note: 1  m  n  length of list.<br />
+Example:<br />
+Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL, m = 2, n = 4<br />
+Output: 1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;NULL</p>
+</blockquote>
+</blockquote>
+<p>Reversing a sublist in one pass is a notoriously hard problem. It requires meticulous and painstaking pointer work.</p>
+<h2 id="solution">Solution</h2>
+<p>The first step is to create a dummy head, and a pointer <code>P</code> to the node before the head of the sublist.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/ReverseSublistCreation.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>Next, a tail pointer is created, pointing to the node after the head 'P'.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/ReverseSublistTail.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>Do notice that the <code>tail</code> pointer doesn't move, rather it points to the next node <strong>after the sublist</strong>. Do also notice that <code>P</code> always points to the <strong>start of the sublist</strong>.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/ReverseSublistTailStatic.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>For this rewiring to take place, a <code>tmp</code> variable is used to iterate over the nodes that need changing.</p>
+<video src="https://manim.s3.us-east-2.amazonaws.com/ReverseSublistTailStaticTmpMoving.mp4" style="margin: 0 auto; width: 640px;" class='center' width="640" height="480" autoplay loop playsinline muted>
+</video>
+
+<p>The <code>tmp</code> variable acts as an iterator of sorts, it's the main point of interest during the iteration. During the iteration we:</p>
+<ul>
+<li>connect the <code>tail</code>  to <code>tmp</code>'s next.</li>
+<li>connect <code>tmp</code> to <code>P</code>'s next.</li>
+<li>connect <code>P</code>'s next to <code>tmp</code>.</li>
+</ul>
+<p>The pattern is <code>tail</code>, <code>tmp</code>, <code>p</code>. This graphic will help you remember this pattern visually.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">reverse_sublist</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">):</span>
+<span class="linenos"> 2</span>    <span class="n">dummy</span> <span class="o">=</span> <span class="n">P</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+<span class="linenos"> 3</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+<span class="linenos"> 4</span>        <span class="n">P</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">next</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>    <span class="n">tail</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">next</span>
+<span class="linenos"> 7</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">finish</span> <span class="o">-</span> <span class="n">start</span><span class="p">):</span>
+<span class="linenos"> 8</span>        <span class="n">tmp</span> <span class="o">=</span> <span class="n">tail</span><span class="o">.</span><span class="n">next</span>
+<span class="linenos"> 9</span>        <span class="n">tail</span><span class="o">.</span><span class="n">next</span><span class="p">,</span> <span class="n">tmp</span><span class="o">.</span><span class="n">next</span><span class="p">,</span> <span class="n">P</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">next</span><span class="p">,</span> <span class="n">sub</span><span class="o">.</span><span class="n">next</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)</span>
+<span class="linenos">10</span>    <span class="k">return</span> <span class="n">dummy</span><span class="o">.</span><span class="n">next</span>
+</pre></div>
+
+<h2 id="time-and-space-complexity">Time and Space Complexity</h2>
+<p>
+<script type="math/tex; mode=display">time = O(n)</script>
+<script type="math/tex; mode=display">space = O(1)</script>
+</p>

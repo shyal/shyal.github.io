@@ -1,0 +1,19 @@
+<p>It's sometimes useful to compare words in a list. </p>
+<p>Given the words:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">aaa</span>
+<span class="linenos">2</span><span class="n">bbb</span>
+<span class="linenos">3</span><span class="n">ccc</span>
+</pre></div>
+
+<p>Compare them as so:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">aaa</span> <span class="o">&lt;</span> <span class="n">bbb</span>
+<span class="linenos">2</span><span class="n">bbb</span> <span class="o">&lt;</span> <span class="n">ccc</span>
+<span class="linenos">3</span><span class="n">ccc</span> <span class="o">&lt;</span> <span class="n">ddd</span>
+</pre></div>
+
+<p>Solution:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">words</span> <span class="o">=</span> <span class="s1">&#39;aaa bbb ccc ddd&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="k">for</span> <span class="n">first</span><span class="p">,</span> <span class="n">second</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">words</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
+<span class="linenos">4</span>    <span class="nb">print</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">,</span> <span class="n">second</span><span class="p">)</span>
+</pre></div>

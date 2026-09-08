@@ -1,0 +1,56 @@
+<p>An important skill when implementing an algorithm is making sure your data variables hold the correct data. One way to do this, is to do so <strong>manually</strong> with a pen and paper, a whiteboard or an iPad.</p>
+<p>What i'm trying to communicate is: the best way to make sure you understand what your algorithm is doing, is to do the number-crunching by hand, and to do so as <strong>neatly</strong> as you possibly can, by drawing <strong>tables</strong> of <strong>values</strong>.</p>
+<p>If you're working with a pen, then create clean tables with rows and columns, and draw arrows and show your thinking and your work clearly.</p>
+<p>If you're in an editor, then it takes a bit more skill at drawing ascii art, but it can absolutely be done. You're essentially using your editor as a drawing board.</p>
+<p>Let's take a look at the <strong>greatest common divisor</strong> algorithm, with simple numbers: <code>20</code> and <code>30</code>. Let's begin with the high-school  method of listing all their divisors.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="mi">20</span>              <span class="mi">30</span>
+<span class="linenos">2</span><span class="mi">10</span> <span class="n">x</span> <span class="mi">2</span>          <span class="mi">15</span> <span class="n">x</span> <span class="mi">2</span>
+<span class="linenos">3</span><span class="mi">5</span>  <span class="n">x</span> <span class="mi">4</span>          <span class="mi">10</span> <span class="n">x</span> <span class="mi">3</span>
+<span class="linenos">4</span><span class="mi">2</span>  <span class="n">x</span> <span class="mi">10</span>         <span class="mi">6</span>  <span class="n">x</span> <span class="mi">5</span>
+<span class="linenos">5</span><span class="mi">1</span>  <span class="n">x</span> <span class="mi">20</span>         <span class="mi">1</span>  <span class="n">x</span> <span class="mi">30</span>
+</pre></div>
+
+<p>The tables above are typical of what you'd actually write out in your editor as a starting point.</p>
+<p><img alt="Pasted image 20221203100057.png" src="https://shyal.s3.us-east-2.amazonaws.com/Pasted image 20221203100057.png" /></p>
+<p>Since we took the time to create this table meticulously, we can clearly see that <code>10</code> is the GCD of <code>20</code> and <code>30</code>. Now the algorithm above doesn't seem very efficient; there is a better one.</p>
+<h2 id="a-better-gcd-algorithm">A better GCD algorithm</h2>
+<p>Computing remainders is far more efficient. The solution goes like this:</p>
+<ul>
+<li>find the remainder <code>r</code> of <code>a % b</code></li>
+<li>assign <code>b</code> to <code>a</code>, and <code>r</code> to <code>b</code></li>
+<li>continue until <code>b == 0</code></li>
+<li>the GCD is <code>a</code></li>
+</ul>
+<p>Now we could jump straight into code, however let's prove to ourselves that it works first:</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">a</span>  <span class="o">%</span> <span class="n">b</span>  <span class="o">=</span> <span class="n">r</span>
+<span class="linenos"> 2</span><span class="o">------------</span>
+<span class="linenos"> 3</span><span class="mi">20</span> <span class="o">%</span> <span class="mi">30</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="linenos"> 4</span>     <span class="o">/</span>    <span class="o">/</span>
+<span class="linenos"> 5</span>    <span class="o">/</span>    <span class="o">/</span>
+<span class="linenos"> 6</span>   <span class="o">/</span>    <span class="o">/</span>
+<span class="linenos"> 7</span>  <span class="o">/</span>    <span class="o">/</span>
+<span class="linenos"> 8</span> <span class="n">v</span>    <span class="n">v</span>
+<span class="linenos"> 9</span><span class="mi">30</span> <span class="o">%</span> <span class="mi">20</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="linenos">10</span>     <span class="o">/</span>    <span class="o">/</span>
+<span class="linenos">11</span>    <span class="o">/</span>    <span class="o">/</span>
+<span class="linenos">12</span>   <span class="o">/</span>    <span class="o">/</span>
+<span class="linenos">13</span>  <span class="o">/</span>    <span class="o">/</span>
+<span class="linenos">14</span> <span class="n">v</span>    <span class="n">v</span>
+<span class="linenos">15</span><span class="mi">20</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+
+<h2 id="implementation">Implementation</h2>
+<p>We seem to have design an algorithm, so let's attempt to implement it.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">GCD</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="k">while</span> <span class="n">b</span><span class="p">:</span>
+<span class="linenos">3</span>      <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
+<span class="linenos">4</span>  <span class="k">return</span> <span class="n">a</span>
+</pre></div>
+
+<div>
+<video style="margin: 0 auto; width: 320px;" class='center' width="6400" height="480" autoplay loop>
+  <source src="Attachments/paste-942c79df1498c5a4603293c2f989b6b1ced23013.mp4
+" type="video/mp4">
+</video>
+</div>
+<p><br></p>

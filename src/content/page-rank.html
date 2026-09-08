@@ -1,0 +1,78 @@
+<p>Systems design <a href="https://www.pramp.com/challenge/9PNnW3nbyZHlovqAvx3l">page rank</a> interview.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">Outdoors</span>
+<span class="linenos"> 2</span>  <span class="o">-</span> <span class="n">tents</span> <span class="o">--&gt;</span> <span class="mi">1</span>
+<span class="linenos"> 3</span>  <span class="o">-</span> <span class="n">led</span> <span class="n">lights</span> <span class="o">--&gt;</span> <span class="mi">2</span>
+<span class="linenos"> 4</span><span class="n">Electronics</span>
+<span class="linenos"> 5</span>  <span class="o">-</span> <span class="n">ipad</span> <span class="n">pro</span>
+<span class="linenos"> 6</span>  <span class="o">-</span> <span class="n">bose</span> <span class="n">qc15</span>
+<span class="linenos"> 7</span><span class="n">Gardening</span>
+<span class="linenos"> 8</span>  <span class="o">-</span> <span class="n">rake</span>
+<span class="linenos"> 9</span>  <span class="o">-</span> <span class="n">wheel</span> <span class="n">barrow</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="n">Use</span> <span class="n">it</span> <span class="n">to</span> <span class="n">share</span> <span class="n">thoughts</span> <span class="ow">and</span> <span class="n">resources</span><span class="p">,</span> <span class="n">such</span> <span class="k">as</span><span class="p">:</span>
+<span class="linenos">12</span><span class="o">-</span> <span class="n">Features</span> <span class="n">scope</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="n">The</span> <span class="n">categories</span> <span class="n">need</span> <span class="n">to</span> <span class="n">be</span> <span class="n">within</span> <span class="n">a</span> <span class="nb">set</span> <span class="n">of</span> <span class="n">accepted</span> <span class="n">categories</span> <span class="n">within</span> <span class="n">the</span> <span class="n">company</span><span class="o">.</span> <span class="n">Products</span> <span class="n">are</span> <span class="nb">all</span> <span class="n">sold</span> <span class="n">on</span> <span class="n">the</span> <span class="n">site</span><span class="o">.</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="o">-</span> <span class="n">API</span> <span class="n">design</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="n">get_category_names</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">user</span>
+<span class="linenos">19</span><span class="n">get_items_for_category</span><span class="p">(</span><span class="n">cat_id</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">offset</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">user</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="n">set_product_category</span><span class="p">(</span><span class="n">prod_id</span><span class="p">,</span> <span class="n">cat_id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">admin</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="n">Messaging</span><span class="p">,</span> <span class="ow">and</span> <span class="n">recieve</span> <span class="n">aggregates</span> <span class="k">for</span> <span class="n">sales</span> <span class="n">totals</span><span class="o">.</span>
+<span class="linenos">24</span>  <span class="n">once</span> <span class="n">an</span> <span class="n">hour</span>
+<span class="linenos">25</span>  <span class="n">once</span> <span class="n">a</span> <span class="n">day</span>
+<span class="linenos">26</span>  
+<span class="linenos">27</span><span class="nb">sorted</span> <span class="n">data</span> <span class="n">structure</span> <span class="o">-&gt;</span> <span class="n">query</span> <span class="n">products</span> <span class="n">based</span> <span class="n">on</span> <span class="n">aggregate</span> <span class="n">sales</span> <span class="n">value</span>
+<span class="linenos">28</span>      <span class="o">-&gt;</span> <span class="n">heap</span> <span class="n">data</span> <span class="n">structure</span>
+<span class="linenos">29</span>          <span class="o">-&gt;</span> <span class="n">update</span>
+<span class="linenos">30</span>          <span class="o">-&gt;</span> <span class="n">insertion</span>
+<span class="linenos">31</span>          <span class="o">-&gt;</span> <span class="n">deletion</span>
+<span class="linenos">32</span>            <span class="o">-&gt;</span> <span class="n">keeping</span> <span class="n">the</span> <span class="n">products</span> <span class="ow">in</span> <span class="nb">sorted</span> <span class="n">order</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span><span class="o">-</span> <span class="n">Pseudo</span> <span class="n">code</span> <span class="k">for</span> <span class="n">specific</span> <span class="n">components</span>
+<span class="linenos">35</span><span class="o">-</span> <span class="n">Data</span> <span class="n">model</span><span class="o">/</span><span class="n">schema</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span><span class="c1"># how to present it in 45 minutes</span>
+<span class="linenos">38</span><span class="c1"># read up on maybe more updated dbs than sql</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span><span class="n">Categories</span>
+<span class="linenos">41</span>   <span class="nb">id</span><span class="p">:</span> <span class="n">auto</span> <span class="c1"># 32</span>
+<span class="linenos">42</span>   <span class="n">name</span><span class="p">:</span> <span class="n">string</span> <span class="c1"># 32</span>
+<span class="linenos">43</span>
+<span class="linenos">44</span><span class="n">Products_</span><span class="p">{</span><span class="err">$</span><span class="n">category</span><span class="p">}:</span>
+<span class="linenos">45</span>   <span class="nb">id</span><span class="p">:</span> <span class="n">auto</span> <span class="c1"># 32</span>
+<span class="linenos">46</span>   <span class="n">name</span><span class="p">:</span> <span class="n">string</span> <span class="c1"># 32</span>
+<span class="linenos">47</span>   <span class="n">prod_id</span><span class="p">:</span> <span class="nb">int</span> <span class="c1"># 32</span>
+<span class="linenos">48</span>   <span class="n">sales_freq</span><span class="p">:</span> <span class="nb">int</span> <span class="c1"># 32</span>
+<span class="linenos">49</span>
+<span class="linenos">50</span><span class="n">Categories</span><span class="p">:</span>
+<span class="linenos">51</span>  <span class="o">-</span> <span class="n">outdoors</span>
+<span class="linenos">52</span>  <span class="o">-</span> <span class="o">...</span>
+<span class="linenos">53</span>
+<span class="linenos">54</span><span class="n">Products_outdoors</span><span class="p">:</span>
+<span class="linenos">55</span>  <span class="o">-</span> <span class="n">rakes</span>
+<span class="linenos">56</span>  <span class="o">-</span> <span class="n">wheelbarrows</span>
+<span class="linenos">57</span>
+<span class="linenos">58</span><span class="n">Products_electronics</span><span class="p">:</span>
+<span class="linenos">59</span>  <span class="o">-</span> <span class="n">ipad</span>
+<span class="linenos">60</span>  <span class="o">-</span> <span class="n">bose</span>
+<span class="linenos">61</span>  <span class="o">-</span> <span class="o">....</span>
+<span class="linenos">62</span>
+<span class="linenos">63</span><span class="o">-</span> <span class="n">Back</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">the</span><span class="o">-</span><span class="n">envelope</span> <span class="n">calculations</span>
+<span class="linenos">64</span>
+<span class="linenos">65</span><span class="mi">12</span> <span class="n">million</span> <span class="n">products</span>
+<span class="linenos">66</span><span class="mi">6</span><span class="p">,</span><span class="mi">500</span><span class="p">,</span><span class="mi">000</span> <span class="n">UPD</span>
+<span class="linenos">67</span><span class="mi">225</span> <span class="n">RPS</span>
+<span class="linenos">68</span>
+<span class="linenos">69</span><span class="o">-</span> <span class="n">Reference</span> <span class="n">links</span>
+<span class="linenos">70</span><span class="o">-</span> <span class="n">Link</span> <span class="n">to</span> <span class="n">whiteboard</span> <span class="ow">or</span> <span class="n">diagram</span> <span class="n">such</span> <span class="k">as</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">sketchboard</span><span class="o">.</span><span class="n">me</span><span class="o">/</span><span class="n">new</span>
+</pre></div>
+
+<ul>
+<li>focus more on presenting the complete picture in 45 minutes, don't waste time</li>
+<li>do back of the envelope to avoid back and forth</li>
+<li>think of an appropriate data structure based on query types</li>
+</ul>

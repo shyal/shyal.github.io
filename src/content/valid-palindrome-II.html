@@ -1,0 +1,61 @@
+<p>This is one of those questions where i really get to see how quickly i'm currently progressing.</p>
+<p>My most recent answer:</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="nf">validPalindrome</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos"> 3</span>        <span class="k">def</span> <span class="nf">is_pal</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="linenos"> 4</span>            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">):</span>
+<span class="linenos"> 5</span>                <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">s</span><span class="p">[</span><span class="o">~</span><span class="n">i</span><span class="p">]:</span>
+<span class="linenos"> 6</span>                    <span class="k">if</span> <span class="n">error</span><span class="p">:</span>
+<span class="linenos"> 7</span>                        <span class="k">return</span> <span class="kc">False</span>
+<span class="linenos"> 8</span>                    <span class="k">return</span> <span class="n">is_pal</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="n">i</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span> <span class="ow">or</span> <span class="n">is_pal</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 9</span>            <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos">10</span>        <span class="k">return</span> <span class="n">is_pal</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+
+<p>It's:</p>
+<ul>
+<li>easy to read</li>
+<li>simple yet sophisticated ([[list index complement]])</li>
+<li>efficient (beats 75%)</li>
+<li>in-place</li>
+<li>uses recursion tastefully</li>
+</ul>
+<h2 id="my-previous-solution-was-a-mess">my previous solution was a mess</h2>
+<p>This is in severe contrast with my previous solution, which was an utter mess. Hard to believe i wrote this only two weeks ago.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="nf">validPalindrome</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos"> 3</span>        
+<span class="linenos"> 4</span>        <span class="k">def</span> <span class="nf">try_left</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+<span class="linenos"> 5</span>            <span class="k">if</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">r</span><span class="p">:</span>
+<span class="linenos"> 6</span>                <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">l</span><span class="o">+</span><span class="mi">1</span>
+<span class="linenos"> 7</span>            <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="n">l</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+<span class="linenos"> 8</span>                <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">l</span><span class="o">+</span><span class="mi">1</span>
+<span class="linenos"> 9</span>            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="n">l</span>
+<span class="linenos">10</span>        
+<span class="linenos">11</span>        <span class="k">def</span> <span class="nf">try_right</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+<span class="linenos">12</span>            <span class="k">if</span> <span class="n">r</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">l</span><span class="p">:</span>
+<span class="linenos">13</span>                <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">r</span><span class="o">-</span><span class="mi">1</span>
+<span class="linenos">14</span>            <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="n">r</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+<span class="linenos">15</span>                <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">r</span><span class="o">-</span><span class="mi">1</span>
+<span class="linenos">16</span>            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="n">r</span>
+<span class="linenos">17</span>        
+<span class="linenos">18</span>
+<span class="linenos">19</span>        <span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">skipped_one</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="kc">False</span>
+<span class="linenos">20</span>        <span class="k">while</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">:</span>
+<span class="linenos">21</span>            <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">r</span><span class="p">]:</span>
+<span class="linenos">22</span>                <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">23</span>                <span class="n">r</span> <span class="o">-=</span> <span class="mi">1</span>
+<span class="linenos">24</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">25</span>                <span class="k">if</span> <span class="n">skipped_one</span><span class="p">:</span>
+<span class="linenos">26</span>                    <span class="k">return</span> <span class="kc">False</span>
+<span class="linenos">27</span>                <span class="n">left_skip_ok</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="n">try_left</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="linenos">28</span>                <span class="k">if</span> <span class="n">left_skip_ok</span><span class="p">:</span>
+<span class="linenos">29</span>                    <span class="n">skipped_one</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">30</span>                    <span class="k">continue</span>
+<span class="linenos">31</span>                <span class="n">right_skip_ok</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">try_right</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="linenos">32</span>                <span class="k">if</span> <span class="n">right_skip_ok</span><span class="p">:</span>
+<span class="linenos">33</span>                    <span class="n">skipped_one</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">34</span>                    <span class="k">continue</span>
+<span class="linenos">35</span>                <span class="k">return</span> <span class="kc">False</span>
+<span class="linenos">36</span>        <span class="k">return</span> <span class="kc">True</span>
+</pre></div>

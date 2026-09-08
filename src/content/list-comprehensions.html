@@ -1,0 +1,64 @@
+<p>List comprehensions are an exceedingly powerful feature that unlocks Python's functional style.</p>
+<h2 id="squaring-items-in-a-list">Squaring items in a list</h2>
+<p>Let's say we want to square items in a list:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="linenos">2</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+<span class="linenos">3</span>  <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">4</span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c1"># [1, 16, 36, 49, 16, 9]</span>
+</pre></div>
+
+<p>This would be the lambda equivalent:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="linenos">2</span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">A</span><span class="p">]</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c1"># [1, 16, 36, 49, 16, 9]</span>
+</pre></div>
+
+<p>With a lambda in a list comp:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="linenos">2</span><span class="n">A</span> <span class="o">=</span> <span class="p">[(</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">*</span> <span class="n">n</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">A</span><span class="p">]</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c1"># [1, 16, 36, 49, 16, 9]</span>
+</pre></div>
+
+<p>This is the map equivalent:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="linenos">2</span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="n">A</span><span class="p">)]</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c1"># [1, 16, 36, 49, 16, 9]</span>
+</pre></div>
+
+<h2 id="filtering-items-in-a-list">Filtering items in a list</h2>
+<p>Or let's say we want to filter out values above <code>5</code>.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="linenos">2</span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">A</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">]</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c1"># [1, 4, 4, 3]</span>
+</pre></div>
+
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="linenos">2</span><span class="n">R</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">3</span><span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">A</span><span class="p">:</span>
+<span class="linenos">4</span>  <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
+<span class="linenos">5</span>      <span class="n">R</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="linenos">6</span><span class="nb">print</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="c1"># [1, 4, 4, 3]</span>
+</pre></div>
+
+<h2 id="nested-list-comprehensions">Nested list comprehensions</h2>
+<p>List comprehensions can start to look confusing when they are nested.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="n">L</span> <span class="o">+</span> <span class="n">N</span> <span class="k">for</span> <span class="n">L</span> <span class="ow">in</span> <span class="s1">&#39;ABC&#39;</span> <span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="s1">&#39;123&#39;</span><span class="p">]</span>
+<span class="linenos">2</span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+
+<p>Note: consider adding conditional nested</p>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">,</span> <span class="s1">&#39;A2&#39;</span><span class="p">,</span> <span class="s1">&#39;A3&#39;</span><span class="p">,</span> <span class="s1">&#39;B1&#39;</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="s1">&#39;C2&#39;</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">]</span>
+</pre></div>
+
+<p>Looking at the output, we can see this list comprehension is equivalent to:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">A</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">2</span><span class="k">for</span> <span class="n">L</span> <span class="ow">in</span> <span class="s1">&#39;ABC&#39;</span><span class="p">:</span>
+<span class="linenos">3</span>  <span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="s1">&#39;123&#39;</span><span class="p">:</span>
+<span class="linenos">4</span>  <span class="n">A</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">L</span> <span class="o">+</span> <span class="n">N</span><span class="p">)</span>
+<span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+
+<p>Try writing complex and nested list comprehensions, and colour-coding them. Doing so makes it much easier reading them down the line.</p>
+<p><img alt="list comp" src="https://shyal.comhttps://shyal.s3.us-east-2.amazonaws.com/Pasted image 20201030080605.png" /></p>
+<p>Please note that list comprehensions return a <strong>copy</strong> of your list. In other words, they are hungry in terms of memory usage. This problem can, however, be obviated via the use of generator expressions.</p>

@@ -1,0 +1,99 @@
+<p>This is a dynamic programming question, very similar to <a href="/levenshtein-distance">levenshtein distance</a>. Given two strings, e.g <strong>frog</strong> and <strong>dog</strong>, determine how many characters need to be deleted for the words to match.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">lru_cache</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="nd">@lru_cache</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="k">def</span> <span class="nf">dist</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="linenos"> 6</span>    <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">b</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="linenos"> 8</span>    <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">b</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+<span class="linenos"> 9</span>        <span class="k">return</span> <span class="n">dist</span><span class="p">(</span><span class="n">a</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">10</span>    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">dist</span><span class="p">(</span><span class="n">a</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">),</span> <span class="n">dist</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="nb">print</span><span class="p">(</span><span class="n">dist</span><span class="p">(</span><span class="s2">&quot;dog&quot;</span><span class="p">,</span> <span class="s2">&quot;frog&quot;</span><span class="p">))</span>
+</pre></div>
+
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 2</span><span class="sd">DP, with deletions until min distance is found</span>
+<span class="linenos"> 3</span><span class="sd">Time: O(M*N) </span>
+<span class="linenos"> 4</span><span class="sd">Space: O(mn)</span>
+<span class="linenos"> 5</span><span class="sd">O(1)</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="sd">   &#39;&#39; H E A T</span>
+<span class="linenos"> 8</span><span class="sd">&#39;&#39;  0 1 2 3 4</span>
+<span class="linenos"> 9</span><span class="sd">H   1 0 1 0 0</span>
+<span class="linenos">10</span><span class="sd">I   2 0 0 0 0 </span>
+<span class="linenos">11</span><span class="sd">T   3 0 0 0 </span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="k">def</span> <span class="nf">deletion_distance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="linenos">16</span>  <span class="k">def</span> <span class="nf">dp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="linenos">17</span>    <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="ow">in</span> <span class="n">mem</span><span class="p">:</span>
+<span class="linenos">18</span>      <span class="k">return</span> <span class="n">mem</span><span class="p">[(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)]</span>
+<span class="linenos">19</span>    <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span> <span class="ow">or</span> <span class="n">b</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<span class="linenos">20</span>      <span class="n">mem</span><span class="p">[(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="linenos">21</span>      <span class="k">return</span> <span class="n">mem</span><span class="p">[(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)]</span>
+<span class="linenos">22</span>    <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">b</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+<span class="linenos">23</span>      <span class="n">mem</span><span class="p">[(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">a</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">24</span>      <span class="k">return</span> <span class="n">mem</span><span class="p">[(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)]</span>
+<span class="linenos">25</span>    <span class="n">mem</span><span class="p">[(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">dp</span><span class="p">(</span><span class="n">a</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">26</span>    <span class="k">return</span> <span class="n">mem</span><span class="p">[(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)]</span>
+<span class="linenos">27</span>  <span class="n">mem</span> <span class="o">=</span> <span class="p">{}</span>  
+<span class="linenos">28</span>  <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">34</span><span class="sd">Deletion Distance</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span><span class="sd">The deletion distance of two strings is the minimum number of characters you need to delete in the two strings in order to get the same string. For instance, the deletion distance between &quot;heat&quot; and &quot;hit&quot; is 3:</span>
+<span class="linenos">37</span><span class="sd">By deleting &#39;e&#39; and &#39;a&#39; in &quot;heat&quot;, and &#39;i&#39; in &quot;hit&quot;, we get the string &quot;ht&quot; in both cases.</span>
+<span class="linenos">38</span><span class="sd">We cannot get the same string from both strings by deleting 2 letters or fewer.</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span><span class="sd">Given the strings str1 and str2, write an efficient function deletionDistance that returns the deletion distance between them. Explain how your function works, and analyze its time and space complexities.</span>
+<span class="linenos">41</span>
+<span class="linenos">42</span><span class="sd">STR1 = HEAT</span>
+<span class="linenos">43</span><span class="sd">STR2 = HIT</span>
+<span class="linenos">44</span><span class="sd">ANS - 3</span>
+<span class="linenos">45</span>
+<span class="linenos">46</span><span class="sd">   &#39;&#39; H E A T</span>
+<span class="linenos">47</span><span class="sd">&#39;&#39;  0 1 2 3 4</span>
+<span class="linenos">48</span><span class="sd">H   1 0 1 2 3</span>
+<span class="linenos">49</span><span class="sd">I   2 1 2 3 4</span>
+<span class="linenos">50</span><span class="sd">T   3 2 3 4 3</span>
+<span class="linenos">51</span>
+<span class="linenos">52</span><span class="sd">base case:</span>
+<span class="linenos">53</span><span class="sd">empty string - don&#39;t delete - 0</span>
+<span class="linenos">54</span>
+<span class="linenos">55</span><span class="sd">if chars match:</span>
+<span class="linenos">56</span><span class="sd">dp[i][j] = dp[i-1][j-1]</span>
+<span class="linenos">57</span>
+<span class="linenos">58</span><span class="sd">if chars mismatch:</span>
+<span class="linenos">59</span><span class="sd">dp[i][j] = min(dp[i][j-1], dp[i-1][j]) + 1</span>
+<span class="linenos">60</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">61</span>
+<span class="linenos">62</span>
+<span class="linenos">63</span><span class="k">def</span> <span class="nf">deletion_distance</span><span class="p">(</span><span class="n">str1</span><span class="p">,</span> <span class="n">str2</span><span class="p">):</span>
+<span class="linenos">64</span>    <span class="n">dp</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">str2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">str1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+<span class="linenos">65</span>
+<span class="linenos">66</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">str1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+<span class="linenos">67</span>        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+<span class="linenos">68</span>
+<span class="linenos">69</span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">str2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+<span class="linenos">70</span>        <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
+<span class="linenos">71</span>
+<span class="linenos">72</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">str1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+<span class="linenos">73</span>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">str2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+<span class="linenos">74</span>            <span class="k">if</span> <span class="p">(</span><span class="n">str1</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">str2</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+<span class="linenos">75</span>                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">76</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">77</span>                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">78</span>
+<span class="linenos">79</span>    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">str1</span><span class="p">)][</span><span class="nb">len</span><span class="p">(</span><span class="n">str2</span><span class="p">)]</span>
+</pre></div>
+
+<p>See also:</p>
+<p><a href="/levenshtein-distance">levenshtein distance</a></p>

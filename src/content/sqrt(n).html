@@ -1,0 +1,37 @@
+<p>Write a python program with a time complexity of <code>f(n) = sqrt(n)</code> and  class <code>O(sqrt(n))</code></p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">p</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="linenos">2</span><span class="k">while</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+<span class="linenos">3</span>    <span class="n">p</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="n">i</span>
+<span class="linenos">4</span>  <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+
+<table>
+<thead>
+<tr>
+<th>i</th>
+<th>p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0+1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1+2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1+2+3</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1+2+3+4</td>
+</tr>
+<tr>
+<td>n</td>
+<td>1+2+3+4+n</td>
+</tr>
+</tbody>
+</table>

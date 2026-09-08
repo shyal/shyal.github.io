@@ -1,0 +1,109 @@
+<p>This is a beautiful algorithm, and the official solution to <a href="https://leetcode.com/problems/making-a-large-island/">leetcode 827</a>.</p>
+<blockquote>
+<blockquote>
+<p>In a 2D grid of 0s and 1s, we change at most one 0 to a 1.<br />
+After, what is the size of the largest island? (An island is a 4-directionally connected group of 1s).</p>
+</blockquote>
+</blockquote>
+<p><img alt="Pasted image 53.png" src="https://shyal.s3.us-east-2.amazonaws.com/Pasted image 53.png" /></p>
+<p>In this case, the answer clearly is:</p>
+<p><img alt="Pasted image 54.png" src="https://shyal.s3.us-east-2.amazonaws.com/Pasted image 54.png" /></p>
+<p>You may want to think of a solution before reading on. Like most graph problems, the solution is pretty simple and straight-forward.</p>
+<h2 id="label-and-measure-islands">Label and measure islands</h2>
+<p>The first step is to label the islands, this can be done quite similarly to [[number of islands]], i.e by using either a [[depth first search]] or a [[bfs]].</p>
+<p><img alt="Pasted image 55.png" src="https://shyal.s3.us-east-2.amazonaws.com/Pasted image 55.png" /></p>
+<p>While labeling them, it's also trivial to measure their sizes, <code>{2:8, 3:2, 4:1}</code>.</p>
+<h2 id="check-neighbours-of-0s">Check neighbours of 0s</h2>
+<p>Finally, we want to iterate over each 0, and for each of its neighbours and sum up their areas, plus one.</p>
+<p>We simply need to track the maximum of that number, and this is our answer.</p>
+<p><img alt="Pasted image 56.png" src="https://shyal.s3.us-east-2.amazonaws.com/Pasted image 56.png" /></p>
+<p>Result: 11.</p>
+<h2 id="implementation">Implementation</h2>
+<h3 id="neighbours">Neighbours</h3>
+<p>Fetching neighbours is something we'll do a lot of, so it deserves its own function.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">neighbors</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="k">for</span> <span class="n">nr</span><span class="p">,</span> <span class="n">nc</span> <span class="ow">in</span> <span class="p">((</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+<span class="linenos">3</span>      <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nr</span> <span class="o">&lt;</span> <span class="n">N</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nc</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">:</span>
+<span class="linenos">4</span>          <span class="k">yield</span> <span class="n">nr</span><span class="p">,</span> <span class="n">nc</span>
+</pre></div>
+
+<h2 id="dfs">DFS</h2>
+<p>The DFS labels and measures the islands.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos">3</span>  <span class="n">grid</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">index</span>
+<span class="linenos">4</span>  <span class="k">for</span> <span class="n">nr</span><span class="p">,</span> <span class="n">nc</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="linenos">5</span>      <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="n">nr</span><span class="p">][</span><span class="n">nc</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">6</span>          <span class="n">ans</span> <span class="o">+=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">nr</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+<span class="linenos">7</span>  <span class="k">return</span> <span class="n">ans</span>
+</pre></div>
+
+<p>We perform the DFS over the entire grid, while storing our area measurements for later use.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">area</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos">2</span><span class="n">index</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="linenos">3</span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+<span class="linenos">4</span>  <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+<span class="linenos">5</span>      <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">6</span>          <span class="n">area</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+<span class="linenos">7</span>          <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+
+<p>Finally we iterate over the 0s, and sum up the areas of their neighbours:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">ans</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">area</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="ow">or</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="linenos">2</span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+<span class="linenos">3</span>  <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+<span class="linenos">4</span>      <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">5</span>          <span class="n">seen</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos">6</span>              <span class="n">grid</span><span class="p">[</span><span class="n">nr</span><span class="p">][</span><span class="n">nc</span><span class="p">]</span> <span class="k">for</span> <span class="n">nr</span><span class="p">,</span> <span class="n">nc</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="n">nr</span><span class="p">][</span><span class="n">nc</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span>
+<span class="linenos">7</span>          <span class="p">}</span>
+<span class="linenos">8</span>          <span class="n">ans</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">area</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">))</span>
+<span class="linenos">9</span><span class="k">return</span> <span class="n">ans</span>
+</pre></div>
+
+<h2 id="putting-it-all-together">Putting it all together</h2>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="nf">largestIsland</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>        <span class="k">def</span> <span class="nf">neighbors</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="linenos"> 6</span>            <span class="k">for</span> <span class="n">nr</span><span class="p">,</span> <span class="n">nc</span> <span class="ow">in</span> <span class="p">((</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+<span class="linenos"> 7</span>                <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nr</span> <span class="o">&lt;</span> <span class="n">N</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nc</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">:</span>
+<span class="linenos"> 8</span>                    <span class="k">yield</span> <span class="n">nr</span><span class="p">,</span> <span class="n">nc</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>        <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+<span class="linenos">11</span>            <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos">12</span>            <span class="n">grid</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">index</span>
+<span class="linenos">13</span>            <span class="k">for</span> <span class="n">nr</span><span class="p">,</span> <span class="n">nc</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="linenos">14</span>                <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="n">nr</span><span class="p">][</span><span class="n">nc</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">15</span>                    <span class="n">ans</span> <span class="o">+=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">nr</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+<span class="linenos">16</span>            <span class="k">return</span> <span class="n">ans</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>        <span class="n">area</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos">19</span>        <span class="n">index</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="linenos">20</span>        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+<span class="linenos">21</span>            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+<span class="linenos">22</span>                <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">23</span>                    <span class="n">area</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+<span class="linenos">24</span>                    <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span>        <span class="n">ans</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">area</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="ow">or</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="linenos">27</span>        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+<span class="linenos">28</span>            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+<span class="linenos">29</span>                <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">30</span>                    <span class="n">seen</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos">31</span>                        <span class="n">grid</span><span class="p">[</span><span class="n">nr</span><span class="p">][</span><span class="n">nc</span><span class="p">]</span> <span class="k">for</span> <span class="n">nr</span><span class="p">,</span> <span class="n">nc</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="n">nr</span><span class="p">][</span><span class="n">nc</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span>
+<span class="linenos">32</span>                    <span class="p">}</span>
+<span class="linenos">33</span>                    <span class="n">ans</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">area</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">))</span>
+<span class="linenos">34</span>        <span class="k">return</span> <span class="n">ans</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span><span class="n">isl</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">38</span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="linenos">39</span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="linenos">40</span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="linenos">41</span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="linenos">42</span>    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="linenos">43</span><span class="p">]</span>
+<span class="linenos">44</span>
+<span class="linenos">45</span><span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">largestIsland</span><span class="p">(</span><span class="n">isl</span><span class="p">))</span>
+</pre></div>

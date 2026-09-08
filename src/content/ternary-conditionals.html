@@ -1,0 +1,49 @@
+<p>Terneries in Python work just fine, however nested ternaries can lead to code that looks convoluted.</p>
+<h2 id="standard-form-conditional">Standard form conditional</h2>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span>
+<span class="linenos"> 2</span><span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos"> 3</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+<span class="linenos"> 4</span>     <span class="n">r</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="linenos"> 5</span> <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 6</span>     <span class="n">r</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="linenos"> 7</span><span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 8</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+
+<h2 id="ternary">Ternary</h2>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+<span class="linenos">2</span><span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">3</span> <span class="k">else</span> <span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">5</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+
+<p>As illustrated above, ternaries have some syntactic issues in python, imo:</p>
+<ul>
+<li>need disambiguating with parenthesis (this looks very confusing: <code>4 if j == 3 else 5 if i &gt; 1 else 5</code>)</li>
+<li>are backwards compared to c-based languages: <code>r = (i &gt; 1 ? j == 3 ? 4 : 5 : 6)</code></li>
+<li>most of the space is taken up by the <code>if</code> and <code>else</code> statements, not the actual logic</li>
+</ul>
+<h2 id="tuples">Tuples</h2>
+<p>Our shortest version of the code above is:</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+<span class="linenos">2</span><span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)[</span><span class="n">j</span> <span class="o">==</span> <span class="mi">3</span><span class="p">])[</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">]</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+
+<p>We are converting the <code>bool</code> result of the conditional to an <code>int</code> (<code>0</code> or <code>1</code>) which we then use for tuple indexing.  Please note we're using tuples rather than lists, since their immutability makes them presumably more efficient.</p>
+<p>There are several advantages:</p>
+<ul>
+<li>conditions are always in the square brackets</li>
+<li>values (or sub-conditionals) are always in the paren</li>
+<li>no extra paren required for readability</li>
+<li>extremely concise</li>
+</ul>
+<h2 id="when-not-to-use">When not to use</h2>
+<p>It's worth noting that, unlike with regular ternaries, each expression found as elements in a list or tuple declaration actually gets evaluated. This means you ought to use these only for simple ternary expressions. Using the results of functions is a no-no, since the function would actually get evaluated, whether the result is used or not.</p>
+<h2 id="chained-comparisons">Chained comparisons</h2>
+<p>On the subject of unconventional conditionals, it's worth explicitly noting that chaining comparisons is fine. Write a comparison so that when x is between 5 and 10 inclusive, the program prints 'in bounds' else it prints 'out of bounds'.</p>
+<h3 id="solution">Solution</h3>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1">: in bounds&#39;</span> <span class="k">if</span> <span class="mi">5</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">10</span> <span class="k">else</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1">: out of bounds&#39;</span><span class="p">)</span>
+</pre></div>

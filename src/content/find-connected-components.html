@@ -1,0 +1,35 @@
+<p>Credit: Tushar</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">startNode</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">component</span><span class="p">):</span>
+<span class="linenos"> 4</span>    <span class="n">component</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">startNode</span><span class="p">)</span>
+<span class="linenos"> 5</span>    <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">startNode</span><span class="p">)</span>
+<span class="linenos"> 6</span>    
+<span class="linenos"> 7</span>    <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">startNode</span><span class="p">]:</span>
+<span class="linenos"> 8</span>        <span class="k">if</span> <span class="n">neighbor</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+<span class="linenos"> 9</span>            <span class="n">dfs</span><span class="p">(</span><span class="n">neighbor</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">component</span><span class="p">)</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="k">def</span> <span class="nf">createGraph</span><span class="p">(</span><span class="n">edges</span><span class="p">):</span>
+<span class="linenos">12</span>    <span class="n">graph</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="linenos">13</span>    <span class="k">for</span> <span class="n">startNode</span><span class="p">,</span> <span class="n">endNode</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+<span class="linenos">14</span>        <span class="n">graph</span><span class="p">[</span><span class="n">startNode</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">endNode</span><span class="p">)</span>
+<span class="linenos">15</span>        <span class="n">graph</span><span class="p">[</span><span class="n">endNode</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">startNode</span><span class="p">)</span>
+<span class="linenos">16</span>    <span class="k">return</span> <span class="n">graph</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="k">def</span> <span class="nf">groupProducts</span><span class="p">(</span><span class="n">productPairs</span><span class="p">):</span>
+<span class="linenos">19</span>    
+<span class="linenos">20</span>    <span class="n">groups</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">21</span>    <span class="n">graph</span> <span class="o">=</span> <span class="n">createGraph</span><span class="p">(</span><span class="n">productPairs</span><span class="p">)</span>
+<span class="linenos">22</span>    
+<span class="linenos">23</span>    <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="linenos">24</span>    <span class="k">for</span> <span class="n">eachStartingNode</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">:</span>
+<span class="linenos">25</span>        <span class="k">if</span> <span class="n">eachStartingNode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+<span class="linenos">26</span>            <span class="n">component</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">27</span>            <span class="n">dfs</span><span class="p">(</span><span class="n">eachStartingNode</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">component</span><span class="p">)</span>
+<span class="linenos">28</span>            <span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">component</span><span class="p">)</span>
+<span class="linenos">29</span>    
+<span class="linenos">30</span>    <span class="k">return</span> <span class="n">groups</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="nb">print</span><span class="p">(</span><span class="n">groupProducts</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">),(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">),(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">)]))</span>
+</pre></div>

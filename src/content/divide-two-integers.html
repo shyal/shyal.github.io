@@ -1,0 +1,45 @@
+<p>This is probably one of my favourite questions. My latest code. Still takes me about half an hour to crank this out. Next time should take less than 5 minutes.</p>
+<h2 id="beats-99">Beats 99%</h2>
+<p><code>Runtime: 20 ms, faster than 99.90% of Python3 online submissions for Divide Two Integers.
+Memory Usage: 13.7 MB, less than 80.96% of Python3 online submissions for Divide Two Integers.</code></p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="nf">divide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos"> 3</span>        <span class="n">sign</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">^</span> <span class="p">(</span><span class="n">b</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span>
+<span class="linenos"> 4</span>        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="n">a</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">a</span><span class="p">,</span> <span class="o">-</span><span class="n">b</span> <span class="k">if</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">b</span>
+<span class="linenos"> 5</span>        <span class="n">power</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">0</span>
+<span class="linenos"> 6</span>        <span class="k">while</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="n">b</span><span class="p">:</span>
+<span class="linenos"> 7</span>            <span class="k">while</span> <span class="p">(</span><span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="n">power</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">a</span><span class="p">:</span>
+<span class="linenos"> 8</span>                <span class="n">power</span> <span class="o">-=</span> <span class="mi">1</span>
+<span class="linenos"> 9</span>            <span class="n">res</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">power</span>
+<span class="linenos">10</span>            <span class="n">a</span> <span class="o">-=</span> <span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="n">power</span>
+<span class="linenos">11</span>        <span class="n">res</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">31</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">sign</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span><span class="p">))</span>
+<span class="linenos">12</span>        <span class="k">return</span> <span class="n">res</span> <span class="o">*</span> <span class="n">sign</span>
+</pre></div>
+
+<p>My previous attempt:</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="nf">divide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span>        <span class="n">m</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">^</span> <span class="p">(</span><span class="n">b</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span>
+<span class="linenos"> 5</span>        <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="n">a</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">a</span>
+<span class="linenos"> 6</span>        <span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="n">b</span> <span class="k">if</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">b</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>        <span class="n">k</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">0</span>
+<span class="linenos"> 9</span>        <span class="k">while</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span>
+<span class="linenos">10</span>            <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="n">a</span><span class="p">:</span>
+<span class="linenos">11</span>                <span class="n">k</span> <span class="o">-=</span> <span class="mi">1</span>
+<span class="linenos">12</span>            <span class="n">r</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">k</span>
+<span class="linenos">13</span>            <span class="n">a</span> <span class="o">-=</span> <span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="n">k</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>        <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">*</span> <span class="n">m</span> <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">else</span> <span class="n">r</span> <span class="o">*</span> <span class="n">m</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>        <span class="k">if</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">2</span> <span class="o">&lt;&lt;</span> <span class="mi">30</span><span class="p">:</span>
+<span class="linenos">18</span>            <span class="k">return</span> <span class="mi">2</span> <span class="o">&lt;&lt;</span> <span class="mi">30</span>
+<span class="linenos">19</span>        <span class="k">if</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">&lt;&lt;</span> <span class="mi">30</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">20</span>            <span class="k">return</span> <span class="p">(</span><span class="mi">2</span> <span class="o">&lt;&lt;</span> <span class="mi">30</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>        <span class="k">return</span> <span class="n">r</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mi">2147483647</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>

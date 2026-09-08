@@ -1,0 +1,42 @@
+<p>When performing a DFS traversal, it can be useful finding backedges, i.e edges to nodes we would have visited, had we not done so already. A simple way of doing this, is to mutate your undirected graph to a directed graph during the DFS traversal.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">Graph</span><span class="p">:</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adjlist</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="bp">self</span><span class="o">.</span><span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="linenos"> 4</span>        <span class="bp">self</span><span class="o">.</span><span class="n">adjlist</span> <span class="o">=</span> <span class="n">adjlist</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>    <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+<span class="linenos"> 7</span>        <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">visited</span><span class="p">:</span>
+<span class="linenos"> 8</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;backedge: </span><span class="si">{</span><span class="n">parent</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 9</span>            <span class="k">return</span>
+<span class="linenos">10</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">11</span>        <span class="bp">self</span><span class="o">.</span><span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+<span class="linenos">12</span>        <span class="k">for</span> <span class="n">neighbour</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjlist</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+<span class="linenos">13</span>            <span class="bp">self</span><span class="o">.</span><span class="n">adjlist</span><span class="p">[</span><span class="n">neighbour</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+<span class="linenos">14</span>            <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">neighbour</span><span class="p">)</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="n">g</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos">18</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="linenos">19</span><span class="n">g</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="linenos">20</span><span class="n">g</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="linenos">21</span><span class="n">g</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="linenos">22</span><span class="n">g</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="linenos">23</span><span class="n">g</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="n">g1</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="linenos">27</span><span class="n">g1</span><span class="o">.</span><span class="n">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+<p>At which point, the only nodes that get visited twice during the DFS are via backedges.</p>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="mi">1</span>
+<span class="linenos">2</span><span class="mi">4</span>
+<span class="linenos">3</span><span class="mi">3</span>
+<span class="linenos">4</span><span class="mi">5</span>
+<span class="linenos">5</span><span class="mi">6</span>
+<span class="linenos">6</span><span class="n">backedge</span><span class="p">:</span> <span class="mi">6</span> <span class="o">-&gt;</span> <span class="mi">3</span>
+<span class="linenos">7</span><span class="mi">2</span>
+<span class="linenos">8</span><span class="n">backedge</span><span class="p">:</span> <span class="mi">2</span> <span class="o">-&gt;</span> <span class="mi">1</span>
+</pre></div>
+
+<p><img alt="Pasted image 22.png" src="https://shyal.s3.us-east-2.amazonaws.com/Pasted image 22.png" /></p>

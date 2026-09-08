@@ -1,0 +1,20 @@
+<p>It might be worth mentioning that the input is unsorted, at which point the linear search makes more sense.</p>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="bp">self</span><span class="o">.</span><span class="n">nums</span> <span class="o">=</span> <span class="n">nums</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="nf">pick</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="n">res</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 7</span>        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 8</span>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nums</span><span class="p">):</span>
+<span class="linenos"> 9</span>            <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+<span class="linenos">10</span>                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">11</span>                <span class="n">chance</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+<span class="linenos">12</span>                <span class="k">if</span> <span class="n">chance</span> <span class="o">==</span> <span class="n">count</span><span class="p">:</span>
+<span class="linenos">13</span>                    <span class="n">res</span> <span class="o">=</span> <span class="n">i</span>
+<span class="linenos">14</span>        <span class="k">return</span> <span class="n">res</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="n">obj</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="linenos">18</span><span class="n">param_1</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">pick</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>

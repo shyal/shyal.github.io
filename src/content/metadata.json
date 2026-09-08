@@ -1,0 +1,575 @@
+{
+  "2d-matrix-ways": {
+    "title": "2d matrix ways"
+  },
+  "EPIP": {
+    "title": "EPIP"
+  },
+  "ThreadPoolExecutor-dead-simple-example": {
+    "title": "ThreadPoolExecutor dead simple example"
+  },
+  "Trapping-Rain-Water": {
+    "title": "Trapping Rain Water"
+  },
+  "accounts-merge-wip": {
+    "title": "accounts merge wip"
+  },
+  "add-strings": {
+    "title": "add strings"
+  },
+  "add-two-numbers": {
+    "title": "add two numbers"
+  },
+  "alien-dictionary": {
+    "title": "alien dictionary"
+  },
+  "array-index-and-element-equality": {
+    "title": "array index and element equality"
+  },
+  "array-min": {
+    "title": "array min"
+  },
+  "basic-calculator-II": {
+    "title": "basic calculator II"
+  },
+  "best-time-to-buy-and-sell-stock": {
+    "title": "best time to buy and sell stock"
+  },
+  "bfs": {
+    "title": "bfs"
+  },
+  "big-oh-definition": {
+    "title": "big oh definition"
+  },
+  "big-omega-definition": {
+    "title": "big omega definition"
+  },
+  "binary-search": {
+    "title": "binary search"
+  },
+  "binary-search-award-budget-cuts": {
+    "title": "binary search award budget cuts"
+  },
+  "binary-search-tree-iterator": {
+    "title": "binary search tree iterator"
+  },
+  "binary-tree-level-order-traversal": {
+    "title": "binary tree level order traversal"
+  },
+  "binary-tree-maximum-path-sum": {
+    "title": "binary tree maximum path sum"
+  },
+  "binary-tree-right-side-view": {
+    "title": "binary tree right side view"
+  },
+  "binary-tree-vertical-order-traversal": {
+    "title": "binary tree vertical order traversal"
+  },
+  "binomial-coefficients": {
+    "title": "binomial coefficients"
+  },
+  "blog/algorithms": {
+    "title": "algorithms"
+  },
+  "blog/links": {
+    "title": "links"
+  },
+  "blog/pythonic-tricks": {
+    "title": "pythonic tricks"
+  },
+  "bracket-match": {
+    "title": "bracket match"
+  },
+  "breadth-first-search": {
+    "title": "breadth first search"
+  },
+  "budget-cuts": {
+    "title": "budget cuts"
+  },
+  "busiest-time-at-the-mall": {
+    "title": "busiest time at the mall"
+  },
+  "closest-binary-search-tree-value": {
+    "title": "closest binary search tree value"
+  },
+  "competitive-programming": {
+    "title": "competitive programming"
+  },
+  "continuous-subarray-sum": {
+    "title": "continuous subarray sum"
+  },
+  "counting-bits-WIP": {
+    "title": "counting bits WIP"
+  },
+  "cubing": {
+    "title": "cubing"
+  },
+  "data-tables": {
+    "title": "data tables"
+  },
+  "dataclass": {
+    "title": "dataclass"
+  },
+  "decoding-a-string": {
+    "title": "decoding a string"
+  },
+  "depth-first-search": {
+    "title": "depth first search"
+  },
+  "design-add-and-search-words-data-structure": {
+    "title": "design add and search words data structure"
+  },
+  "dfs-backedge-detection": {
+    "title": "dfs backedge detection"
+  },
+  "diameter-of-binary-tree": {
+    "title": "diameter of binary tree"
+  },
+  "diff-between-two-strings": {
+    "title": "diff between two strings"
+  },
+  "divide-two-integers": {
+    "title": "divide two integers"
+  },
+  "dp-array-sum": {
+    "title": "dp array sum"
+  },
+  "draw-h-tree": {
+    "title": "draw h tree"
+  },
+  "drone-flight-planner": {
+    "title": "drone flight planner"
+  },
+  "enumerate": {
+    "title": "enumerate"
+  },
+  "exclusive-time-of-functions": {
+    "title": "exclusive time of functions"
+  },
+  "find-connected-components": {
+    "title": "find connected components"
+  },
+  "find-first-occurrence-of-k-in-array": {
+    "title": "find first occurrence of k in array"
+  },
+  "find-missing-number-in-array": {
+    "title": "find missing number in array"
+  },
+  "find-the-celebrity": {
+    "title": "find the celebrity"
+  },
+  "flatten-a-dictionary": {
+    "title": "flatten a dictionary"
+  },
+  "generating-callgraphs-in-python-with-mermaid": {
+    "title": "generating callgraphs in python with mermaid"
+  },
+  "generating-primes": {
+    "title": "generating primes"
+  },
+  "generator-expressions": {
+    "title": "generator expressions"
+  },
+  "getting-a-different-number": {
+    "title": "getting a different number"
+  },
+  "huffman-encoding": {
+    "title": "huffman encoding"
+  },
+  "inorder-successor-in-bst": {
+    "title": "inorder successor in bst"
+  },
+  "int-to-base": {
+    "title": "int to base"
+  },
+  "integer-to-english-words": {
+    "title": "integer to english words"
+  },
+  "intersection-of-three-sorted-arrays": {
+    "title": "intersection of three sorted arrays"
+  },
+  "intersection-of-two-arrays": {
+    "title": "intersection of two arrays"
+  },
+  "is-graph-bipartitie": {
+    "title": "is graph bipartitie"
+  },
+  "itertools.product": {
+    "title": "itertools.product"
+  },
+  "k-closest-points-to-origin": {
+    "title": "k closest points to origin"
+  },
+  "kth-largest-element-in-an-array": {
+    "title": "kth largest element in an array"
+  },
+  "lambdas": {
+    "title": "lambdas"
+  },
+  "largest-smaller-BST-key": {
+    "title": "largest smaller BST key"
+  },
+  "largest-time-for-given-digits": {
+    "title": "largest time for given digits"
+  },
+  "levenshtein-distance": {
+    "title": "levenshtein distance"
+  },
+  "linked-list-cycle": {
+    "title": "linked list cycle"
+  },
+  "list-comprehensions": {
+    "title": "list comprehensions"
+  },
+  "longest-arithmetic-sequence": {
+    "title": "longest arithmetic sequence"
+  },
+  "longest-palindrome": {
+    "title": "longest palindrome"
+  },
+  "longest-substrinct-with-at-most-k-distinct-characters": {
+    "title": "longest substrinct with at most k distinct characters"
+  },
+  "lru-cache": {
+    "title": "lru cache"
+  },
+  "making-a-large-island": {
+    "title": "making a large island"
+  },
+  "matrix-anticlockwise-rotation": {
+    "title": "matrix anticlockwise rotation"
+  },
+  "matrix-clockwise-rotation": {
+    "title": "matrix clockwise rotation"
+  },
+  "matrix-diagonal-sum": {
+    "title": "matrix diagonal sum"
+  },
+  "matrix-transpose": {
+    "title": "matrix transpose"
+  },
+  "max-array": {
+    "title": "max array"
+  },
+  "max-array-from-right": {
+    "title": "max array from right"
+  },
+  "maximum-difference-between-node-and-ancestor": {
+    "title": "maximum difference between node and ancestor"
+  },
+  "maximum-size-subarray-sum-equals-k": {
+    "title": "maximum size subarray sum equals k"
+  },
+  "maximum-sum-of-3-non-overlapping-subarrays": {
+    "title": "maximum sum of 3 non overlapping subarrays"
+  },
+  "maximum-swap": {
+    "title": "maximum swap"
+  },
+  "meeting-rooms-ii": {
+    "title": "meeting rooms ii"
+  },
+  "merge-2-sorted-lists": {
+    "title": "merge 2 sorted lists"
+  },
+  "merge-intervals": {
+    "title": "merge intervals"
+  },
+  "merge-k-sorted-lists": {
+    "title": "merge k sorted lists"
+  },
+  "merge-sorted-array": {
+    "title": "merge sorted array"
+  },
+  "mincost-tickets": {
+    "title": "mincost tickets"
+  },
+  "minimum-cost-spanning-tree": {
+    "title": "minimum cost spanning tree"
+  },
+  "minimum-deletion": {
+    "title": "minimum deletion"
+  },
+  "minimum-remove-to-make-valid-parentheses": {
+    "title": "minimum remove to make valid parentheses"
+  },
+  "minimum-window-substring": {
+    "title": "minimum window substring"
+  },
+  "monotonic-array": {
+    "title": "monotonic array"
+  },
+  "move-zeroes-to-end": {
+    "title": "move zeroes to end"
+  },
+  "movies": {
+    "title": "movies"
+  },
+  "multiply-strings": {
+    "title": "multiply strings"
+  },
+  "multistage-graph": {
+    "title": "multistage graph"
+  },
+  "n": {
+    "title": "n"
+  },
+  "n(n+1)-over-2": {
+    "title": "n(n+1) over 2"
+  },
+  "next-closest-time": {
+    "title": "next closest time"
+  },
+  "next-greater-element-i": {
+    "title": "next greater element i"
+  },
+  "next-permutation": {
+    "title": "next permutation"
+  },
+  "num-encodings": {
+    "title": "num encodings"
+  },
+  "number-of-islands": {
+    "title": "number of islands"
+  },
+  "number-of-paths": {
+    "title": "number of paths"
+  },
+  "number-of-submatrices": {
+    "title": "number of submatrices"
+  },
+  "online-stock-span": {
+    "title": "online stock span"
+  },
+  "optimal-merge-pattern": {
+    "title": "optimal merge pattern"
+  },
+  "page-rank": {
+    "title": "page rank"
+  },
+  "pancake-sort": {
+    "title": "pancake sort"
+  },
+  "path-sum-iii": {
+    "title": "path sum iii"
+  },
+  "permuting-a-string": {
+    "title": "permuting a string"
+  },
+  "pow-x-n": {
+    "title": "pow x n"
+  },
+  "power-of-two": {
+    "title": "power of two"
+  },
+  "pramp-algorithms": {
+    "title": "pramp algorithms"
+  },
+  "product-of-array-except-self": {
+    "title": "product of array except self"
+  },
+  "pyqt-webview": {
+    "title": "pyqt webview"
+  },
+  "python-array-module": {
+    "title": "python array module"
+  },
+  "python-list-slicing": {
+    "title": "python list slicing"
+  },
+  "quadratic": {
+    "title": "quadratic"
+  },
+  "rabin-karp": {
+    "title": "rabin karp"
+  },
+  "random-pick-index": {
+    "title": "random pick index"
+  },
+  "random-pick-with-weight": {
+    "title": "random pick with weight"
+  },
+  "range-sum-of-bst": {
+    "title": "range sum of bst"
+  },
+  "range-sum-query-mutable": {
+    "title": "range sum query mutable"
+  },
+  "recurrence-relation-for-a-simple-decreasing-function": {
+    "title": "recurrence relation for a simple decreasing function"
+  },
+  "recurrence-relation-with-for-loop": {
+    "title": "recurrence relation with for loop"
+  },
+  "recursion": {
+    "title": "recursion"
+  },
+  "reduce": {
+    "title": "reduce"
+  },
+  "regular-expression-matching": {
+    "title": "regular expression matching"
+  },
+  "remove-duplicates": {
+    "title": "remove duplicates"
+  },
+  "remove-invalid-parentheses": {
+    "title": "remove invalid parentheses"
+  },
+  "reorder-routes-to-make-all-paths-lead-to-city-zero": {
+    "title": "reorder routes to make all paths lead to city zero"
+  },
+  "return-a-list-with-0-or-1-items": {
+    "title": "return a list with 0 or 1 items"
+  },
+  "reverse-sublist": {
+    "title": "reverse sublist"
+  },
+  "reversing-a-subarray": {
+    "title": "reversing a subarray"
+  },
+  "roman-to-numeral": {
+    "title": "roman to numeral"
+  },
+  "rotate-a-2d-array": {
+    "title": "rotate a 2d array"
+  },
+  "rotated-digits": {
+    "title": "rotated digits"
+  },
+  "rotten-oranges": {
+    "title": "rotten oranges"
+  },
+  "scrims": {
+    "title": "scrims"
+  },
+  "search-first-key": {
+    "title": "search first key"
+  },
+  "serialize-and-deserialize-binary-tree": {
+    "title": "serialize and deserialize binary tree"
+  },
+  "shifted-array-search": {
+    "title": "shifted array search"
+  },
+  "shifted-zip": {
+    "title": "shifted zip"
+  },
+  "shortest-distance-from-all-buildings": {
+    "title": "shortest distance from all buildings"
+  },
+  "single-bidirectional-pass": {
+    "title": "single bidirectional pass"
+  },
+  "slicing-to-prevent-list-index-out-of-range": {
+    "title": "slicing to prevent list index out of range"
+  },
+  "snippets": {
+    "title": "snippets"
+  },
+  "spiral-matrix-II": {
+    "title": "spiral matrix II"
+  },
+  "spiral-order-matrix": {
+    "title": "spiral order matrix"
+  },
+  "split-array-with-equal-sum": {
+    "title": "split array with equal sum"
+  },
+  "split-array-with-equal-sums": {
+    "title": "split array with equal sums"
+  },
+  "splitting-a-list-into-two-distinct-sublists": {
+    "title": "splitting a list into two distinct sublists"
+  },
+  "sqrt(n)": {
+    "title": "sqrt(n)"
+  },
+  "string-contains-all-chars-ordered": {
+    "title": "string contains all chars ordered"
+  },
+  "string-contains-all-chars-unordered": {
+    "title": "string contains all chars unordered"
+  },
+  "string-formatting": {
+    "title": "string formatting"
+  },
+  "subarray-sum-equals-k": {
+    "title": "subarray sum equals k"
+  },
+  "subsets": {
+    "title": "subsets"
+  },
+  "subsets-II": {
+    "title": "subsets II"
+  },
+  "substring-search": {
+    "title": "substring search"
+  },
+  "sudoku-solver": {
+    "title": "sudoku solver"
+  },
+  "switch-calculator": {
+    "title": "switch calculator"
+  },
+  "systems-design": {
+    "title": "systems design"
+  },
+  "task-scheduler": {
+    "title": "task scheduler"
+  },
+  "ternary-conditionals": {
+    "title": "ternary conditionals"
+  },
+  "the-skyline-problem": {
+    "title": "the skyline problem"
+  },
+  "theta-definition": {
+    "title": "theta definition"
+  },
+  "three-sum": {
+    "title": "three sum"
+  },
+  "time-complexity-analysis": {
+    "title": "time complexity analysis"
+  },
+  "toeplitz-matrix": {
+    "title": "toeplitz matrix"
+  },
+  "tracing-the-recursion-tree": {
+    "title": "tracing the recursion tree"
+  },
+  "two-sum": {
+    "title": "two sum"
+  },
+  "using-xor-for-signedness": {
+    "title": "using xor for signedness"
+  },
+  "valid-palindrome": {
+    "title": "valid palindrome"
+  },
+  "valid-palindrome-II": {
+    "title": "valid palindrome II"
+  },
+  "validate-sudoku": {
+    "title": "validate sudoku"
+  },
+  "verifying-an-alien-dictionary": {
+    "title": "verifying an alien dictionary"
+  },
+  "vertical-order-traversal-of-a-binary-tree": {
+    "title": "vertical order traversal of a binary tree"
+  },
+  "vulnerability-scanning-techniques": {
+    "title": "vulnerability scanning techniques"
+  },
+  "word-break": {
+    "title": "word break"
+  },
+  "word-count-engine": {
+    "title": "word count engine"
+  },
+  "zigzag-conversion": {
+    "title": "zigzag conversion"
+  }
+}

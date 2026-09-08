@@ -1,0 +1,17 @@
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">flatten_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">):</span>
+<span class="linenos"> 2</span>  <span class="k">def</span> <span class="nf">flat</span><span class="p">(</span><span class="n">outk</span><span class="p">,</span> <span class="n">ind</span><span class="p">):</span>
+<span class="linenos"> 3</span>    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ind</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos"> 4</span>      <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="nb">dict</span><span class="p">:</span> 
+<span class="linenos"> 5</span>        <span class="n">flat</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">outk</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">if</span> <span class="n">outk</span> <span class="ow">and</span> <span class="n">k</span> <span class="k">else</span> <span class="p">(</span><span class="n">outk</span> <span class="ow">or</span> <span class="n">k</span><span class="p">),</span> <span class="n">v</span><span class="p">)</span>
+<span class="linenos"> 6</span>      <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="n">out</span><span class="p">[</span><span class="n">flat_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+<span class="linenos"> 8</span>  <span class="n">out</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos"> 9</span>  <span class="n">flat</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">)</span>
+<span class="linenos">10</span>  <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+
+<h3 id="time-and-space-complexity">Time and Space Complexity</h3>
+<p>
+<script type="math/tex; mode=display">time = O(n)</script>
+<script type="math/tex; mode=display">space = O(n)</script>
+</p>
