@@ -1,7 +1,15 @@
 <script>
 	import Badge from '$lib/components/ui/badge/badge.svelte';
+	import TttcGraph from '$lib/components/portfolio/TttcGraph.svelte';
+	import FlowPilotScene from '$lib/components/portfolio/FlowPilotScene.svelte';
+	import OsbToolsScene from '$lib/components/portfolio/OsbToolsScene.svelte';
+	import HoverPyScene from '$lib/components/portfolio/HoverPyScene.svelte';
 
-	let { title, href = '', description, dates, tags = [], image = '', links = [] } = $props();
+	// `graphic` names an animated component to use in place of the image.
+	const graphics = { tttc: TttcGraph, flowpilot: FlowPilotScene, osbtools: OsbToolsScene, hoverpy: HoverPyScene };
+
+	let { title, href = '', description, dates, tags = [], image = '', graphic = '', links = [] } = $props();
+	const Graphic = $derived(graphics[graphic]);
 
 	const external = (u) => u.startsWith('http');
 </script>
@@ -9,14 +17,18 @@
 <div
 	class="flex h-full flex-col overflow-hidden rounded-lg border bg-card text-card-foreground transition-all duration-300 ease-out hover:shadow-lg"
 >
-	{#if image}
+	{#if Graphic || image}
 		<a
 			href={href || '#'}
 			class="block cursor-pointer"
 			target={href && external(href) ? '_blank' : undefined}
 			rel={href && external(href) ? 'noopener noreferrer' : undefined}
 		>
-			<img class="h-40 w-full overflow-hidden object-cover object-top" src={image} alt={title} loading="lazy" />
+			{#if Graphic}
+				<div class="h-40 w-full overflow-hidden"><Graphic /></div>
+			{:else}
+				<img class="h-40 w-full overflow-hidden object-cover object-top" src={image} alt={title} loading="lazy" />
+			{/if}
 		</a>
 	{/if}
 	<div class="flex flex-col px-2">

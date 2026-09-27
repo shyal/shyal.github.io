@@ -54,6 +54,7 @@ export const work = [
 	{
 		company: 'FlowPilot Studio',
 		initials: 'FP',
+		href: '/work/flowpilot',
 		logo: '/logos/flowpilot.png',
 		fit: 'cover',
 		title: 'Co-founder, Senior Developer',
@@ -209,7 +210,7 @@ export const projects = [
 		description:
 			"An LLM interface for collective decision-making, built at the AI Objectives Institute. Onboarded Taiwan's Ministry of Digital Affairs.",
 		tags: ['Svelte', 'Firebase', 'Python', 'UMAP', 'HDBSCAN', 'BERTopic'],
-		image: '/work/talk-to-the-city-report.jpg',
+		graphic: 'tttc',
 		links: [
 			{ type: 'Video', href: '/work/talk-to-the-city' },
 			{ type: 'Source', href: 'https://github.com/AIObjectives/talk-to-the-city-reports' }
@@ -217,11 +218,13 @@ export const projects = [
 	},
 	{
 		title: 'FlowPilot Studio',
+		href: '/work/flowpilot',
 		dates: '2025 - 2026',
 		description:
-			"A SaaS for VFX studios. Connects to a studio's Flow Production Tracking database, builds charts and tables from plain-English requests, and runs automations from FPT webhooks.",
+			"A SaaS for VFX studios, co-founded and co-built with Kevin Sallée. Connects to a studio's Flow Production Tracking database, builds charts and tables from plain-English requests, and runs automations from FPT webhooks.",
 		tags: ['SvelteKit', 'Supabase', 'FastAPI', 'Rust', 'Redis Streams', 'AWS', 'Claude API'],
-		links: []
+		graphic: 'flowpilot',
+		links: [{ type: 'Video', href: '/work/flowpilot' }]
 	},
 	{
 		title: 'Claude Code Manila',
@@ -240,7 +243,7 @@ export const projects = [
 		description:
 			'A service virtualisation library for Python, on PyPI. My article on it reached the Hacker News front page.',
 		tags: ['Python', 'Go', 'Hoverfly'],
-		image: '/work/hoverpy.png',
+		graphic: 'hoverpy',
 		links: [{ type: 'Source', href: 'https://github.com/SpectoLabs/hoverpy' }]
 	},
 	{
@@ -250,7 +253,7 @@ export const projects = [
 		description:
 			'3D scene sanitation tools for Maya, written at Reliance Digital Domain and later open-sourced. Adopted by other studios.',
 		tags: ['C++', 'Python', 'Maya'],
-		image: '/work/osbtools.png',
+		graphic: 'osbtools',
 		links: [{ type: 'Source', href: 'https://github.com/shyal/osbtools' }]
 	}
 ];
