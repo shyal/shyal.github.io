@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+	<g fill="none" stroke="#C6A867" stroke-linecap="round" stroke-linejoin="round">
+		<!-- C: full circle minus a gap on the right -->
+		<path d="M79.4 29.3 A36 36 0 1 0 79.4 70.7" stroke-width="8"/>
+		<!-- crown prongs -->
+		<g stroke-width="3.6">
+			<path d="M50 60 V36"/>
+			<path d="M44 60 L39.5 40"/>
+			<path d="M56 60 L60.5 40"/>
+			<path d="M38 60 L31 46"/>
+			<path d="M62 60 L69 46"/>
+		</g>
+	</g>
+	<g fill="#C6A867">
+		<!-- prong knobs -->
+		<circle cx="50" cy="32" r="4"/>
+		<circle cx="38.8" cy="36.5" r="3.8"/>
+		<circle cx="61.2" cy="36.5" r="3.8"/>
+		<circle cx="29.5" cy="43" r="3.8"/>
+		<circle cx="70.5" cy="43" r="3.8"/>
+		<!-- base bar and the drop beneath -->
+		<rect x="33" y="59.5" width="34" height="5" rx="1.5"/>
+		<ellipse cx="50" cy="71.5" rx="5" ry="3.5"/>
+	</g>
+</svg>
