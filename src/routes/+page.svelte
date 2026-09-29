@@ -104,7 +104,7 @@
 							</div>
 							<h2 class="text-3xl font-bold tracking-tighter sm:text-5xl">Selected work</h2>
 							<p class="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-								Two LLM products, a community, and two open-source tools from the VFX years.
+								Two LLM products, a language in progress, a community, and two open-source tools from the VFX years.
 							</p>
 						</div>
 					</div>

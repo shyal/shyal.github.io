@@ -4,9 +4,10 @@
 	import FlowPilotScene from '$lib/components/portfolio/FlowPilotScene.svelte';
 	import OsbToolsScene from '$lib/components/portfolio/OsbToolsScene.svelte';
 	import HoverPyScene from '$lib/components/portfolio/HoverPyScene.svelte';
+	import PydsaScene from '$lib/components/portfolio/PydsaScene.svelte';
 
 	// `graphic` names an animated component to use in place of the image.
-	const graphics = { tttc: TttcGraph, flowpilot: FlowPilotScene, osbtools: OsbToolsScene, hoverpy: HoverPyScene };
+	const graphics = { tttc: TttcGraph, flowpilot: FlowPilotScene, osbtools: OsbToolsScene, hoverpy: HoverPyScene, pydsa: PydsaScene };
 
 	let { title, href = '', description, dates, tags = [], image = '', graphic = '', links = [] } = $props();
 	const Graphic = $derived(graphics[graphic]);

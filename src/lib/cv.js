@@ -227,6 +227,16 @@ export const projects = [
 		links: [{ type: 'Video', href: '/work/flowpilot' }]
 	},
 	{
+		title: 'pydsa',
+		href: '/work/pydsa',
+		dates: '2026 - Present',
+		description:
+			'A Python dialect for data structures and algorithms work, pronounced pizza. Solutions are written in a few lines and transpiled to the Python that LeetCode accepts.',
+		tags: ['Python', 'Language design', 'Transpiler', 'VS Code'],
+		graphic: 'pydsa',
+		links: [{ type: 'Website', href: '/work/pydsa' }]
+	},
+	{
 		title: 'Claude Code Manila',
 		href: 'https://www.ccm.pm',
 		dates: '2026 - Present',

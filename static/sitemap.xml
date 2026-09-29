@@ -16,4 +16,9 @@
 		<changefreq>yearly</changefreq>
 		<priority>0.8</priority>
 	</url>
+	<url>
+		<loc>https://www.shyal.com/work/pydsa</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
 </urlset>
