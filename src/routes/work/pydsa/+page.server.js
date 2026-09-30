@@ -1,9 +1,14 @@
 import { levels } from '$lib/tutorial/mu-lessons.js';
+import mu from '../../../../static/pydsa/mu.py?raw';
+
+// The language version, read from the transpiler the browser runs.
+const version = mu.match(/^VERSION = "([^"]+)"/m)[1];
 
 // The page is the tutorial app. The client gets everything the in-browser
 // runner needs: the Python, the setup, the probe, and the accepted answers.
 export function load() {
 	return {
+		version,
 		levels: levels.map((level) => ({
 			id: level.id,
 			title: level.title,

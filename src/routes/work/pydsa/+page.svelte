@@ -21,4 +21,4 @@
 	<meta name="twitter:card" content="summary_large_image" />
 </svelte:head>
 
-<MuTutorial levels={data.levels} />
+<MuTutorial levels={data.levels} version={data.version} />

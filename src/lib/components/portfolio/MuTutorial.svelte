@@ -13,7 +13,7 @@
 	import { XP, ranks } from '$lib/tutorial/mu-lessons.js';
 	import { judge, onStatus, warm } from '$lib/tutorial/runner.js';
 
-	let { levels } = $props();
+	let { levels, version } = $props();
 
 	const STORE = 'pydsa-tutorial-v2';
 	const all = levels.flatMap((level) => level.lessons.map((lesson) => ({ level, lesson })));
@@ -188,7 +188,7 @@ def longestCommonSubsequence(a: str, b: str) -> int
 			<p>It transpiles to python. The python it generates is often quite a lot slower than hand written python, but it's much, much more succinct.</p>
 			<div class="taste"><CodeEditor value={TASTE} lang="mu" readonly minLines={1} /></div>
 			<p>I'll assume you're already familiar with python's syntax; this way, we can simply cover the differences.</p>
-			<p class="small">Version 0.6. The first run downloads a python runtime, it takes a few seconds.</p>
+			<p class="small">Version {version}. The first run downloads a python runtime, it takes a few seconds.</p>
 			<div class="help"><button type="button" class="btn green" onclick={closeIntro}>Start the tutorial</button></div>
 		</div>
 	</div>
@@ -199,7 +199,7 @@ def longestCommonSubsequence(a: str, b: str) -> int
 		<div class="brand">
 			<a class="back" href="/" aria-label="Back to shyal.com">‹</a>
 			<span class="logo">pydsa</span>
-			<span class="sub">tutorial · 0.6</span>
+			<span class="sub">tutorial · {version}</span>
 			<button type="button" class="about" onclick={() => (intro = true)}>What is this?</button>
 		</div>
 		<div class="stats">

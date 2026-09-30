@@ -6,14 +6,14 @@ import { python } from '@codemirror/lang-python';
 import { tags as t } from '@lezer/highlight';
 
 const KEYWORDS = new Set(
-	'def memo for in if elif else while return break continue pass del assert from first import extends and or not is ret'.split(' ')
+	'def memo for in if elif else while return break continue pass del assert from first import extends and or not is ret yield'.split(' ')
 );
 const CONSTANTS = new Set(['true', 'false', 'none', 'inf']);
 const FOLDS = new Set(['sum', 'max', 'min', 'count']);
 const BUILTINS = new Set(
-	`len abs sort scan counter ceil floor cells nbrs table like shape put pairs levels adjacency indegrees
+	`len abs sort scan counter ceil floor cells nbrs table like shape put row col set_row set_col pairs levels adjacency indegrees
 	components graph dijkstra in_bounds edges is_edge grid_bfs triples ceil_div first_true last_true first_false
-	last_false min_chunks Multiset heap to_digits to_int even odd print range sorted set list dict zip enumerate
+	last_false min_chunks Multiset as_list heap to_digits to_int even odd print range sorted set list dict zip enumerate
 	deque`.split(/\s+/)
 );
 const TYPES = new Set(['int', 'str', 'char', 'bool', 'float', 'none']);
