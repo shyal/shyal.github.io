@@ -1,10 +1,15 @@
 // The tutorial's Python, in a worker so the page stays responsive. Pyodide
-// comes from jsDelivr (the same build the leetcode extension ships), mu.py
-// and runner.py from /pydsa/. Messages are {id, op, ...}; replies are
+// comes from jsDelivr (the same build the leetcode extension ships). mu.py
+// and runner.py are bundled in, so a deploy can never run against a cached
+// older transpiler. Messages are {id, op, ...}; replies are
 // {id, ok, ...}. `transpile` returns the Python for some mu, `run` runs one
 // program and returns what it printed.
 
+import muSource from '../../../static/pydsa/mu.py?raw';
+import runnerSource from '../../../static/pydsa/runner.py?raw';
+
 const PYODIDE = 'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/';
+const FILES = { 'mu.py': muSource, 'runner.py': runnerSource };
 
 let ready;
 
@@ -14,11 +19,7 @@ function boot() {
 		const { loadPyodide } = await import(/* @vite-ignore */ PYODIDE + 'pyodide.mjs');
 		const py = await loadPyodide({ indexURL: PYODIDE });
 		postMessage({ status: 'Loading the transpiler' });
-		for (const f of ['mu.py', 'runner.py']) {
-			const r = await fetch(`/pydsa/${f}`);
-			if (!r.ok) throw new Error(`could not fetch ${f}`);
-			py.FS.writeFile(`/home/pyodide/${f}`, await r.text());
-		}
+		for (const [f, text] of Object.entries(FILES)) py.FS.writeFile(`/home/pyodide/${f}`, text);
 		py.runPython('import sys; sys.path.insert(0, "/home/pyodide"); import runner');
 		postMessage({ status: 'ready' });
 		return py;
