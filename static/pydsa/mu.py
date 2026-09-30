@@ -9,7 +9,7 @@ The language is specified in mu/spec/v<VERSION>.md.
 import re
 import sys
 
-VERSION = "0.6"
+VERSION = "0.7"
 
 KEYWORDS = {"from", "in", "not", "and", "or", "if", "else", "is"}
 # names that end a call written without brackets
@@ -169,7 +169,7 @@ HELPERS = {
         raise err[0]
     return out[0]""",
     ),
-    # cells, nbrs, table, like, shape, put, pairs, levels, adjacency, indegrees,
+    # cells, nbrs, table, like, shape, put, row, col, set_row, set_col, pairs, levels, adjacency, indegrees,
     # to_digits, to_int, even, odd copy the utils/harness builtins; test_mu.py
     # checks they agree
     "_holds": (
@@ -256,17 +256,54 @@ def nbrs(
         dims = [len(s) for s in seqs]
     return tuple(d - 1 for d in dims) if last_index else tuple(dims)""",
     ),
+    "_spread": (
+        ["from itertools import repeat", "from typing import Iterable"],
+        [],
+        """def _spread(v):
+    if isinstance(v, str) or not isinstance(v, Iterable):
+        return repeat(v)
+    return iter(v)""",
+    ),
     "put": (
         [],
-        [],
+        ["_spread"],
         """def put(grid, at, v):
-    for i, j in at:
-        grid[i][j] = v""",
+    for (i, j), x in zip(at, _spread(v)):
+        grid[i][j] = x""",
+    ),
+    "row": (
+        [],
+        [],
+        """def row(grid, i):
+    return list(grid[i])""",
+    ),
+    "col": (
+        [],
+        [],
+        """def col(grid, j):
+    return [r[j] for r in grid]""",
+    ),
+    "set_row": (
+        [],
+        ["put"],
+        """def set_row(grid, i, v):
+    put(grid, ((i, j) for j in range(len(grid[i]))), v)""",
+    ),
+    "set_col": (
+        [],
+        ["put"],
+        """def set_col(grid, j, v):
+    put(grid, ((i, j) for i in range(len(grid))), v)""",
     ),
     "pairs": (
         [],
         [],
-        """def pairs(n, type=tuple):
+        """def pairs(n, type=tuple, back=False):
+    if back:
+        for j in range(n):
+            for i in range(j):
+                yield type((i, j))
+        return
     for i in range(n):
         for j in range(i + 1, n):
             yield type((i, j))""",

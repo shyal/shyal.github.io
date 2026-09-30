@@ -837,6 +837,42 @@ export const levels = [
 				probe: 'solve(a, n)'
 			},
 			{
+				id: 'pairs-back',
+				title: 'pairs back',
+				note: "<code>pairs(n, back=true)</code> yields the same pairs grouped by the later index: for each j, every <code>(i, j)</code> with i &lt; j. That's the order of a 1-D dp where cell j looks back at every earlier cell. This is 300 bottom-up. <code>table(n, fill=1)</code> with one size is a list.",
+				python: 'def lengthOfLIS(nums: list[int]) -> int:\n    n = len(nums)\n    dp = [1] * n\n    for i in range(n):\n        for j in range(i):\n            if nums[j] < nums[i]:\n                dp[i] = max(dp[i], dp[j] + 1)\n    return max(dp)',
+				stub: 'def lengthOfLIS(nums: [int]) -> int\n  # solution\n  pass',
+				answer: 'def lengthOfLIS(nums: [int]) -> int\n  dp = table(len(nums), fill=1)\n  for (j, i) in pairs(len(nums), back=true)\n    if nums[j] < nums[i]\n      dp[i] = max(dp[i], dp[j] + 1)\n  max dp',
+				accept: ['def lengthOfLIS(nums: [int]) -> int\n  dp = table(len nums, fill=1)\n  for (j, i) in pairs(len nums, back=true)\n    if nums[j] < nums[i]\n      dp[i] = max(dp[i], dp[j] + 1)\n  max(dp)'],
+				hint: 'dp = table(len(nums), fill=1), then for (j, i) in pairs(len(nums), back=true).',
+				setup: 'nums = [10, 9, 2, 5, 3, 7, 101, 18]',
+				probe: 'lengthOfLIS(nums)'
+			},
+			{
+				id: 'row-col',
+				title: 'row, col, set_row and set_col',
+				note: '<code>row(grid, i)</code> is a copy of row i, <code>col(grid, j)</code> a copy of column j. <code>set_row(grid, i, v)</code> and <code>set_col(grid, j, v)</code> write v into every cell of it.',
+				python: 'def solve(grid):\n    top = grid[0][:]\n    left = [r[0] for r in grid]\n    for j in range(len(grid[0])):\n        grid[1][j] = 0\n    for i in range(len(grid)):\n        grid[i][2] = 9\n    return (top, left, grid)',
+				stub: 'def solve(grid)\n  # solution\n  pass',
+				answer: 'def solve(grid)\n  top = row(grid, 0)\n  left = col(grid, 0)\n  set_row(grid, 1, 0)\n  set_col(grid, 2, 9)\n  (top, left, grid)',
+				accept: [],
+				hint: 'row(grid, 0), col(grid, 0), set_row(grid, 1, 0), set_col(grid, 2, 9)',
+				setup: 'grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]',
+				probe: 'solve(grid)'
+			},
+			{
+				id: 'min-path-sum',
+				title: '64. Minimum Path Sum',
+				note: '64. <code>like(grid)</code> is zeros. <code>put</code>, <code>set_row</code> and <code>set_col</code> take an iterable too, one item per cell. <code>cells(grid, start=1)</code> skips the first row and column.',
+				python: 'def minPathSum(grid: list[list[int]]) -> int:\n    m, n = len(grid), len(grid[0])\n    dp = [[0] * n for _ in range(m)]\n    dp[0][0] = grid[0][0]\n    for j in range(1, n):\n        dp[0][j] = dp[0][j - 1] + grid[0][j]\n    for i in range(1, m):\n        dp[i][0] = dp[i - 1][0] + grid[i][0]\n    for i in range(1, m):\n        for j in range(1, n):\n            dp[i][j] = min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j]\n    return dp[-1][-1]',
+				stub: 'def minPathSum(grid: [[int]]) -> int\n  # solution\n  pass',
+				answer: 'def minPathSum(grid: [[int]]) -> int\n  dp = like(grid)\n  set_row(dp, 0, scan(+, row(grid, 0)))\n  set_col(dp, 0, scan(+, col(grid, 0)))\n  for (r, c) in cells(grid, start=1)\n    dp[r][c] = min(dp[r-1][c], dp[r][c-1]) + grid[r][c]\n  dp[-1][-1]',
+				accept: [],
+				hint: 'like(grid), set_row and set_col with scan(+, ...), then a loop over cells(grid, start=1).',
+				setup: 'grid = [[1, 3, 1], [1, 5, 1], [4, 2, 1]]',
+				probe: 'minPathSum(grid)'
+			},
+			{
 				id: 'last-true',
 				title: 'last_true',
 				note: '<code>first k in lo..hi if pred</code> finds the smallest k. <code>last_true(lo, hi, ok)</code> is the other direction: the largest x in <code>lo..hi</code> with <code>ok(x)</code>, <code>lo - 1</code> if none. <code>first_false</code> and <code>last_false</code> exist too, and <code>first_true</code> is the function form of <code>first</code>.',
