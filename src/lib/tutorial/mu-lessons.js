@@ -188,6 +188,18 @@ export const levels = [
 				hint: 'int(a), op, int(b) = ...',
 				setup: "s = '3 + 4'",
 				probe: 'solve(s)'
+			},
+			{
+				id: 'two-sum',
+				title: '1. Two Sum',
+				note: '1. <code>for i, x in nums</code> is enumerate, and an early <code>return</code> is as in python. A function that returns nothing on its last line returns none.',
+				python: 'def twoSum(nums: list[int], target: int) -> list[int]:\n    seen = {}\n    for i, x in enumerate(nums):\n        if target - x in seen:\n            return [seen[target - x], i]\n        seen[x] = i',
+				stub: 'def twoSum(nums: [int], target: int) -> [int]\n  # solution\n  pass',
+				answer: 'def twoSum(nums: [int], target: int) -> [int]\n  seen = {}\n  for i, x in nums\n    if target - x in seen\n      return [seen[target - x], i]\n    seen[x] = i',
+				accept: [],
+				hint: 'for i, x in nums, then the early return.',
+				setup: 'nums = [2, 7, 11, 15]\ntarget = 9',
+				probe: 'twoSum(nums, target)'
 			}
 		]
 	},
@@ -431,6 +443,31 @@ export const levels = [
 				hint: 'ret res, acc = [], 0',
 				setup: 'xs = [3, 1, 2]',
 				probe: 'running(xs)'
+			},
+			{
+				id: 'yield',
+				title: 'yield',
+				note: '<code>yield x</code>, <code>yield a, b</code>, <code>yield from xs</code> and a bare <code>yield</code> are statements, as in python. A function whose body has one is a generator.',
+				python: 'def evens(n):\n    for i in range(n):\n        if i % 2 == 0:\n            yield i',
+				stub: 'def evens(n)\n  # solution\n  pass',
+				answer: 'def evens(n)\n  for i in 0..<n\n    if even i\n      yield i',
+				accept: ['def evens(n)\n  for i in 0..<n\n    if i % 2 == 0\n      yield i'],
+				hint: 'for i in 0..<n, if even i, yield i.',
+				setup: 'n = 7',
+				probe: 'list(evens(n))',
+				probeMu: 'list(Solution().evens(n))'
+			},
+			{
+				id: 'as-list',
+				title: '78. Subsets',
+				note: 'A line <code>@f</code> above a <code>def</code> or a <code>memo</code> decorates it, as in python. <code>@as_list</code> is a helper: the function yields each answer when it finds it, and the caller receives the whole list. This is 78.',
+				python: 'def subsets(nums: list[int]) -> list[list[int]]:\n    res = []\n    for mask in range(1 << len(nums)):\n        res.append([x for i, x in enumerate(nums) if mask >> i & 1])\n    return res',
+				stub: 'def subsets(nums: [int]) -> [[int]]\n  # solution\n  pass',
+				answer: '@as_list\ndef subsets(nums: [int]) -> [[int]]\n  for mask in 0..<(1 << len(nums))\n    yield [x for i, x in nums if mask >> i & 1]',
+				accept: ['def subsets(nums: [int]) -> [[int]]\n  ret res = []\n  for mask in 0..<(1 << len(nums))\n    res <- [x for i, x in nums if mask >> i & 1]'],
+				hint: '@as_list above the def, then yield one subset per mask in 0..<(1 << len(nums)).',
+				setup: 'nums = [1, 2, 3]',
+				probe: 'subsets(nums)'
 			}
 		]
 	},
@@ -578,7 +615,7 @@ export const levels = [
 		id: 'memo',
 		title: 'Memo and search',
 		blurb:
-			'Memoised recursion and binary search on the answer. Both have a keyword.',
+			'Memoised recursion and binary search on the answer. Both have a keyword. And or if, for the -1 at the end.',
 		lessons: [
 			{
 				id: 'memo-one-line',
@@ -615,6 +652,18 @@ export const levels = [
 				hint: 'memo f(i) = 1 + max from 0 for j in 0..<i if nums[j] < nums[i]: f(j)',
 				setup: 'nums = [10, 9, 2, 5, 3, 7, 101, 18]',
 				probe: 'lengthOfLIS(nums)'
+			},
+			{
+				id: 'or-if',
+				title: 'or if',
+				note: '<code>x or d if v</code> is x, or d when x equals v. <code>f(amount) or -1 if inf</code> reads "f(amount), or -1 if it is inf". x is evaluated once. This is 322, Coin Change.',
+				python: 'import math\nfrom functools import cache\n\ndef coinChange(coins: list[int], amount: int) -> int:\n    @cache\n    def f(a):\n        if a == 0:\n            return 0\n        if a < 0:\n            return math.inf\n        return 1 + min(f(a - c) for c in coins)\n    t = f(amount)\n    return -1 if t == math.inf else t',
+				stub: 'def coinChange(coins: [int], amount: int) -> int\n  # solution\n  pass',
+				answer: 'def coinChange(coins: [int], amount: int) -> int\n  memo f(a) =\n    | a == 0 -> 0\n    | a < 0 -> inf\n    | else -> 1 + min for c in coins: f(a - c)\n  f(amount) or -1 if inf',
+				accept: [],
+				hint: 'memo f(a) = with three cases, then f(amount) or -1 if inf.',
+				setup: 'coins = [1, 2, 5]\namount = 11',
+				probe: 'coinChange(coins, amount)'
 			},
 			{
 				id: 'memo-block',
@@ -735,12 +784,12 @@ export const levels = [
 			{
 				id: 'network-delay',
 				title: '743. Network Delay Time',
-				note: '743. <code>graph(vs, edges)</code> is a weighted graph, <code>dijkstra(g, src)</code> is the distance to every vertex, inf if unreachable.',
+				note: '743. <code>graph(vs, edges)</code> is a weighted graph, <code>dijkstra(g, src)</code> is the distance to every vertex, inf if unreachable. <code>or -1 if inf</code> turns that into the -1 the problem wants.',
 				python: 'import heapq\nimport math\nfrom collections import defaultdict\n\ndef networkDelayTime(times: list[list[int]], n: int, k: int) -> int:\n    adj = defaultdict(list)\n    for u, v, w in times:\n        adj[u].append((v, w))\n    d = {v: math.inf for v in range(1, n + 1)}\n    d[k] = 0\n    h = [(0, k)]\n    while h:\n        du, u = heapq.heappop(h)\n        if du > d[u]:\n            continue\n        for v, w in adj[u]:\n            if du + w < d[v]:\n                d[v] = du + w\n                heapq.heappush(h, (d[v], v))\n    t = max(d.values())\n    return t if t < math.inf else -1',
 				stub: 'def networkDelayTime(times: [(int, int, int)], n: int, k: int) -> int\n  # solution\n  pass',
-				answer: 'def networkDelayTime(times: [(int, int, int)], n: int, k: int) -> int\n  d = dijkstra(graph(1..n, times, directed=true), k)\n  t = max for v in 1..n: d[v]\n  t if t < inf else -1',
-				accept: [],
-				hint: 'd = dijkstra(graph(1..n, times, directed=true), k), then a max fold over 1..n.',
+				answer: 'def networkDelayTime(times: [(int, int, int)], n: int, k: int) -> int\n  d = dijkstra(graph(1..n, times, directed=true), k)\n  t = max for v in 1..n: d[v]\n  t or -1 if inf',
+				accept: ['def networkDelayTime(times: [(int, int, int)], n: int, k: int) -> int\n  d = dijkstra(graph(1..n, times, directed=true), k)\n  t = max for v in 1..n: d[v]\n  t if t < inf else -1'],
+				hint: 'd = dijkstra(graph(1..n, times, directed=true), k), a max fold over 1..n, then t or -1 if inf.',
 				setup: 'times = [(2, 1, 1), (2, 3, 1), (3, 4, 1)]\nn = 4\nk = 2',
 				probe: 'networkDelayTime(times, n, k)'
 			},
