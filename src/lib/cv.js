@@ -227,14 +227,18 @@ export const projects = [
 		links: [{ type: 'Video', href: '/work/flowpilot' }]
 	},
 	{
-		title: 'pydsa',
-		href: '/work/pydsa',
+		title: 'mu',
+		href: 'https://www.shyal.com/mu/',
 		dates: '2026 - Present',
 		description:
-			'A Python dialect for data structures and algorithms work, pronounced pizza. Solutions are written in a few lines and transpiled to the Python that LeetCode accepts.',
+			'A small language that transpiles to Python, with pydsa as its library of algorithm helpers. Together they write many LeetCode solutions in one or two lines, and the Python that mu prints imports only the standard library.',
 		tags: ['Python', 'Language design', 'Transpiler', 'VS Code'],
 		graphic: 'pydsa',
-		links: [{ type: 'Website', href: '/work/pydsa' }]
+		links: [
+			{ type: 'Docs', href: 'https://www.shyal.com/mu/' },
+			{ type: 'pydsa', href: 'https://www.shyal.com/pydsa/' },
+			{ type: 'Source', href: 'https://github.com/shyal/mu' }
+		]
 	},
 	{
 		title: 'Claude Code Manila',
